@@ -9,6 +9,7 @@ import com.google.firebase.messaging.Notification;
 
 public class FirebaseMessage {
 
+
     public static void sendToToken(String token, String title, String body) throws FirebaseMessagingException {
         // [START send_to_token]
         // This registration token comes from the client FCM SDKs.

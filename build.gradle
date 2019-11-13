@@ -18,5 +18,6 @@ dependencies {
     implementation 'org.springframework.boot:spring-boot-starter'
     testImplementation 'org.springframework.boot:spring-boot-starter-test'
     compile("org.springframework.boot:spring-boot-starter-web")
-    compile 'org.mongodb:mongo-java-driver:2.12.3'
+    compile 'org.mongodb:mongodb-driver:3.11.2'
+    compile 'org.mongodb:mongodb-driver:3.8.1'
 }
