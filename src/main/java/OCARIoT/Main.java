@@ -4,9 +4,6 @@ import com.google.auth.oauth2.GoogleCredentials;
 import com.google.firebase.FirebaseApp;
 import com.google.firebase.FirebaseOptions;
 import com.google.firebase.messaging.FirebaseMessagingException;
-import com.mongodb.DB;
-import com.mongodb.MongoClient;
-import com.mongodb.MongoClientURI;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 
@@ -20,14 +17,12 @@ public class Main {
 
         SpringApplication.run(Main.class,args);
 
-        FileInputStream serviceAccount =
-                new FileInputStream("/Users/jpdoliveira/IdeaProjects/OCARIoT/src/ocariot-d0c9e-firebase-adminsdk-py85n-e6ca7702f3.json");
 
-        FirebaseOptions options = new FirebaseOptions.Builder()
-                .setCredentials(GoogleCredentials.fromStream(serviceAccount))
-                .build();
+        FileInputStream serviceAccount = new FileInputStream("/Users/jpdoliveira/IdeaProjects/OCARIoT/src/ocariot-d0c9e-firebase-adminsdk-py85n-e6ca7702f3.json");
+        FirebaseOptions options = new FirebaseOptions.Builder().setCredentials(GoogleCredentials.fromStream(serviceAccount)).build();
 
         FirebaseApp.initializeApp(options);
+
 
 
     }
