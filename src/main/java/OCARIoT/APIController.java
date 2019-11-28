@@ -9,6 +9,7 @@ import org.springframework.web.bind.annotation.*;
 import java.net.UnknownHostException;
 import java.util.Map;
 
+
 @RestController
 public class APIController {
 
@@ -23,14 +24,16 @@ public class APIController {
     }
 
     @PostMapping("user/{id}")
-    public String create(@PathVariable String id, @RequestBody Map<String, String> body) throws UnknownHostException {
+    public String create(@PathVariable String id, @RequestBody Map <String,String> body) throws UnknownHostException {
 
 
         String token = body.get("token");
 
+
         collection.updateOne(eq("id", id), new Document("$addToSet", new Document("Tokens",token)),new UpdateOptions().upsert(true).bypassDocumentValidation(true));
         Document myDoc = collection.find(eq("id",id)).first();
         return myDoc.toJson();
+
 
 
     }

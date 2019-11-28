@@ -10,12 +10,9 @@ import com.google.firebase.messaging.Notification;
 public class FirebaseMessage {
 
 
-    public static void sendToToken(String token, String title, String body) throws FirebaseMessagingException {
-        // [START send_to_token]
-        // This registration token comes from the client FCM SDKs.
+    public static String sendToToken(String token, String title, String body) throws FirebaseMessagingException {
 
 
-        // See documentation on defining a message payload.
         Message message = Message.builder()
                 .setNotification(new Notification(title,body))
                 .setToken(token)
@@ -26,14 +23,13 @@ public class FirebaseMessage {
         String response = FirebaseMessaging.getInstance().send(message);
         // Response is a message ID string.
         System.out.println("Successfully sent message: " + response);
+        return response;
         // [END send_to_token]
     }
 
     public static void sendToTopic(String topic, String title, String body) throws FirebaseMessagingException {
-        // [START send_to_topic]
-        // The topic name can be optionally prefixed with "/topics/".
 
-        // See documentation on defining a message payload.
+
         Message message = Message.builder()
                 .setNotification(new Notification(title,body))
                 .setTopic(topic)
