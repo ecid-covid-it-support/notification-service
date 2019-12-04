@@ -3,7 +3,6 @@ package OCARIoT;
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.google.firebase.messaging.FirebaseMessagingException;
-import com.mongodb.DBObject;
 import com.mongodb.client.MongoClient;
 import com.mongodb.client.MongoClients;
 import com.mongodb.client.MongoCollection;
@@ -11,11 +10,14 @@ import com.mongodb.client.MongoDatabase;
 import org.bson.BsonDocument;
 import org.bson.BsonString;
 import org.bson.Document;
+import org.json.JSONObject;
 import org.springframework.amqp.core.Message;
 import org.springframework.amqp.rabbit.annotation.RabbitListener;
 import org.springframework.stereotype.Component;
 import java.util.List;
 import java.util.Map;
+import java.util.ResourceBundle;
+
 import static com.mongodb.client.model.Filters.eq;
 
 
@@ -23,12 +25,19 @@ import static com.mongodb.client.model.Filters.eq;
 @Component
 public class RabbitMQ {
 
-    MongoClient mongoClient = MongoClients.create("mongodb://localhost:27017");
-    MongoDatabase database = mongoClient.getDatabase("NotificationMicroservice");
-    MongoCollection<Document> collection = database.getCollection("Users");
+    private static ResourceBundle rb = ResourceBundle.getBundle("application");
+
+    String mongoHost = rb.getString("spring.data.mongodb");
+    String mongoDatabase = rb.getString("spring.data.mongodb.database");
+    String mongoCollection = rb.getString("spring.data.mongodb.collection");
 
 
-    @RabbitListener(queues = "${rabbitmq.queue.Notification}")
+    MongoClient mongoClient = MongoClients.create(mongoHost);
+    MongoDatabase database = mongoClient.getDatabase(mongoDatabase);
+    MongoCollection<Document> collection = database.getCollection(mongoCollection);
+
+
+    @RabbitListener(queues = "${rabbitmq.queue.send.notification}")
     public String notificationService(Message message) throws JsonProcessingException {
 
         System.out.println("Recieved Message From RabbitMQ: " + message);
@@ -36,7 +45,6 @@ public class RabbitMQ {
 
         byte[] body = message.getBody();
         String jsonBody = new String(body);
-        //System.out.println(jsonBody);
         ObjectMapper mapper = new ObjectMapper();
         Map<String, String> map = mapper.readValue(jsonBody, Map.class);
 
@@ -68,8 +76,6 @@ public class RabbitMQ {
                 }
 
                 List<String> tokens = (List) collection.find(eq("id",userID)).first().get("Tokens");
-                //System.out.println(tokens);
-                //System.out.println(tokens.isEmpty());
 
 
                 for (String token:tokens){
@@ -93,28 +99,20 @@ public class RabbitMQ {
         return  "Message must contain 'id' or 'topic' keys and values";
     }
 
-    @RabbitListener(queues = "${rabbitmq.queue.Delete}")
-    public String deleteUsers(Message message) throws JsonProcessingException {
+    @RabbitListener(queues = "${rabbitmq.queue.delete.users}")
+    public void deleteUsers(Message message) throws JsonProcessingException {
 
         byte[] body = message.getBody();
-        String jsonBody = new String(body);
-        ObjectMapper mapper = new ObjectMapper();
-        Map<String, String> map = mapper.readValue(jsonBody, Map.class);
+        JSONObject jsonmsg = new JSONObject(new String(body));
+        String id = String.valueOf(jsonmsg.getJSONObject("user").get("id"));
 
 
-        if (map.containsKey("id")) {
-            String id = map.get("id");
+        Document doc = collection.find(eq("id",id)).first();
+        if (doc!=null){
 
-            Document doc = collection.find(eq("id",id)).first(); //get first document
-            if (doc==null){
-                return "User " + id + " does not exist in the database.";
-
-            }
             collection.deleteMany(doc);
 
-            return "User " + id + " deleted";
-
         }
-        return "Message does not contain key 'id'.";
+
     }
 }

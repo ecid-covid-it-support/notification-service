@@ -2,6 +2,8 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="8cd855f9-d8e2-46cb-a5a1-fa8d4102f752" name="Default Changelist" comment="">
+      <change afterPath="$PROJECT_DIR$/.idea/OCARIoT.iml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.idea/jarRepositories.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.gradle/5.2.1/executionHistory/executionHistory.bin" beforeDir="false" afterPath="$PROJECT_DIR$/.gradle/5.2.1/executionHistory/executionHistory.bin" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.gradle/5.2.1/executionHistory/executionHistory.lock" beforeDir="false" afterPath="$PROJECT_DIR$/.gradle/5.2.1/executionHistory/executionHistory.lock" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.gradle/5.2.1/fileHashes/fileHashes.bin" beforeDir="false" afterPath="$PROJECT_DIR$/.gradle/5.2.1/fileHashes/fileHashes.bin" afterDir="false" />
@@ -10,23 +12,15 @@
       <change beforePath="$PROJECT_DIR$/.gradle/5.2.1/javaCompile/javaCompile.lock" beforeDir="false" afterPath="$PROJECT_DIR$/.gradle/5.2.1/javaCompile/javaCompile.lock" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.gradle/buildOutputCleanup/buildOutputCleanup.lock" beforeDir="false" afterPath="$PROJECT_DIR$/.gradle/buildOutputCleanup/buildOutputCleanup.lock" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/build.gradle" beforeDir="false" afterPath="$PROJECT_DIR$/build.gradle" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/build/classes/java/main/OCARIoT/APIController.class" beforeDir="false" afterPath="$PROJECT_DIR$/build/classes/java/main/OCARIoT/APIController.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/build/classes/java/main/OCARIoT/FirebaseMessage.class" beforeDir="false" afterPath="$PROJECT_DIR$/build/classes/java/main/OCARIoT/FirebaseMessage.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/build/classes/java/main/OCARIoT/Main.class" beforeDir="false" afterPath="$PROJECT_DIR$/build/classes/java/main/OCARIoT/Main.class" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/build/classes/java/main/OCARIoT/RabbitMQ.class" beforeDir="false" afterPath="$PROJECT_DIR$/build/classes/java/main/OCARIoT/RabbitMQ.class" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/build/classes/java/main/OCARIoT/RabbitMQConfig.class" beforeDir="false" afterPath="$PROJECT_DIR$/build/classes/java/main/OCARIoT/RabbitMQConfig.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/build/classes/java/main/OCARIoT/User.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/build/classes/java/main/OCARIoT/UserMockedData.class" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/build/resources/main/application.properties" beforeDir="false" afterPath="$PROJECT_DIR$/build/resources/main/application.properties" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/OCARIoT/APIController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/OCARIoT/APIController.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/OCARIoT/FirebaseMessage.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/OCARIoT/FirebaseMessage.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/OCARIoT/Main.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/OCARIoT/Main.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/OCARIoT/RabbitMQ.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/OCARIoT/RabbitMQ.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/OCARIoT/RabbitMQConfig.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/OCARIoT/RabbitMQConfig.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/resources/application.properties" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/application.properties" afterDir="false" />
     </list>
-    <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
@@ -79,6 +73,11 @@
   </component>
   <component name="ProjectId" id="1SekasgahE3NY2Vdu1A6OpfTRtt" />
   <component name="ProjectLevelVcsManager" settingsEditedManually="true" />
+  <component name="ProjectViewState">
+    <option name="hideEmptyMiddlePackages" value="true" />
+    <option name="showExcludedFiles" value="true" />
+    <option name="showLibraryContents" value="true" />
+  </component>
   <component name="PropertiesComponent">
     <property name="SHARE_PROJECT_CONFIGURATION_FILES" value="true" />
     <property name="com.intellij.ide.scratch.LRUPopupBuilder$1/New Scratch File" value="EditorConfig" />
@@ -93,18 +92,6 @@
       <recent name="$PROJECT_DIR$/src" />
       <recent name="$PROJECT_DIR$/src/main" />
     </key>
-  </component>
-  <component name="RunDashboard">
-    <option name="ruleStates">
-      <list>
-        <RuleState>
-          <option name="name" value="ConfigurationTypeDashboardGroupingRule" />
-        </RuleState>
-        <RuleState>
-          <option name="name" value="StatusDashboardGroupingRule" />
-        </RuleState>
-      </list>
-    </option>
   </component>
   <component name="RunManager">
     <configuration name="Main" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
@@ -125,6 +112,18 @@
         <item itemvalue="Application.Main" />
       </list>
     </recent_temporary>
+  </component>
+  <component name="ServiceViewManager">
+    <option name="viewStates">
+      <list>
+        <serviceView>
+          <treeState>
+            <expand />
+            <select />
+          </treeState>
+        </serviceView>
+      </list>
+    </option>
   </component>
   <component name="SvnConfiguration">
     <configuration />
@@ -151,5 +150,27 @@
         </entry>
       </map>
     </option>
+  </component>
+  <component name="WindowStateProjectService">
+    <state x="648" y="287" key="#com.intellij.openapi.updateSettings.impl.PluginUpdateInfoDialog" timestamp="1575365576596">
+      <screen x="0" y="23" width="1920" height="1057" />
+    </state>
+    <state x="648" y="287" key="#com.intellij.openapi.updateSettings.impl.PluginUpdateInfoDialog/0.23.1920.1057/1920.222.1920.1057/-1920.246.1920.1057@0.23.1920.1057" timestamp="1575365576596" />
+    <state width="1878" height="174" key="GridCell.Tab.0.bottom" timestamp="1575466199714">
+      <screen x="0" y="23" width="1920" height="1057" />
+    </state>
+    <state width="1878" height="174" key="GridCell.Tab.0.bottom/0.23.1920.1057/1920.222.1920.1057/-1920.246.1920.1057@0.23.1920.1057" timestamp="1575466199714" />
+    <state width="1878" height="174" key="GridCell.Tab.0.center" timestamp="1575466199712">
+      <screen x="0" y="23" width="1920" height="1057" />
+    </state>
+    <state width="1878" height="174" key="GridCell.Tab.0.center/0.23.1920.1057/1920.222.1920.1057/-1920.246.1920.1057@0.23.1920.1057" timestamp="1575466199712" />
+    <state width="1878" height="174" key="GridCell.Tab.0.left" timestamp="1575466199711">
+      <screen x="0" y="23" width="1920" height="1057" />
+    </state>
+    <state width="1878" height="174" key="GridCell.Tab.0.left/0.23.1920.1057/1920.222.1920.1057/-1920.246.1920.1057@0.23.1920.1057" timestamp="1575466199711" />
+    <state width="1878" height="174" key="GridCell.Tab.0.right" timestamp="1575466199713">
+      <screen x="0" y="23" width="1920" height="1057" />
+    </state>
+    <state width="1878" height="174" key="GridCell.Tab.0.right/0.23.1920.1057/1920.222.1920.1057/-1920.246.1920.1057@0.23.1920.1057" timestamp="1575466199713" />
   </component>
 </project>

@@ -12,18 +12,18 @@ import org.springframework.context.annotation.Configuration;
 @Configuration
 public class RabbitMQConfig {
 
-    @Value("${rabbitmq.exchange}")
-    private String exchange;
+    @Value("${rabbitmq.exchange.send.notification}")
+    private String exchangeNotification;
 
     @Bean
-    public DirectExchange direct() {
-        return new DirectExchange(exchange);
+    public DirectExchange directNotification() {
+        return new DirectExchange(exchangeNotification);
     }
 
-    @Value("${rabbitmq.queue.Notification}")
+    @Value("${rabbitmq.queue.send.notification}")
     String queueNotification;
 
-    @Value("${rabbitmq.routingkey.Notification}")
+    @Value("${rabbitmq.routingkey.send.notification}")
     private String routingkeyNotification;
 
     @Bean
@@ -32,15 +32,23 @@ public class RabbitMQConfig {
     }
 
     @Bean
-    public Binding binding1a(DirectExchange direct, Queue queueNotification) {
-        return BindingBuilder.bind(queueNotification).to(direct).with(routingkeyNotification);
+    public Binding binding1a(DirectExchange directNotification, Queue queueNotification) {
+        return BindingBuilder.bind(queueNotification).to(directNotification).with(routingkeyNotification);
     }
 
-    @Value("${rabbitmq.queue.Delete}")
-    String queueDelete;
+    @Value("${rabbitmq.exchange.delete.users}")
+    private String exchange;
 
-    @Value("${rabbitmq.routingkey.deleteUsers}")
+    @Bean
+    public DirectExchange direct() {
+        return new DirectExchange(exchange);
+    }
+
+    @Value("${rabbitmq.routingkey.delete.users}")
     private String routingkeyDelete;
+
+    @Value("${rabbitmq.queue.delete.users}")
+    String queueDelete;
 
     @Bean
     Queue queueUsers() {
@@ -51,6 +59,7 @@ public class RabbitMQConfig {
     public Binding binding2a(DirectExchange direct, Queue queueUsers) {
         return BindingBuilder.bind(queueUsers).to(direct).with(routingkeyDelete);
     }
+
     @Bean
     public MessageConverter jsonMessageConverter() {
         return new Jackson2JsonMessageConverter();

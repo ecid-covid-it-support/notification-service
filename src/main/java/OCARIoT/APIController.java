@@ -8,14 +8,22 @@ import static com.mongodb.client.model.Filters.*;
 import org.springframework.web.bind.annotation.*;
 import java.net.UnknownHostException;
 import java.util.Map;
+import java.util.ResourceBundle;
 
 
 @RestController
 public class APIController {
 
-    MongoClient mongoClient = MongoClients.create("mongodb://localhost:27017");
-    MongoDatabase database = mongoClient.getDatabase("NotificationMicroservice");
-    MongoCollection<Document> collection = database.getCollection("Users");
+    private static ResourceBundle rb = ResourceBundle.getBundle("application");
+
+    String mongoHost = rb.getString("spring.data.mongodb");
+    String mongoDatabase = rb.getString("spring.data.mongodb.database");
+    String mongoCollection = rb.getString("spring.data.mongodb.collection");
+
+
+    MongoClient mongoClient = MongoClients.create(mongoHost);
+    MongoDatabase database = mongoClient.getDatabase(mongoDatabase);
+    MongoCollection<Document> collection = database.getCollection(mongoCollection);
 
 
     @RequestMapping("/")
