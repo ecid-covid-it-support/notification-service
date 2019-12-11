@@ -9,13 +9,15 @@ import org.springframework.web.bind.annotation.*;
 import java.net.UnknownHostException;
 import java.util.Map;
 import java.util.ResourceBundle;
+import java.util.logging.Logger;
 
 
 @RestController
 public class APIController {
 
-    private static ResourceBundle rb = ResourceBundle.getBundle("application");
+    private static final Logger LOGGER = Logger.getLogger( RabbitMQ.class.getName() );
 
+    private static ResourceBundle rb = ResourceBundle.getBundle("application");
     String mongoHost = rb.getString("spring.data.mongodb");
     String mongoDatabase = rb.getString("spring.data.mongodb.database");
     String mongoCollection = rb.getString("spring.data.mongodb.collection");
@@ -34,16 +36,10 @@ public class APIController {
     @PostMapping("user/{id}")
     public String create(@PathVariable String id, @RequestBody Map <String,String> body) throws UnknownHostException {
 
-
         String token = body.get("token");
-
-
         collection.updateOne(eq("id", id), new Document("$addToSet", new Document("Tokens",token)),new UpdateOptions().upsert(true).bypassDocumentValidation(true));
         Document myDoc = collection.find(eq("id",id)).first();
-        return myDoc.toJson();
-
-
-
+        return "User saved";
     }
 
     @GetMapping("/user/{id}")

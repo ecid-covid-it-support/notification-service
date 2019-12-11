@@ -10,7 +10,7 @@ import com.google.firebase.messaging.Notification;
 public class FirebaseMessage {
 
 
-    public static String sendToToken(String token, String title, String body) throws FirebaseMessagingException {
+    public static void sendToToken(String token, String title, String body) throws FirebaseMessagingException {
 
 
         Message message = Message.builder()
@@ -22,12 +22,12 @@ public class FirebaseMessage {
         // registration token.
         String response = FirebaseMessaging.getInstance().send(message);
         // Response is a message ID string.
-        System.out.println("Successfully sent message: " + response);
-        return response;
+        //System.out.println("Successfully sent message: " + response);
         // [END send_to_token]
     }
 
     public static void sendToTopic(String topic, String title, String body) throws FirebaseMessagingException {
+
 
 
         Message message = Message.builder()
@@ -38,7 +38,7 @@ public class FirebaseMessage {
         // Send a message to the devices subscribed to the provided topic.
         String response = FirebaseMessaging.getInstance().send(message);
         // Response is a message ID string.
-        System.out.println("Successfully sent message: " + response);
+        //System.out.println("Successfully sent message: " + response);
         // [END send_to_topic]
     }
 
