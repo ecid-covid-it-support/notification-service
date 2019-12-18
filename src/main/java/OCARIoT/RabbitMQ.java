@@ -12,12 +12,14 @@ import org.bson.BsonDocument;
 import org.bson.BsonString;
 import org.bson.Document;
 import org.bson.conversions.Bson;
+import org.json.JSONException;
 import org.json.JSONObject;
 import org.springframework.amqp.core.Message;
 import org.springframework.amqp.rabbit.annotation.RabbitListener;
 import org.springframework.stereotype.Component;
 import java.util.List;
 import java.util.ResourceBundle;
+import java.util.logging.Level;
 import java.util.logging.Logger;
 
 import static com.mongodb.client.model.Filters.eq;
@@ -44,88 +46,108 @@ public class RabbitMQ {
     @RabbitListener(queues = "${rabbitmq.queue.send.notification}")
     public void notificationService(Message message) throws JsonProcessingException {
 
-        //LOGGER.log(Level.INFO,"Received message from RabbitMQ "+ message);
 
-        byte[] body = message.getBody();
-        JSONObject jsonmsg = new JSONObject(new String(body));
+        try {
+            byte[] body = message.getBody();
+            JSONObject jsonmsg = new JSONObject(new String(body));
 
-        if (jsonmsg.has("topic")){
-            String topic = (String) jsonmsg.get("topic");
-            String title = (String) jsonmsg.get("title");
-            String content = (String) jsonmsg.get("body");
-            try {
-                FirebaseMessage.sendToTopic(topic, title, content);
+            if (jsonmsg.has("event_name")) {
 
-            } catch (FirebaseMessagingException e) {
-                e.printStackTrace();
-                //return "Not possible to send message to topic " + topic +".";
-            }
-            //return "Notification sent to topic " + topic+".";
-         }
-        else{
-            if (jsonmsg.has("id")){
+                String eventName = (String) jsonmsg.get("event_name");
 
-                String title = (String) jsonmsg.get("title");
-                String content = (String) jsonmsg.get("body");
-                String userID = (String) jsonmsg.get("id");
+                if (jsonmsg.get("event_name").equals("SendNotificationEvent")) {
 
-                long found = collection.countDocuments(new BsonDocument("id", new BsonString(userID)));
-                if (found==0){
-                    //LOGGER.log(Level.INFO,"User does not exist in database ");
-                    //return "User does not exist in database.";
-                }
-                else {
+                    if (jsonmsg.has("notification")) {
 
-                    //LOGGER.log(Level.INFO,"Seatching for Tokens");
-                    List<String> tokens = (List) collection.find(eq("id", userID)).first().get("Tokens");
-                    //LOGGER.log(Level.INFO,"Tokens "+ tokens);
-
-                    for (String token : tokens) {
-
-                        try {
-
-                            FirebaseMessage.sendToToken(token, title, content);
+                        if (jsonmsg.getJSONObject("notification").has("topic")) {
 
 
-                        } catch (FirebaseMessagingException e) {
-                            Bson filter = Filters.eq("id",userID);
-                            Bson delete = Updates.pull("Tokens",token);
-                            collection.updateOne(filter,delete);
-                            //e.printStackTrace();
+                            try {
+                                String topic = String.valueOf(jsonmsg.getJSONObject("notification").get("topic"));
+                                String title = String.valueOf(jsonmsg.getJSONObject("notification").get("title"));
+                                String content = String.valueOf(jsonmsg.getJSONObject("notification").get("body"));
+                                FirebaseMessage.sendToTopic(topic, title, content);
 
+                            } catch (FirebaseMessagingException e) {
+                                LOGGER.log(Level.WARNING, "An error occurred while attempting perform the operation with the SendNotificationEvent name event. " +
+                                        "Cannot read property 'topic', 'body' or 'title'");
+
+                            }
+                        }
+                        if (jsonmsg.getJSONObject("notification").has("id")) {
+
+
+                            try {
+                                String title = String.valueOf(jsonmsg.getJSONObject("notification").get("title"));
+                                String content = String.valueOf(jsonmsg.getJSONObject("notification").get("body"));
+                                String userID = String.valueOf(jsonmsg.getJSONObject("notification").get("id"));
+
+
+                                long found = collection.countDocuments(new BsonDocument("id", new BsonString(userID)));
+                                if (found == 0) {
+
+                                    LOGGER.log(Level.INFO, "User does not exist in database ");
+
+                                } else {
+
+                                    List<String> tokens = (List) collection.find(eq("id", userID)).first().get("Tokens");
+
+                                    for (String token : tokens) {
+
+                                        try {
+
+                                            FirebaseMessage.sendToToken(token, title, content);
+
+                                        } catch (FirebaseMessagingException e) {
+
+                                            Bson filter = Filters.eq("id", userID);
+                                            Bson delete = Updates.pull("Tokens", token);
+                                            collection.updateOne(filter, delete);
+
+
+                                        }
+                                    }
+                                }
+                            } catch (JSONException e) {
+
+                                LOGGER.log(Level.WARNING, "An error occurred while attempting perform the operation with the SendNotificationEvent name event. " +
+                                        "Cannot read property 'id', 'body' or 'title' or user does not exist in database");
+                            }
                         }
                     }
-                    //return "Notification message sent to user " + userID;
                 }
+                if (jsonmsg.get("event_name").equals("UserDeleteEvent")) {
+
+                    String id = null;
+
+                    if (jsonmsg.has("user")) {
+                        try {
+
+                            id = String.valueOf(jsonmsg.getJSONObject("user").get("id"));
+
+
+                            Document doc = collection.find(eq("id", id)).first();
+                            if (doc != null) {
+
+                                collection.deleteMany(doc);
+                                LOGGER.log(Level.INFO, "User " + id + " deleted from database");
+
+
+                            } else if (doc == null) {
+
+                                LOGGER.log(Level.WARNING, "User " + id + " does not exist on database");
+
+                            }
+                        } catch (JSONException e) {
+                            //e.printStackTrace();
+                            LOGGER.log(Level.WARNING, "An error occurred while attempting perform the operation with the UserDeleteEvent name event. Cannot read property 'id' or undefined");
+                        }
+                    }
+                }
+
             }
-        }
-        //return  "Message must contain 'id' or 'topic' keys and values";
-    }
-
-    @RabbitListener(queues = "${rabbitmq.queue.delete.users}")
-    public void deleteUsers(Message message) throws JsonProcessingException {
-
-        byte[] body = message.getBody();
-        JSONObject jsonmsg = new JSONObject(new String(body));
-        //LOGGER.log(Level.INFO,"Received message from RabbitMQ " + message);
-        String id = null;
-
-        if (jsonmsg.has("user")) {
-            id = String.valueOf(jsonmsg.getJSONObject("user").get("id"));
-
-
-            Document doc = collection.find(eq("id", id)).first();
-            if (doc != null) {
-
-                collection.deleteMany(doc);
-                //LOGGER.log(Level.INFO, "User " + id + " deleted from database");
-
-
-            } else if (doc == null) {
-
-                //LOGGER.log(Level.WARNING, "User " + id + " does not exist on database");
-
-            }
+        } catch (JSONException e) {
+            LOGGER.log(Level.WARNING, "An error occurred while attempting to read message. Possible problem with JSON format");
         }
     }
 }

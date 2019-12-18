@@ -19,8 +19,13 @@ public class Main {
 
         SpringApplication.run(Main.class,args);
 
-        FileInputStream serviceAccount = new FileInputStream("/Users/jpdoliveira/IdeaProjects/OCARIoT/src/ocariot-d0c9e-firebase-adminsdk-py85n-e6ca7702f3.json");
-        FirebaseOptions options = new FirebaseOptions.Builder().setCredentials(GoogleCredentials.fromStream(serviceAccount)).build();
+        FileInputStream serviceAccount = new FileInputStream("//Users/jpdoliveira/IdeaProjects/OCARIoT/src/main/java/OCARIoT/ocariot-3ecd2-firebase-adminsdk-nq31m-c7616a4aad.json");
+
+        FirebaseOptions options = new FirebaseOptions.Builder()
+                .setCredentials(GoogleCredentials.fromStream(serviceAccount))
+                .setDatabaseUrl("https://ocariot-3ecd2.firebaseio.com")
+                .build();
+
         FirebaseApp.initializeApp(options);
 
     }
