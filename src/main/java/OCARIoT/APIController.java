@@ -21,8 +21,10 @@ public class APIController {
     String mongoHost = rb.getString("spring.data.mongodb");
     String mongoDatabase = rb.getString("spring.data.mongodb.database");
     String mongoCollection = rb.getString("spring.data.mongodb.collection");
+    //String username =rb.getString("spring.data.mongodb.username");
+    //String password =rb.getString("spring.data.mongodb.password");
 
-
+    //MongoCredential credential = MongoCredential.createCredential(username,mongoDatabase,password.toCharArray());
     MongoClient mongoClient = MongoClients.create(mongoHost);
     MongoDatabase database = mongoClient.getDatabase(mongoDatabase);
     MongoCollection<Document> collection = database.getCollection(mongoCollection);

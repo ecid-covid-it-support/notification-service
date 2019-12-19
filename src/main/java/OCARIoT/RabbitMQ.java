@@ -2,6 +2,7 @@ package OCARIoT;
 
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.google.firebase.messaging.FirebaseMessagingException;
+import com.mongodb.MongoCredential;
 import com.mongodb.client.MongoClient;
 import com.mongodb.client.MongoClients;
 import com.mongodb.client.MongoCollection;
@@ -34,7 +35,6 @@ public class RabbitMQ {
     String mongoHost = rb.getString("spring.data.mongodb");
     String mongoDatabase = rb.getString("spring.data.mongodb.database");
     String mongoCollection = rb.getString("spring.data.mongodb.collection");
-
 
     MongoClient mongoClient = MongoClients.create(mongoHost);
     MongoDatabase database = mongoClient.getDatabase(mongoDatabase);
