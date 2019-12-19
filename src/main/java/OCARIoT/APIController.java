@@ -1,36 +1,33 @@
 package OCARIoT;
 
-import com.google.firebase.messaging.FirebaseMessagingException;
-import com.google.gson.JsonObject;
-
 import com.mongodb.client.*;
-
 import com.mongodb.client.MongoClient;
 import com.mongodb.client.model.UpdateOptions;
 import org.bson.Document;
-
 import static com.mongodb.client.model.Filters.*;
-
-
 import org.springframework.web.bind.annotation.*;
-
-
-import java.io.IOException;
 import java.net.UnknownHostException;
-
 import java.util.Map;
+import java.util.ResourceBundle;
+import java.util.logging.Logger;
+
 
 @RestController
 public class APIController {
 
-    UserMockedData userMockedData = UserMockedData.getInstance();
+    private static final Logger LOGGER = Logger.getLogger( RabbitMQ.class.getName() );
 
-    MongoClient mongoClient = MongoClients.create("mongodb://localhost:27017");
-    MongoDatabase database = mongoClient.getDatabase("NotificationMicroservice");
-    MongoCollection<Document> collection = database.getCollection("Users");
+    private static ResourceBundle rb = ResourceBundle.getBundle("application");
+    String mongoHost = rb.getString("spring.data.mongodb");
+    String mongoDatabase = rb.getString("spring.data.mongodb.database");
+    String mongoCollection = rb.getString("spring.data.mongodb.collection");
+    //String username =rb.getString("spring.data.mongodb.username");
+    //String password =rb.getString("spring.data.mongodb.password");
 
-    public APIController() throws UnknownHostException {
-    }
+    //MongoCredential credential = MongoCredential.createCredential(username,mongoDatabase,password.toCharArray());
+    MongoClient mongoClient = MongoClients.create(mongoHost);
+    MongoDatabase database = mongoClient.getDatabase(mongoDatabase);
+    MongoCollection<Document> collection = database.getCollection(mongoCollection);
 
 
     @RequestMapping("/")
@@ -39,54 +36,19 @@ public class APIController {
     }
 
     @PostMapping("user/{id}")
-    public String create(@PathVariable String id, @RequestBody Map<String, String> body) throws UnknownHostException {
-
+    public String create(@PathVariable String id, @RequestBody Map <String,String> body) throws UnknownHostException {
 
         String token = body.get("token");
-
         collection.updateOne(eq("id", id), new Document("$addToSet", new Document("Tokens",token)),new UpdateOptions().upsert(true).bypassDocumentValidation(true));
         Document myDoc = collection.find(eq("id",id)).first();
-        return myDoc.toJson();
-
-
+        return "User saved";
     }
 
     @GetMapping("/user/{id}")
     public String show(@PathVariable String id){
 
-        int userId = Integer.parseInt(id);
-
         Document myDoc = collection.find(eq("id",id)).first();
         return myDoc.toJson();
-
-
     }
-
-    @PostMapping("notification/topic")
-    public JsonObject topic(@RequestBody Map<String, String> body) throws IOException, FirebaseMessagingException {
-
-        String topic = body.get("topic");
-        String title = body.get("title");
-        String content = body.get("body");
-        FirebaseMessage.sendToTopic(topic, title, content);
-        return null;
-
-    }
-
-    @PostMapping("notification/{id}")
-    public JsonObject token(@PathVariable String id, @RequestBody Map<String, String> body) throws IOException, FirebaseMessagingException {
-
-        int userID = Integer.parseInt(id);
-
-        String title = body.get("title");
-        String content = body.get("body");
-        String token = userMockedData.getTokenById(userID);
-
-        FirebaseMessage.sendToToken(token, title, content);
-        return null;
-    }
-
-
-
 
 }

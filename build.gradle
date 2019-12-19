@@ -1,7 +1,8 @@
 plugins {
     id 'java'
-    id 'org.springframework.boot' version '2.1.9.RELEASE'
+    id "org.springframework.boot" version "2.2.2.RELEASE"
     id 'io.spring.dependency-management' version '1.0.8.RELEASE'
+
 }
 
 version '1.0-SNAPSHOT'
@@ -14,10 +15,11 @@ repositories {
 
 dependencies {
     testCompile group: 'junit', name: 'junit', version: '4.12'
-    implementation 'com.google.firebase:firebase-admin:6.10.0'
-    implementation 'org.springframework.boot:spring-boot-starter'
-    testImplementation 'org.springframework.boot:spring-boot-starter-test'
-    compile("org.springframework.boot:spring-boot-starter-web")
-    compile 'org.mongodb:mongodb-driver:3.11.2'
-    compile 'org.mongodb:mongodb-driver:3.8.1'
+
+    compile group: 'com.google.firebase', name: 'firebase-admin', version: '6.11.0'
+    compile group: 'org.springframework.boot', name: 'spring-boot-starter-data-mongodb', version: '2.2.2.RELEASE'
+    compile group: 'org.springframework.boot', name: 'spring-boot-starter-web', version: '2.2.2.RELEASE'
+    compile group: 'org.json', name: 'json', version: '20190722'
+    compile group: 'org.springframework.amqp', name: 'spring-rabbit', version: '2.2.2.RELEASE'
 }
+
