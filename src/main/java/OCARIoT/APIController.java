@@ -1,12 +1,14 @@
 package OCARIoT;
 
-import com.mongodb.client.*;
+import com.mongodb.client.MongoClients;
 import com.mongodb.client.MongoClient;
+import com.mongodb.client.MongoCollection;
+import com.mongodb.client.MongoDatabase;
+import static com.mongodb.client.model.Filters.eq;
 import com.mongodb.client.model.UpdateOptions;
 import org.bson.Document;
-import static com.mongodb.client.model.Filters.*;
 import org.springframework.web.bind.annotation.*;
-import java.net.UnknownHostException;
+
 import java.util.Map;
 import java.util.ResourceBundle;
 import java.util.logging.Logger;
@@ -15,19 +17,17 @@ import java.util.logging.Logger;
 @RestController
 public class APIController {
 
-    private static final Logger LOGGER = Logger.getLogger( RabbitMQ.class.getName() );
 
-    private static ResourceBundle rb = ResourceBundle.getBundle("application");
-    String mongoHost = rb.getString("spring.data.mongodb");
-    String mongoDatabase = rb.getString("spring.data.mongodb.database");
-    String mongoCollection = rb.getString("spring.data.mongodb.collection");
-    //String username =rb.getString("spring.data.mongodb.username");
-    //String password =rb.getString("spring.data.mongodb.password");
+    private static final ResourceBundle rb = ResourceBundle.getBundle("application");
+    final String mongoDatabase = rb.getString("data.mongodb.database");
+    final String mongoCollection = rb.getString("data.mongodb.collection");
+    final String mongoURI = rb.getString("data.mongodb.uri");
 
-    //MongoCredential credential = MongoCredential.createCredential(username,mongoDatabase,password.toCharArray());
-    MongoClient mongoClient = MongoClients.create(mongoHost);
-    MongoDatabase database = mongoClient.getDatabase(mongoDatabase);
-    MongoCollection<Document> collection = database.getCollection(mongoCollection);
+    final MongoClient mongoClient = MongoClients.create(mongoURI);
+    final MongoDatabase database = mongoClient.getDatabase(mongoDatabase);
+    final MongoCollection<Document> collection = database.getCollection(mongoCollection);
+
+
 
 
     @RequestMapping("/")
@@ -36,7 +36,7 @@ public class APIController {
     }
 
     @PostMapping("user/{id}")
-    public String create(@PathVariable String id, @RequestBody Map <String,String> body) throws UnknownHostException {
+    public String create(@PathVariable String id, @RequestBody Map <String,String> body) {
 
         String token = body.get("token");
         collection.updateOne(eq("id", id), new Document("$addToSet", new Document("Tokens",token)),new UpdateOptions().upsert(true).bypassDocumentValidation(true));

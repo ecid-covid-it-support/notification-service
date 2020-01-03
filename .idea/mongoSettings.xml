@@ -4,7 +4,10 @@
     <option name="serverConfigurations">
       <list>
         <ServerConfiguration>
+          <option name="authenticationDatabase" value="NotificationMicroservice" />
+          <option name="authenticationMechanism" value="SCRAM-SHA-1" />
           <option name="label" value="Microservice" />
+          <option name="password" value="abc123" />
           <option name="serverUrls">
             <list>
               <option value="localhost:27017" />
@@ -13,6 +16,7 @@
           <option name="sshTunnelingConfiguration">
             <SshTunnelingConfiguration />
           </option>
+          <option name="username" value="myDbOwner" />
         </ServerConfiguration>
       </list>
     </option>

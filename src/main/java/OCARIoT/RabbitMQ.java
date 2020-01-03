@@ -1,6 +1,5 @@
 package OCARIoT;
 
-import com.fasterxml.jackson.core.JsonProcessingException;
 import com.google.firebase.messaging.FirebaseMessagingException;
 import com.mongodb.client.MongoClient;
 import com.mongodb.client.MongoClients;
@@ -17,7 +16,9 @@ import org.json.JSONObject;
 import org.springframework.amqp.core.Message;
 import org.springframework.amqp.rabbit.annotation.RabbitListener;
 import org.springframework.stereotype.Component;
+
 import java.util.List;
+import java.util.Objects;
 import java.util.ResourceBundle;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -31,20 +32,21 @@ public class RabbitMQ {
 
     private static final Logger LOGGER = Logger.getLogger( RabbitMQ.class.getName() );
 
-    private static ResourceBundle rb = ResourceBundle.getBundle("application");
+    private static final ResourceBundle rb = ResourceBundle.getBundle("application");
+    final String mongoDatabase = rb.getString("data.mongodb.database");
+    final String mongoCollection = rb.getString("data.mongodb.collection");
+    final String mongoURI = rb.getString("data.mongodb.uri");
 
-    String mongoHost = rb.getString("spring.data.mongodb");
-    String mongoDatabase = rb.getString("spring.data.mongodb.database");
-    String mongoCollection = rb.getString("spring.data.mongodb.collection");
+    final MongoClient mongoClient = MongoClients.create(mongoURI);
+    final MongoDatabase database = mongoClient.getDatabase(mongoDatabase);
+    final MongoCollection<Document> collection = database.getCollection(mongoCollection);
 
 
-    MongoClient mongoClient = MongoClients.create(mongoHost);
-    MongoDatabase database = mongoClient.getDatabase(mongoDatabase);
-    MongoCollection<Document> collection = database.getCollection(mongoCollection);
+
 
 
     @RabbitListener(queues = "${rabbitmq.queue.send.notification}")
-    public void notificationService(Message message) throws JsonProcessingException {
+    public void notificationService(Message message) {
 
 
         try {
@@ -90,7 +92,7 @@ public class RabbitMQ {
 
                                 } else {
 
-                                    List<String> tokens = (List) collection.find(eq("id", userID)).first().get("Tokens");
+                                    List<String> tokens = (List) Objects.requireNonNull(collection.find(eq("id", userID)).first()).get("Tokens");
 
                                     for (String token : tokens) {
 
@@ -118,7 +120,7 @@ public class RabbitMQ {
                 }
                 if (jsonmsg.get("event_name").equals("UserDeleteEvent")) {
 
-                    String id = null;
+                    String id;
 
                     if (jsonmsg.has("user")) {
                         try {
