@@ -8,11 +8,14 @@ import org.springframework.context.annotation.Configuration;
 @Configuration
 public class RabbitMQConfig {
 
+
+
     @Value("${rabbitmq.exchange.send.notification}")
     private String exchangeNotification;
 
     @Bean
     public DirectExchange directNotification() {
+
         return new DirectExchange(exchangeNotification);
     }
 
@@ -24,6 +27,7 @@ public class RabbitMQConfig {
 
     @Bean
     Queue queueNotification() {
+
         return new Queue(queueNotification, true);
     }
 

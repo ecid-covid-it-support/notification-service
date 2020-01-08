@@ -12,18 +12,15 @@ public class FirebaseMessage {
 
     public static void sendToToken(String token, String title, String body) throws FirebaseMessagingException {
 
-
         Message message = Message.builder()
                 .setNotification(new Notification(title,body))
                 .setToken(token)
                 .build();
 
-        // Send a message to the device corresponding to the provided
-        // registration token.
-        String response = FirebaseMessaging.getInstance().send(message);
-        // Response is a message ID string.
-        System.out.println("Successfully sent message: " + response);
-        // [END send_to_token]
+
+        // Send a message to the device corresponding to the provided registration token.
+        FirebaseMessaging.getInstance().send(message);
+
     }
 
     public static void sendToTopic(String topic, String title, String body) throws FirebaseMessagingException {
@@ -35,10 +32,8 @@ public class FirebaseMessage {
                 .build();
 
         // Send a message to the devices subscribed to the provided topic.
-        String response = FirebaseMessaging.getInstance().send(message);
-        // Response is a message ID string.
-        System.out.println("Successfully sent message: " + response);
-        // [END send_to_topic]
+        FirebaseMessaging.getInstance().send(message);
+
     }
 
 

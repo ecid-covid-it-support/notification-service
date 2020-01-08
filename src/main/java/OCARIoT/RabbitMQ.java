@@ -1,10 +1,7 @@
 package OCARIoT;
 
 import com.google.firebase.messaging.FirebaseMessagingException;
-import com.mongodb.client.MongoClient;
-import com.mongodb.client.MongoClients;
 import com.mongodb.client.MongoCollection;
-import com.mongodb.client.MongoDatabase;
 import com.mongodb.client.model.Filters;
 import com.mongodb.client.model.Updates;
 import org.bson.BsonDocument;
@@ -15,38 +12,29 @@ import org.json.JSONException;
 import org.json.JSONObject;
 import org.springframework.amqp.core.Message;
 import org.springframework.amqp.rabbit.annotation.RabbitListener;
-import org.springframework.stereotype.Component;
-
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
 import java.util.List;
 import java.util.Objects;
-import java.util.ResourceBundle;
+import java.util.function.Supplier;
 import java.util.logging.Level;
 import java.util.logging.Logger;
-
 import static com.mongodb.client.model.Filters.eq;
 
 
 
-@Component
-public class RabbitMQ {
+@Service
+public class RabbitMQ{
 
     private static final Logger LOGGER = Logger.getLogger( RabbitMQ.class.getName() );
 
-    private static final ResourceBundle rb = ResourceBundle.getBundle("application");
-    final String mongoDatabase = rb.getString("data.mongodb.database");
-    final String mongoCollection = rb.getString("data.mongodb.collection");
-    final String mongoURI = rb.getString("data.mongodb.uri");
 
-    final MongoClient mongoClient = MongoClients.create(mongoURI);
-    final MongoDatabase database = mongoClient.getDatabase(mongoDatabase);
-    final MongoCollection<Document> collection = database.getCollection(mongoCollection);
-
-
-
-
+    @Autowired
+    private  MongoCollection<Document> collection;
 
     @RabbitListener(queues = "${rabbitmq.queue.send.notification}")
     public void notificationService(Message message) {
+
 
 
         try {
@@ -92,7 +80,7 @@ public class RabbitMQ {
 
                                 } else {
 
-                                    List<String> tokens = (List) Objects.requireNonNull(collection.find(eq("id", userID)).first()).get("Tokens");
+                                    List<String> tokens = (List) (Objects.requireNonNull(collection.find(eq("id", userID)).first())).get("Tokens");
 
                                     for (String token : tokens) {
 
@@ -101,7 +89,7 @@ public class RabbitMQ {
                                             FirebaseMessage.sendToToken(token, title, content);
 
                                         } catch (FirebaseMessagingException e) {
-
+                                            //LOGGER.log(Level.WARNING, (Supplier<String>) e);
                                             Bson filter = Filters.eq("id", userID);
                                             Bson delete = Updates.pull("Tokens", token);
                                             collection.updateOne(filter, delete);
@@ -135,13 +123,12 @@ public class RabbitMQ {
                                 LOGGER.log(Level.INFO, "User " + id + " deleted from database");
 
 
-                            } else if (doc == null) {
+                            } else {
 
                                 LOGGER.log(Level.WARNING, "User " + id + " does not exist on database");
 
                             }
                         } catch (JSONException e) {
-                            //e.printStackTrace();
                             LOGGER.log(Level.WARNING, "An error occurred while attempting perform the operation with the UserDeleteEvent name event. Cannot read property 'id' or undefined");
                         }
                     }

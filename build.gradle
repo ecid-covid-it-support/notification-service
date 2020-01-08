@@ -21,5 +21,7 @@ dependencies {
     compile group: 'org.springframework.boot', name: 'spring-boot-starter-web', version: '2.2.2.RELEASE'
     compile group: 'org.json', name: 'json', version: '20190722'
     compile group: 'org.springframework.amqp', name: 'spring-rabbit', version: '2.2.2.RELEASE'
+
+
 }
 
