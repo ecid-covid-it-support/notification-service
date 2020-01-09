@@ -1,6 +1,7 @@
 package OCARIoT;
 
 
+import com.mongodb.MongoClientOptions;
 import com.mongodb.client.MongoClient;
 import com.mongodb.client.MongoClients;
 import com.mongodb.client.MongoCollection;
@@ -20,6 +21,8 @@ public class MongoDBConfiguration{
     public String mongoDatabase;
     @Value("${spring.data.mongodb.collection}")
     public String mongoCollection;
+
+
 
     @Bean
     public MongoCollection<Document> collection() {

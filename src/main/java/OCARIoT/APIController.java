@@ -27,7 +27,7 @@ public class APIController {
     public String create(@PathVariable String id, @RequestBody Map <String,String> body) {
 
         String token = body.get("token");
-        collection.updateOne(eq("id", id), new Document("$addToSet", new Document("Tokens",token)),new UpdateOptions().upsert(true).bypassDocumentValidation(true));
+        collection.updateOne(eq("id", id), new Document("$addToSet", new Document("Tokens",token)),new UpdateOptions().upsert(true));
         return "User saved";
     }
 

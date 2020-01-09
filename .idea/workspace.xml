@@ -7,26 +7,17 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="8cd855f9-d8e2-46cb-a5a1-fa8d4102f752" name="Default Changelist" comment="">
-      <change afterPath="$PROJECT_DIR$/src/main/java/OCARIoT/MongoDBConfiguration.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/resources/ocariot-3ecd2-firebase-adminsdk-nq31m-d53e9217cd.json" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.gradle/5.2.1/executionHistory/executionHistory.bin" beforeDir="false" afterPath="$PROJECT_DIR$/.gradle/5.2.1/executionHistory/executionHistory.bin" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.gradle/5.2.1/executionHistory/executionHistory.lock" beforeDir="false" afterPath="$PROJECT_DIR$/.gradle/5.2.1/executionHistory/executionHistory.lock" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.gradle/5.2.1/fileHashes/fileHashes.bin" beforeDir="false" afterPath="$PROJECT_DIR$/.gradle/5.2.1/fileHashes/fileHashes.bin" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.gradle/5.2.1/fileHashes/fileHashes.lock" beforeDir="false" afterPath="$PROJECT_DIR$/.gradle/5.2.1/fileHashes/fileHashes.lock" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.gradle/5.2.1/javaCompile/classAnalysis.bin" beforeDir="false" afterPath="$PROJECT_DIR$/.gradle/5.2.1/javaCompile/classAnalysis.bin" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.gradle/5.2.1/javaCompile/javaCompile.lock" beforeDir="false" afterPath="$PROJECT_DIR$/.gradle/5.2.1/javaCompile/javaCompile.lock" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.gradle/5.2.1/javaCompile/taskHistory.bin" beforeDir="false" afterPath="$PROJECT_DIR$/.gradle/5.2.1/javaCompile/taskHistory.bin" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.gradle/buildOutputCleanup/buildOutputCleanup.lock" beforeDir="false" afterPath="$PROJECT_DIR$/.gradle/buildOutputCleanup/buildOutputCleanup.lock" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/misc.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/misc.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/build.gradle" beforeDir="false" afterPath="$PROJECT_DIR$/build.gradle" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/OCARIoT/APIController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/OCARIoT/APIController.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/OCARIoT/FirebaseMessage.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/OCARIoT/FirebaseMessage.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/OCARIoT/Main.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/OCARIoT/Main.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/OCARIoT/RabbitMQ.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/OCARIoT/RabbitMQ.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/OCARIoT/RabbitMQConfig.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/OCARIoT/RabbitMQConfig.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/OCARIoT/MongoDBConfiguration.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/OCARIoT/MongoDBConfiguration.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/resources/application.properties" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/application.properties" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/ocariot-d0c9e-firebase-adminsdk-py85n-e6ca7702f3.json" beforeDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -59,6 +50,12 @@
               <path>
                 <item name="" type="6a2764b6:ExternalProjectsStructure$RootNode" />
                 <item name="OCARIoT" type="f1a62948:ProjectNode" />
+                <item name="Source Sets" type="e897c970:GradleViewContributor$SourceSetsNode" />
+                <item name="main" type="396b929e:GradleViewContributor$SourceSetNode" />
+              </path>
+              <path>
+                <item name="" type="6a2764b6:ExternalProjectsStructure$RootNode" />
+                <item name="OCARIoT" type="f1a62948:ProjectNode" />
                 <item name="Tasks" type="e4a08cd1:TasksNode" />
               </path>
               <path>
@@ -66,6 +63,12 @@
                 <item name="OCARIoT" type="f1a62948:ProjectNode" />
                 <item name="Tasks" type="e4a08cd1:TasksNode" />
                 <item name="build" type="c8890929:TasksNode$1" />
+              </path>
+              <path>
+                <item name="" type="6a2764b6:ExternalProjectsStructure$RootNode" />
+                <item name="OCARIoT" type="f1a62948:ProjectNode" />
+                <item name="Tasks" type="e4a08cd1:TasksNode" />
+                <item name="build setup" type="c8890929:TasksNode$1" />
               </path>
             </expand>
             <select />
@@ -288,10 +291,10 @@
       <screen x="0" y="23" width="1920" height="1057" />
     </state>
     <state x="560" y="218" key="#Project_Structure/0.23.1920.1057/1920.222.1920.1057/-1920.246.1920.1057@0.23.1920.1057" timestamp="1576073513177" />
-    <state x="646" y="122" key="#com.intellij.execution.impl.EditConfigurationsDialog" timestamp="1578479857018">
+    <state x="646" y="122" key="#com.intellij.execution.impl.EditConfigurationsDialog" timestamp="1578575450726">
       <screen x="0" y="23" width="1920" height="1057" />
     </state>
-    <state x="646" y="122" key="#com.intellij.execution.impl.EditConfigurationsDialog/0.23.1920.1057/1920.222.1920.1057/-1920.246.1920.1057@0.23.1920.1057" timestamp="1578479857018" />
+    <state x="646" y="122" key="#com.intellij.execution.impl.EditConfigurationsDialog/0.23.1920.1057/1920.222.1920.1057/-1920.246.1920.1057@0.23.1920.1057" timestamp="1578575450726" />
     <state x="773" y="264" key="#com.intellij.ide.util.MemberChooser" timestamp="1578417891547">
       <screen x="0" y="23" width="1920" height="1057" />
     </state>
@@ -308,36 +311,36 @@
       <screen x="0" y="23" width="1920" height="1057" />
     </state>
     <state x="709" y="394" key="ANALYSIS_DLG_com.intellij.analysis.BaseAnalysisAction$1/0.23.1920.1057/1920.222.1920.1057/-1920.246.1920.1057@0.23.1920.1057" timestamp="1578483840505" />
-    <state x="1356" y="303" width="490" height="754" key="EnvironmentVariablesDialog" timestamp="1578479856131">
+    <state x="1356" y="303" width="490" height="754" key="EnvironmentVariablesDialog" timestamp="1578494226308">
       <screen x="0" y="23" width="1920" height="1057" />
     </state>
-    <state x="1356" y="303" width="490" height="754" key="EnvironmentVariablesDialog/0.23.1920.1057/1920.222.1920.1057/-1920.246.1920.1057@0.23.1920.1057" timestamp="1578479856131" />
-    <state width="1878" height="192" key="GridCell.Tab.0.bottom" timestamp="1578484052772">
+    <state x="1356" y="303" width="490" height="754" key="EnvironmentVariablesDialog/0.23.1920.1057/1920.222.1920.1057/-1920.246.1920.1057@0.23.1920.1057" timestamp="1578494226308" />
+    <state width="1878" height="192" key="GridCell.Tab.0.bottom" timestamp="1578581512745">
       <screen x="0" y="23" width="1920" height="1057" />
     </state>
     <state width="1878" height="174" key="GridCell.Tab.0.bottom/0.23.1920.1057/1920.222.1920.1057/-1920.246.1920.1057@-1920.246.1920.1057" timestamp="1575658586176" />
-    <state width="1878" height="192" key="GridCell.Tab.0.bottom/0.23.1920.1057/1920.222.1920.1057/-1920.246.1920.1057@0.23.1920.1057" timestamp="1578484052772" />
+    <state width="1878" height="192" key="GridCell.Tab.0.bottom/0.23.1920.1057/1920.222.1920.1057/-1920.246.1920.1057@0.23.1920.1057" timestamp="1578581512745" />
     <state width="1878" height="265" key="GridCell.Tab.0.bottom/0.23.1920.1057/1920.222.1920.1057/-1920.246.1920.1057@1920.222.1920.1057" timestamp="1576678033873" />
     <state width="1878" height="174" key="GridCell.Tab.0.bottom/0.23.1920.1057/1920.23.1920.1057@0.23.1920.1057" timestamp="1575544288975" />
-    <state width="1878" height="192" key="GridCell.Tab.0.center" timestamp="1578484052770">
+    <state width="1878" height="192" key="GridCell.Tab.0.center" timestamp="1578581512742">
       <screen x="0" y="23" width="1920" height="1057" />
     </state>
     <state width="1878" height="174" key="GridCell.Tab.0.center/0.23.1920.1057/1920.222.1920.1057/-1920.246.1920.1057@-1920.246.1920.1057" timestamp="1575658586174" />
-    <state width="1878" height="192" key="GridCell.Tab.0.center/0.23.1920.1057/1920.222.1920.1057/-1920.246.1920.1057@0.23.1920.1057" timestamp="1578484052770" />
+    <state width="1878" height="192" key="GridCell.Tab.0.center/0.23.1920.1057/1920.222.1920.1057/-1920.246.1920.1057@0.23.1920.1057" timestamp="1578581512742" />
     <state width="1878" height="265" key="GridCell.Tab.0.center/0.23.1920.1057/1920.222.1920.1057/-1920.246.1920.1057@1920.222.1920.1057" timestamp="1576678033871" />
     <state width="1878" height="174" key="GridCell.Tab.0.center/0.23.1920.1057/1920.23.1920.1057@0.23.1920.1057" timestamp="1575544288973" />
-    <state width="1878" height="192" key="GridCell.Tab.0.left" timestamp="1578484052770">
+    <state width="1878" height="192" key="GridCell.Tab.0.left" timestamp="1578581512737">
       <screen x="0" y="23" width="1920" height="1057" />
     </state>
     <state width="1878" height="174" key="GridCell.Tab.0.left/0.23.1920.1057/1920.222.1920.1057/-1920.246.1920.1057@-1920.246.1920.1057" timestamp="1575658586173" />
-    <state width="1878" height="192" key="GridCell.Tab.0.left/0.23.1920.1057/1920.222.1920.1057/-1920.246.1920.1057@0.23.1920.1057" timestamp="1578484052770" />
+    <state width="1878" height="192" key="GridCell.Tab.0.left/0.23.1920.1057/1920.222.1920.1057/-1920.246.1920.1057@0.23.1920.1057" timestamp="1578581512737" />
     <state width="1878" height="265" key="GridCell.Tab.0.left/0.23.1920.1057/1920.222.1920.1057/-1920.246.1920.1057@1920.222.1920.1057" timestamp="1576678033870" />
     <state width="1878" height="174" key="GridCell.Tab.0.left/0.23.1920.1057/1920.23.1920.1057@0.23.1920.1057" timestamp="1575544288973" />
-    <state width="1878" height="192" key="GridCell.Tab.0.right" timestamp="1578484052771">
+    <state width="1878" height="192" key="GridCell.Tab.0.right" timestamp="1578581512743">
       <screen x="0" y="23" width="1920" height="1057" />
     </state>
     <state width="1878" height="174" key="GridCell.Tab.0.right/0.23.1920.1057/1920.222.1920.1057/-1920.246.1920.1057@-1920.246.1920.1057" timestamp="1575658586175" />
-    <state width="1878" height="192" key="GridCell.Tab.0.right/0.23.1920.1057/1920.222.1920.1057/-1920.246.1920.1057@0.23.1920.1057" timestamp="1578484052771" />
+    <state width="1878" height="192" key="GridCell.Tab.0.right/0.23.1920.1057/1920.222.1920.1057/-1920.246.1920.1057@0.23.1920.1057" timestamp="1578581512743" />
     <state width="1878" height="265" key="GridCell.Tab.0.right/0.23.1920.1057/1920.222.1920.1057/-1920.246.1920.1057@1920.222.1920.1057" timestamp="1576678033872" />
     <state width="1878" height="174" key="GridCell.Tab.0.right/0.23.1920.1057/1920.23.1920.1057@0.23.1920.1057" timestamp="1575544288974" />
     <state x="548" y="295" key="IDE.errors.dialog" timestamp="1578050348765">
