@@ -21,12 +21,16 @@ public class MongoDBConfiguration{
     public String mongoDatabase;
     @Value("${spring.data.mongodb.collection}")
     public String mongoCollection;
+    @Value("${server.ssl.key-store}")
+    public String keystorePath;
+    @Value("${server.ssl.key-store-password}")
+    public String keystorePass;
 
 
     @Bean
     public  MongoClientOptions mongoClientOptions(){
-        System.setProperty ("javax.net.ssl.keyStore","<<PATH TO KEYSTOR >>");
-        System.setProperty ("javax.net.ssl.keyStorePassword","PASSWORD");
+        System.setProperty ("javax.net.ssl.keyStore",keystorePath);
+        System.setProperty ("javax.net.ssl.keyStorePassword",keystorePass);
         MongoClientOptions.Builder builder = MongoClientOptions.builder();
         builder.maxConnectionIdleTime(60000);//set the max wait time in (ms)
         MongoClientOptions options=builder.sslEnabled(true).build();
