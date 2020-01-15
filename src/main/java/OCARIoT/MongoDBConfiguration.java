@@ -23,14 +23,15 @@ public class MongoDBConfiguration{
     public String mongoCollection;
 
 
-    /*@Bean
+    @Bean
     public  MongoClientOptions mongoClientOptions(){
         System.setProperty ("javax.net.ssl.keyStore","<<PATH TO KEYSTOR >>");
         System.setProperty ("javax.net.ssl.keyStorePassword","PASSWORD");
         MongoClientOptions.Builder builder = MongoClientOptions.builder();
+        builder.maxConnectionIdleTime(60000);//set the max wait time in (ms)
         MongoClientOptions options=builder.sslEnabled(true).build();
         return options;
-    }*/
+    }
 
     @Bean
     public MongoCollection<Document> collection() {
