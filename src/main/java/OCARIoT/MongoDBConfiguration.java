@@ -32,8 +32,7 @@ public class MongoDBConfiguration{
         System.setProperty ("javax.net.ssl.keyStore",keystorePath);
         System.setProperty ("javax.net.ssl.keyStorePassword",keystorePass);
         MongoClientOptions.Builder builder = MongoClientOptions.builder();
-        builder.maxConnectionIdleTime(60000);//set the max wait time in (ms)
-        MongoClientOptions options=builder.sslEnabled(true).build();
+        MongoClientOptions options=builder.sslEnabled(true).maxConnectionIdleTime(20000).build();
         return options;
     }
 
