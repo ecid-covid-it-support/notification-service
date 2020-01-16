@@ -37,7 +37,7 @@ public class MongoDBConfiguration{
     }
 
     @Bean
-    public MongoCollection<Document> collection(MongoClientOptions options) {
+    public MongoCollection<Document> collection() {
 
         final MongoClient mongoClient = MongoClients.create(mongoURI);
         final MongoDatabase database = mongoClient.getDatabase(mongoDatabase);
