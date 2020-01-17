@@ -31,8 +31,6 @@ public class MongoDBConfiguration{
     public  MongoClientOptions mongoClientOptions(){
         System.setProperty ("javax.net.ssl.keyStore",keystorePath);
         System.setProperty ("javax.net.ssl.keyStorePassword",keystorePass);
-        System.setProperty ("javax.net.ssl.trustStore","");
-        System.setProperty ("javax.net.ssl.trustStorePassword","");
         MongoClientOptions.Builder builder = MongoClientOptions.builder();
         MongoClientOptions options=builder.sslEnabled(true).sslInvalidHostNameAllowed(true).build();
         return options;
