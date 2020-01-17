@@ -8,6 +8,9 @@
   <component name="ChangeListManager">
     <list default="true" id="8cd855f9-d8e2-46cb-a5a1-fa8d4102f752" name="Default Changelist" comment="">
       <change beforePath="$PROJECT_DIR$/.gradle/5.2.1/executionHistory/executionHistory.lock" beforeDir="false" afterPath="$PROJECT_DIR$/.gradle/5.2.1/executionHistory/executionHistory.lock" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/OCARIoT/Main.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/OCARIoT/Main.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/application.properties" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/application.properties" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/ocariot-3ecd2-firebase-adminsdk-nq31m-d53e9217cd.json" beforeDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
