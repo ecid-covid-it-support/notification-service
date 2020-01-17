@@ -29,19 +29,19 @@ public class MongoDBConfiguration{
     public String truststorePath;
 
 
-    @Bean
+    /*@Bean
     public  MongoClientOptions mongoClientOptions(){
-        System.setProperty ("javax.net.ssl.keyStore",keystorePath);
-        System.setProperty ("javax.net.ssl.keyStorePassword",keystorePass);
-        System.setProperty ("javax.net.ssl.trustStore",truststorePath);
-        System.setProperty ("javax.net.ssl.trustStorePassword",keystorePass);
         MongoClientOptions.Builder builder = MongoClientOptions.builder();
         MongoClientOptions options=builder.sslEnabled(true).sslInvalidHostNameAllowed(true).build();
         return options;
     }
 
-    @Bean
-    public MongoCollection<Document> collection(MongoClientOptions options) {
+    @Bean*/
+    public MongoCollection<Document> collection() {
+        System.setProperty ("javax.net.ssl.keyStore",keystorePath);
+        System.setProperty ("javax.net.ssl.keyStorePassword",keystorePass);
+        System.setProperty ("javax.net.ssl.trustStore",truststorePath);
+        System.setProperty ("javax.net.ssl.trustStorePassword",keystorePass);
         final MongoClient mongoClient = MongoClients.create(mongoURI);
         final MongoDatabase database = mongoClient.getDatabase(mongoDatabase);
         return database.getCollection(mongoCollection);
