@@ -25,21 +25,23 @@ public class MongoDBConfiguration{
     public String keystorePath;
     @Value("${server.ssl.key-store-password}")
     public String keystorePass;
+    @Value("${server.ssl.trust-store-password}")
+    public String truststorePath;
 
 
     @Bean
     public  MongoClientOptions mongoClientOptions(){
         System.setProperty ("javax.net.ssl.keyStore",keystorePath);
         System.setProperty ("javax.net.ssl.keyStorePassword",keystorePass);
+        System.setProperty ("javax.net.ssl.trustStore",truststorePath);
+        System.setProperty ("javax.net.ssl.trustStorePassword",keystorePass);
         MongoClientOptions.Builder builder = MongoClientOptions.builder();
         MongoClientOptions options=builder.sslEnabled(true).sslInvalidHostNameAllowed(true).build();
         return options;
     }
 
     @Bean
-    public MongoCollection<Document> collection() {
-        System.setProperty ("javax.net.ssl.keyStore",keystorePath);
-        System.setProperty ("javax.net.ssl.keyStorePassword",keystorePass);
+    public MongoCollection<Document> collection(MongoClientOptions options) {
         final MongoClient mongoClient = MongoClients.create(mongoURI);
         final MongoDatabase database = mongoClient.getDatabase(mongoDatabase);
         return database.getCollection(mongoCollection);
