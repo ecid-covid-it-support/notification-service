@@ -39,12 +39,15 @@ public class MongoDBConfiguration{
         return options;
     }
 
-
+    public @Bean MongoClient mongoClient() throws Exception {
+        MongoClient mongoClient = MongoClients.create(mongoURI);
+        return mongoClient;
+    }
 
     @Bean
-    public MongoCollection<Document> collection(MongoClientOptions options) {
+    public MongoCollection<Document> collection(MongoClient mongoClient) {
 
-        final MongoClient mongoClient = MongoClients.create(mongoURI);
+        //final MongoClient mongoClient = MongoClients.create(mongoURI);
         final MongoDatabase database = mongoClient.getDatabase(mongoDatabase);
         return database.getCollection(mongoCollection);
     }
