@@ -2,6 +2,7 @@ package OCARIoT;
 
 
 import com.mongodb.MongoClientOptions;
+import com.mongodb.ServerAddress;
 import com.mongodb.client.MongoClient;
 import com.mongodb.client.MongoClients;
 import com.mongodb.client.MongoCollection;
@@ -29,19 +30,20 @@ public class MongoDBConfiguration{
     public String truststorePath;
 
 
-    /*@Bean
-    public  MongoClientOptions mongoClientOptions(){
-        MongoClientOptions.Builder builder = MongoClientOptions.builder();
-        MongoClientOptions options=builder.sslEnabled(true).sslInvalidHostNameAllowed(true).build();
-        return options;
-    }*/
-
     @Bean
-    public MongoCollection<Document> collection() {
+    public  MongoClientOptions mongoClientOptions(){
         System.setProperty ("javax.net.ssl.keyStore",keystorePath);
         System.setProperty ("javax.net.ssl.keyStorePassword",keystorePass);
-        System.setProperty ("javax.net.ssl.trustStore",truststorePath);
-        System.setProperty ("javax.net.ssl.trustStorePassword",keystorePass);
+        MongoClientOptions.Builder builder = MongoClientOptions.builder();
+        MongoClientOptions options=builder.sslEnabled(true).build();
+        return options;
+    }
+
+
+
+    @Bean
+    public MongoCollection<Document> collection(MongoClientOptions options) {
+
         final MongoClient mongoClient = MongoClients.create(mongoURI);
         final MongoDatabase database = mongoClient.getDatabase(mongoDatabase);
         return database.getCollection(mongoCollection);
