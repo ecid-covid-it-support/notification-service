@@ -1,8 +1,6 @@
 package OCARIoT;
 
 
-import com.mongodb.MongoClientOptions;
-import com.mongodb.ServerAddress;
 import com.mongodb.client.MongoClient;
 import com.mongodb.client.MongoClients;
 import com.mongodb.client.MongoCollection;
@@ -26,10 +24,7 @@ public class MongoDBConfiguration{
     public String keystorePath;
     @Value("${server.ssl.key-store-password}")
     public String keystorePass;
-    @Value("${server.ssl.trust-store-password}")
-    public String truststorePath;
-
-
+   
     /*@Bean
     public  MongoClientOptions mongoClientOptions(){
         System.setProperty ("javax.net.ssl.keyStore",keystorePath);
