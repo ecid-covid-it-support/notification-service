@@ -24,7 +24,9 @@ public class MongoDBConfiguration{
     public String keystorePath;
     @Value("${server.ssl.key-store-password}")
     public String keystorePass;
-   
+    /*@Value("${server.ssl.trust-store}")
+    public String trustStorePath;*/
+
     /*@Bean
     public  MongoClientOptions mongoClientOptions(){
         System.setProperty ("javax.net.ssl.keyStore",keystorePath);
@@ -41,10 +43,12 @@ public class MongoDBConfiguration{
 
     @Bean
     public MongoCollection<Document> collection() {
+        System.setProperty ("javax.net.ssl.trustStore",keystorePath);
+        System.setProperty ("javax.net.ssl.trustStorePassword",keystorePass);
         System.setProperty ("javax.net.ssl.keyStore",keystorePath);
         System.setProperty ("javax.net.ssl.keyStorePassword",keystorePass);
-        final MongoClient mongoClient = MongoClients.create(mongoURI);
-        final MongoDatabase database = mongoClient.getDatabase(mongoDatabase);
+        MongoClient mongoClient = MongoClients.create(mongoURI);
+        MongoDatabase database = mongoClient.getDatabase(mongoDatabase);
         return database.getCollection(mongoCollection);
     }
 }
