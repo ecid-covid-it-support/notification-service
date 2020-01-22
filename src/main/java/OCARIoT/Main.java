@@ -15,7 +15,7 @@ import java.security.KeyStoreException;
 
 
 @SpringBootApplication
-@EnableAutoConfiguration(exclude={MongoAutoConfiguration.class})
+//@EnableAutoConfiguration(exclude={MongoAutoConfiguration.class})
 public class Main {
 
     @Value("${firebase.adminsdk.path}")
