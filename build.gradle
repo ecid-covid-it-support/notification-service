@@ -18,9 +18,12 @@ dependencies {
 
     compile group: 'com.google.firebase', name: 'firebase-admin', version: '6.11.0'
     compile group: 'org.springframework.data', name: 'spring-data-mongodb', version: '2.1.1.RELEASE'
-    compile group: 'org.springframework.boot', name: 'spring-boot', version: '2.2.2.RELEASE'
+    compile group: 'org.springframework.boot', name: 'spring-boot-starter-web', version: '2.2.2.RELEASE'
     compile group: 'org.json', name: 'json', version: '20190722'
     compile group: 'org.springframework.amqp', name: 'spring-rabbit', version: '2.2.2.RELEASE'
+    implementation 'org.springframework.boot:spring-boot-starter-data-mongodb'
+    implementation 'org.springframework.boot:spring-boot-starter-data-rest'
+    testImplementation 'org.springframework.boot:spring-boot-starter-test'
 
 
 }
