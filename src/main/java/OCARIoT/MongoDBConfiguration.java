@@ -44,8 +44,8 @@ public class MongoDBConfiguration{
 
     @Bean
     public MongoCollection<Document> collection() {
-        //System.setProperty ("javax.net.ssl.keyStore",keystorePath);
-        //System.setProperty ("javax.net.ssl.keyStorePassword",keystorePass);
+        System.setProperty ("javax.net.ssl.keyStore",keystorePath);
+        System.setProperty ("javax.net.ssl.keyStorePassword",keystorePass);
         MongoClient mongoClient = MongoClients.create(mongoURI);
         MongoDatabase database = mongoClient.getDatabase(mongoDatabase);
         return database.getCollection(mongoCollection);
