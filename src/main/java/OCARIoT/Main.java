@@ -18,8 +18,8 @@ import java.security.KeyStoreException;
 @EnableAutoConfiguration(exclude={MongoAutoConfiguration.class})
 public class Main {
 
-    @Value("${firebase.adminsdk.path}")
-    private static String adminSDKPath;
+    //@Value("${firebase.adminsdk.path}")
+    private static String adminSDKPath="/etc/.certs/ocariot-3ecd2-firebase-adminsdk-nq31m-d53e9217cd.json";
 
     public static void main(String[] args) throws IOException, KeyStoreException {
 

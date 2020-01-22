@@ -43,7 +43,7 @@ public class MongoDBConfiguration{
         return mongoClient;
     }*/
 
-
+    
 
     @Bean
     public MongoCollection<Document> collection() {
