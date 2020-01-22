@@ -15,11 +15,11 @@ import org.springframework.context.annotation.Configuration;
 @Configuration
 public class MongoDBConfiguration{
 
-    @Value("${spring.data.mongodb.uri}")
+    @Value("${spring.mongodb.uri}")
     public String mongoURI;
-    @Value("${spring.data.mongodb.database}")
+    @Value("${spring.mongodb.database}")
     public String mongoDatabase;
-    @Value("${spring.data.mongodb.collection}")
+    @Value("${spring.mongodb.collection}")
     public String mongoCollection;
     @Value("${server.ssl.key-store}")
     public String keystorePath;
@@ -41,6 +41,8 @@ public class MongoDBConfiguration{
         MongoClient mongoClient = MongoClients.create(mongoURI);
         return mongoClient;
     }*/
+
+
 
     @Bean
     public MongoCollection<Document> collection() {
