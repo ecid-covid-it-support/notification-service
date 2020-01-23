@@ -23,7 +23,7 @@ public class FirebaseMessage {
 
         // Send a message to the device corresponding to the provided registration token.
         FirebaseMessaging.getInstance().send(message);
-        LOGGER.log(Level.WARNING, "Message sent to token " + token);
+
 
     }
 
@@ -37,7 +37,7 @@ public class FirebaseMessage {
 
         // Send a message to the devices subscribed to the provided topic.
         FirebaseMessaging.getInstance().send(message);
-        LOGGER.log(Level.WARNING, "Message sent to id " + topic);
+
 
     }
 

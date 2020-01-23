@@ -3,14 +3,13 @@ package OCARIoT;
 import com.google.auth.oauth2.GoogleCredentials;
 import com.google.firebase.FirebaseApp;
 import com.google.firebase.FirebaseOptions;
-import org.springframework.beans.factory.annotation.Value;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.EnableAutoConfiguration;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.boot.autoconfigure.mongo.MongoAutoConfiguration;
 
 import java.io.*;
-import java.security.KeyStoreException;
+
 
 
 
@@ -18,17 +17,22 @@ import java.security.KeyStoreException;
 @EnableAutoConfiguration(exclude={MongoAutoConfiguration.class})
 public class Main {
 
-    //@Value("${firebase.adminsdk.path}")
-    private static String adminSDKPath="/etc/.certs/ocariot-3ecd2-firebase-adminsdk-nq31m-d53e9217cd.json";
+    public static void main(String[] args) throws IOException {
 
-    public static void main(String[] args) throws IOException, KeyStoreException {
+        FileInputStream serviceAccount =
+                new FileInputStream("/Users/jpdoliveira/IdeaProjects/OCARIoT/src/main/resources/ocariot-3ecd2-firebase-adminsdk-78rs8-aef075a1ea.json");
+
+        FirebaseOptions options = new FirebaseOptions.Builder()
+                .setCredentials(GoogleCredentials.fromStream(serviceAccount))
+                .setDatabaseUrl("https://ocariot-3ecd2.firebaseio.com")
+                .build();
+
+        FirebaseApp.initializeApp(options);
 
 
         SpringApplication.run(Main.class,args);
 
-        FileInputStream serviceAccount = new FileInputStream(adminSDKPath);
-        FirebaseOptions options = new FirebaseOptions.Builder().setCredentials(GoogleCredentials.fromStream(serviceAccount)).build();
-        FirebaseApp.initializeApp(options);
+
 
     }
 }

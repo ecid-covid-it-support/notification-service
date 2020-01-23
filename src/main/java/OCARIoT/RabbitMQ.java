@@ -1,5 +1,8 @@
 package OCARIoT;
 
+import com.google.auth.oauth2.GoogleCredentials;
+import com.google.firebase.FirebaseApp;
+import com.google.firebase.FirebaseOptions;
 import com.google.firebase.messaging.FirebaseMessagingException;
 import com.mongodb.client.MongoCollection;
 import com.mongodb.client.model.Filters;
@@ -14,6 +17,10 @@ import org.springframework.amqp.core.Message;
 import org.springframework.amqp.rabbit.annotation.RabbitListener;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+
+import java.io.FileInputStream;
+import java.io.FileNotFoundException;
+import java.io.IOException;
 import java.util.List;
 import java.util.Objects;
 import java.util.logging.Level;
@@ -32,8 +39,7 @@ public class RabbitMQ{
     private  MongoCollection<Document> collection;
 
     @RabbitListener(queues = "${rabbitmq.queue.send.notification}")
-    public void notificationService(Message message) {
-
+    public void notificationService(Message message) throws IOException {
 
 
         try {
