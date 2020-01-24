@@ -23,6 +23,7 @@ import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.util.List;
 import java.util.Objects;
+import java.util.function.Supplier;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import static com.mongodb.client.model.Filters.eq;
@@ -104,7 +105,6 @@ public class RabbitMQ{
                                     }
                                 }
                             } catch (JSONException e) {
-
                                 LOGGER.log(Level.WARNING, "An error occurred while attempting perform the operation with the SendNotificationEvent name event. " +
                                         "Cannot read property 'id', 'body' or 'title' or user does not exist in database");
                             }

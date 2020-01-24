@@ -11,12 +11,11 @@
       <change beforePath="$PROJECT_DIR$/.gradle/5.2.1/executionHistory/executionHistory.lock" beforeDir="false" afterPath="$PROJECT_DIR$/.gradle/5.2.1/executionHistory/executionHistory.lock" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.gradle/5.2.1/fileHashes/fileHashes.bin" beforeDir="false" afterPath="$PROJECT_DIR$/.gradle/5.2.1/fileHashes/fileHashes.bin" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.gradle/5.2.1/fileHashes/fileHashes.lock" beforeDir="false" afterPath="$PROJECT_DIR$/.gradle/5.2.1/fileHashes/fileHashes.lock" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.gradle/5.2.1/javaCompile/classAnalysis.bin" beforeDir="false" afterPath="$PROJECT_DIR$/.gradle/5.2.1/javaCompile/classAnalysis.bin" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.gradle/5.2.1/javaCompile/javaCompile.lock" beforeDir="false" afterPath="$PROJECT_DIR$/.gradle/5.2.1/javaCompile/javaCompile.lock" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.gradle/buildOutputCleanup/buildOutputCleanup.lock" beforeDir="false" afterPath="$PROJECT_DIR$/.gradle/buildOutputCleanup/buildOutputCleanup.lock" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/OCARIoT/Main.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/OCARIoT/Main.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/OCARIoT/MongoDBConfiguration.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/OCARIoT/MongoDBConfiguration.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/application.properties" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/application.properties" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/OCARIoT/RabbitMQ.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/OCARIoT/RabbitMQ.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -91,7 +90,7 @@
       <recent name="$PROJECT_DIR$/src/main" />
     </key>
   </component>
-  <component name="RunManager" selected="Application.Main">
+  <component name="RunManager" selected="Gradle.OCARIoT [clean]">
     <configuration name="Main" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
       <envs>
         <env name="PORT_HTTPS" value="8081" />
@@ -202,9 +201,9 @@
     </list>
     <recent_temporary>
       <list>
+        <item itemvalue="Gradle.OCARIoT [clean]" />
         <item itemvalue="Application.Main" />
         <item itemvalue="Gradle.OCARIoT [init]" />
-        <item itemvalue="Gradle.OCARIoT [clean]" />
         <item itemvalue="Gradle.OCARIoT [build]" />
         <item itemvalue="Gradle.OCARIoT [bootJar]" />
       </list>
@@ -261,10 +260,10 @@
       <screen x="0" y="23" width="1920" height="1057" />
     </state>
     <state x="560" y="218" key="#Project_Structure/0.23.1920.1057/1920.222.1920.1057/-1920.246.1920.1057@0.23.1920.1057" timestamp="1576073513177" />
-    <state x="849" y="166" key="#com.intellij.execution.impl.EditConfigurationsDialog" timestamp="1579867011661">
+    <state x="849" y="166" key="#com.intellij.execution.impl.EditConfigurationsDialog" timestamp="1579870424220">
       <screen x="0" y="23" width="1920" height="1057" />
     </state>
-    <state x="849" y="166" key="#com.intellij.execution.impl.EditConfigurationsDialog/0.23.1920.1057/1920.222.1920.1057/-1920.246.1920.1057@0.23.1920.1057" timestamp="1579867011661" />
+    <state x="849" y="166" key="#com.intellij.execution.impl.EditConfigurationsDialog/0.23.1920.1057/1920.222.1920.1057/-1920.246.1920.1057@0.23.1920.1057" timestamp="1579870424220" />
     <state x="664" y="361" key="#com.intellij.fileTypes.FileTypeChooser" timestamp="1578585003421">
       <screen x="0" y="23" width="1920" height="1057" />
     </state>
@@ -285,36 +284,36 @@
       <screen x="0" y="23" width="1920" height="1057" />
     </state>
     <state x="709" y="394" key="ANALYSIS_DLG_com.intellij.analysis.BaseAnalysisAction$1/0.23.1920.1057/1920.222.1920.1057/-1920.246.1920.1057@0.23.1920.1057" timestamp="1578483840505" />
-    <state x="1193" y="262" width="490" height="754" key="EnvironmentVariablesDialog" timestamp="1579867010610">
+    <state x="922" y="212" width="490" height="754" key="EnvironmentVariablesDialog" timestamp="1579870422931">
       <screen x="0" y="23" width="1920" height="1057" />
     </state>
-    <state x="1193" y="262" width="490" height="754" key="EnvironmentVariablesDialog/0.23.1920.1057/1920.222.1920.1057/-1920.246.1920.1057@0.23.1920.1057" timestamp="1579867010610" />
-    <state width="1878" height="250" key="GridCell.Tab.0.bottom" timestamp="1579800843405">
+    <state x="922" y="212" width="490" height="754" key="EnvironmentVariablesDialog/0.23.1920.1057/1920.222.1920.1057/-1920.246.1920.1057@0.23.1920.1057" timestamp="1579870422931" />
+    <state width="1878" height="250" key="GridCell.Tab.0.bottom" timestamp="1579871290511">
       <screen x="0" y="23" width="1920" height="1057" />
     </state>
     <state width="1878" height="174" key="GridCell.Tab.0.bottom/0.23.1920.1057/1920.222.1920.1057/-1920.246.1920.1057@-1920.246.1920.1057" timestamp="1575658586176" />
-    <state width="1878" height="250" key="GridCell.Tab.0.bottom/0.23.1920.1057/1920.222.1920.1057/-1920.246.1920.1057@0.23.1920.1057" timestamp="1579800843405" />
+    <state width="1878" height="250" key="GridCell.Tab.0.bottom/0.23.1920.1057/1920.222.1920.1057/-1920.246.1920.1057@0.23.1920.1057" timestamp="1579871290511" />
     <state width="1480" height="107" key="GridCell.Tab.0.bottom/0.23.1920.1057/1920.222.1920.1057/-1920.246.1920.1057@1920.222.1920.1057" timestamp="1579707411638" />
     <state width="1878" height="174" key="GridCell.Tab.0.bottom/0.23.1920.1057/1920.23.1920.1057@0.23.1920.1057" timestamp="1575544288975" />
-    <state width="1878" height="250" key="GridCell.Tab.0.center" timestamp="1579800843402">
+    <state width="1878" height="250" key="GridCell.Tab.0.center" timestamp="1579871290509">
       <screen x="0" y="23" width="1920" height="1057" />
     </state>
     <state width="1878" height="174" key="GridCell.Tab.0.center/0.23.1920.1057/1920.222.1920.1057/-1920.246.1920.1057@-1920.246.1920.1057" timestamp="1575658586174" />
-    <state width="1878" height="250" key="GridCell.Tab.0.center/0.23.1920.1057/1920.222.1920.1057/-1920.246.1920.1057@0.23.1920.1057" timestamp="1579800843402" />
+    <state width="1878" height="250" key="GridCell.Tab.0.center/0.23.1920.1057/1920.222.1920.1057/-1920.246.1920.1057@0.23.1920.1057" timestamp="1579871290509" />
     <state width="1480" height="107" key="GridCell.Tab.0.center/0.23.1920.1057/1920.222.1920.1057/-1920.246.1920.1057@1920.222.1920.1057" timestamp="1579707411633" />
     <state width="1878" height="174" key="GridCell.Tab.0.center/0.23.1920.1057/1920.23.1920.1057@0.23.1920.1057" timestamp="1575544288973" />
-    <state width="1878" height="250" key="GridCell.Tab.0.left" timestamp="1579800843401">
+    <state width="1878" height="250" key="GridCell.Tab.0.left" timestamp="1579871290508">
       <screen x="0" y="23" width="1920" height="1057" />
     </state>
     <state width="1878" height="174" key="GridCell.Tab.0.left/0.23.1920.1057/1920.222.1920.1057/-1920.246.1920.1057@-1920.246.1920.1057" timestamp="1575658586173" />
-    <state width="1878" height="250" key="GridCell.Tab.0.left/0.23.1920.1057/1920.222.1920.1057/-1920.246.1920.1057@0.23.1920.1057" timestamp="1579800843401" />
+    <state width="1878" height="250" key="GridCell.Tab.0.left/0.23.1920.1057/1920.222.1920.1057/-1920.246.1920.1057@0.23.1920.1057" timestamp="1579871290508" />
     <state width="1480" height="107" key="GridCell.Tab.0.left/0.23.1920.1057/1920.222.1920.1057/-1920.246.1920.1057@1920.222.1920.1057" timestamp="1579707411631" />
     <state width="1878" height="174" key="GridCell.Tab.0.left/0.23.1920.1057/1920.23.1920.1057@0.23.1920.1057" timestamp="1575544288973" />
-    <state width="1878" height="250" key="GridCell.Tab.0.right" timestamp="1579800843404">
+    <state width="1878" height="250" key="GridCell.Tab.0.right" timestamp="1579871290510">
       <screen x="0" y="23" width="1920" height="1057" />
     </state>
     <state width="1878" height="174" key="GridCell.Tab.0.right/0.23.1920.1057/1920.222.1920.1057/-1920.246.1920.1057@-1920.246.1920.1057" timestamp="1575658586175" />
-    <state width="1878" height="250" key="GridCell.Tab.0.right/0.23.1920.1057/1920.222.1920.1057/-1920.246.1920.1057@0.23.1920.1057" timestamp="1579800843404" />
+    <state width="1878" height="250" key="GridCell.Tab.0.right/0.23.1920.1057/1920.222.1920.1057/-1920.246.1920.1057@0.23.1920.1057" timestamp="1579871290510" />
     <state width="1480" height="107" key="GridCell.Tab.0.right/0.23.1920.1057/1920.222.1920.1057/-1920.246.1920.1057@1920.222.1920.1057" timestamp="1579707411634" />
     <state width="1878" height="174" key="GridCell.Tab.0.right/0.23.1920.1057/1920.23.1920.1057@0.23.1920.1057" timestamp="1575544288974" />
     <state x="548" y="295" key="IDE.errors.dialog" timestamp="1578591829687">
