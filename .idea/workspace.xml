@@ -11,12 +11,12 @@
       <change beforePath="$PROJECT_DIR$/.gradle/5.2.1/executionHistory/executionHistory.lock" beforeDir="false" afterPath="$PROJECT_DIR$/.gradle/5.2.1/executionHistory/executionHistory.lock" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.gradle/5.2.1/fileHashes/fileHashes.bin" beforeDir="false" afterPath="$PROJECT_DIR$/.gradle/5.2.1/fileHashes/fileHashes.bin" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.gradle/5.2.1/fileHashes/fileHashes.lock" beforeDir="false" afterPath="$PROJECT_DIR$/.gradle/5.2.1/fileHashes/fileHashes.lock" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.gradle/5.2.1/javaCompile/classAnalysis.bin" beforeDir="false" afterPath="$PROJECT_DIR$/.gradle/5.2.1/javaCompile/classAnalysis.bin" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.gradle/5.2.1/javaCompile/javaCompile.lock" beforeDir="false" afterPath="$PROJECT_DIR$/.gradle/5.2.1/javaCompile/javaCompile.lock" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.gradle/5.2.1/javaCompile/taskHistory.bin" beforeDir="false" afterPath="$PROJECT_DIR$/.gradle/5.2.1/javaCompile/taskHistory.bin" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.gradle/buildOutputCleanup/buildOutputCleanup.lock" beforeDir="false" afterPath="$PROJECT_DIR$/.gradle/buildOutputCleanup/buildOutputCleanup.lock" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/build.gradle" beforeDir="false" afterPath="$PROJECT_DIR$/build.gradle" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/OCARIoT/Main.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/OCARIoT/Main.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/OCARIoT/MongoDBConfiguration.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/OCARIoT/MongoDBConfiguration.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/application.properties" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/application.properties" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -36,60 +36,7 @@
         </task>
         <projects_view>
           <tree_state>
-            <expand>
-              <path>
-                <item name="" type="6a2764b6:ExternalProjectsStructure$RootNode" />
-                <item name="OCARIoT" type="f1a62948:ProjectNode" />
-              </path>
-              <path>
-                <item name="" type="6a2764b6:ExternalProjectsStructure$RootNode" />
-                <item name="OCARIoT" type="f1a62948:ProjectNode" />
-                <item name="Source Sets" type="e897c970:GradleViewContributor$SourceSetsNode" />
-              </path>
-              <path>
-                <item name="" type="6a2764b6:ExternalProjectsStructure$RootNode" />
-                <item name="OCARIoT" type="f1a62948:ProjectNode" />
-                <item name="Source Sets" type="e897c970:GradleViewContributor$SourceSetsNode" />
-                <item name="main" type="396b929e:GradleViewContributor$SourceSetNode" />
-              </path>
-              <path>
-                <item name="" type="6a2764b6:ExternalProjectsStructure$RootNode" />
-                <item name="OCARIoT" type="f1a62948:ProjectNode" />
-                <item name="Source Sets" type="e897c970:GradleViewContributor$SourceSetsNode" />
-                <item name="main" type="396b929e:GradleViewContributor$SourceSetNode" />
-                <item name="Dependencies" type="6de06a37:ExternalSystemViewDefaultContributor$MyDependenciesNode" />
-              </path>
-              <path>
-                <item name="" type="6a2764b6:ExternalProjectsStructure$RootNode" />
-                <item name="OCARIoT" type="f1a62948:ProjectNode" />
-                <item name="Source Sets" type="e897c970:GradleViewContributor$SourceSetsNode" />
-                <item name="test" type="396b929e:GradleViewContributor$SourceSetNode" />
-              </path>
-              <path>
-                <item name="" type="6a2764b6:ExternalProjectsStructure$RootNode" />
-                <item name="OCARIoT" type="f1a62948:ProjectNode" />
-                <item name="Source Sets" type="e897c970:GradleViewContributor$SourceSetsNode" />
-                <item name="test" type="396b929e:GradleViewContributor$SourceSetNode" />
-                <item name="Dependencies" type="6de06a37:ExternalSystemViewDefaultContributor$MyDependenciesNode" />
-              </path>
-              <path>
-                <item name="" type="6a2764b6:ExternalProjectsStructure$RootNode" />
-                <item name="OCARIoT" type="f1a62948:ProjectNode" />
-                <item name="Tasks" type="e4a08cd1:TasksNode" />
-              </path>
-              <path>
-                <item name="" type="6a2764b6:ExternalProjectsStructure$RootNode" />
-                <item name="OCARIoT" type="f1a62948:ProjectNode" />
-                <item name="Tasks" type="e4a08cd1:TasksNode" />
-                <item name="build" type="c8890929:TasksNode$1" />
-              </path>
-              <path>
-                <item name="" type="6a2764b6:ExternalProjectsStructure$RootNode" />
-                <item name="OCARIoT" type="f1a62948:ProjectNode" />
-                <item name="Tasks" type="e4a08cd1:TasksNode" />
-                <item name="build setup" type="c8890929:TasksNode$1" />
-              </path>
-            </expand>
+            <expand />
             <select />
           </tree_state>
         </projects_view>
@@ -144,7 +91,7 @@
       <recent name="$PROJECT_DIR$/src/main" />
     </key>
   </component>
-  <component name="RunManager" selected="Gradle.OCARIoT [clean]">
+  <component name="RunManager" selected="Application.Main">
     <configuration name="Main" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
       <envs>
         <env name="PORT_HTTPS" value="8081" />
@@ -314,10 +261,10 @@
       <screen x="0" y="23" width="1920" height="1057" />
     </state>
     <state x="560" y="218" key="#Project_Structure/0.23.1920.1057/1920.222.1920.1057/-1920.246.1920.1057@0.23.1920.1057" timestamp="1576073513177" />
-    <state x="849" y="166" key="#com.intellij.execution.impl.EditConfigurationsDialog" timestamp="1579799873400">
+    <state x="849" y="166" key="#com.intellij.execution.impl.EditConfigurationsDialog" timestamp="1579867011661">
       <screen x="0" y="23" width="1920" height="1057" />
     </state>
-    <state x="849" y="166" key="#com.intellij.execution.impl.EditConfigurationsDialog/0.23.1920.1057/1920.222.1920.1057/-1920.246.1920.1057@0.23.1920.1057" timestamp="1579799873400" />
+    <state x="849" y="166" key="#com.intellij.execution.impl.EditConfigurationsDialog/0.23.1920.1057/1920.222.1920.1057/-1920.246.1920.1057@0.23.1920.1057" timestamp="1579867011661" />
     <state x="664" y="361" key="#com.intellij.fileTypes.FileTypeChooser" timestamp="1578585003421">
       <screen x="0" y="23" width="1920" height="1057" />
     </state>
@@ -338,10 +285,10 @@
       <screen x="0" y="23" width="1920" height="1057" />
     </state>
     <state x="709" y="394" key="ANALYSIS_DLG_com.intellij.analysis.BaseAnalysisAction$1/0.23.1920.1057/1920.222.1920.1057/-1920.246.1920.1057@0.23.1920.1057" timestamp="1578483840505" />
-    <state x="1193" y="262" width="490" height="754" key="EnvironmentVariablesDialog" timestamp="1579799872240">
+    <state x="1193" y="262" width="490" height="754" key="EnvironmentVariablesDialog" timestamp="1579867010610">
       <screen x="0" y="23" width="1920" height="1057" />
     </state>
-    <state x="1193" y="262" width="490" height="754" key="EnvironmentVariablesDialog/0.23.1920.1057/1920.222.1920.1057/-1920.246.1920.1057@0.23.1920.1057" timestamp="1579799872240" />
+    <state x="1193" y="262" width="490" height="754" key="EnvironmentVariablesDialog/0.23.1920.1057/1920.222.1920.1057/-1920.246.1920.1057@0.23.1920.1057" timestamp="1579867010610" />
     <state width="1878" height="250" key="GridCell.Tab.0.bottom" timestamp="1579800843405">
       <screen x="0" y="23" width="1920" height="1057" />
     </state>
