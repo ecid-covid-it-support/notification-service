@@ -12,7 +12,7 @@ public class FirebaseMessage {
     public static void sendToToken(String token, String title, String body) throws FirebaseMessagingException {
 
         Message message = Message.builder()
-                .setNotification(new Notification(title,body))
+                .setNotification(Notification.builder().setTitle(title).setBody(body).build())
                 .setToken(token)
                 .build();
 
@@ -24,7 +24,7 @@ public class FirebaseMessage {
 
 
         Message message = Message.builder()
-                .setNotification(new Notification(title,body))
+                .setNotification(Notification.builder().setTitle(title).setBody(body).build())
                 .setTopic(topic)
                 .build();
 
