@@ -6,7 +6,12 @@
     </artifacts-to-build>
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="8cd855f9-d8e2-46cb-a5a1-fa8d4102f752" name="Default Changelist" comment="" />
+    <list default="true" id="8cd855f9-d8e2-46cb-a5a1-fa8d4102f752" name="Default Changelist" comment="">
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/notification_service/RabbitMQ.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/notification_service/RabbitMQ.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/notification_service/RabbitMQConfig.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/notification_service/RabbitMQConfig.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/application.properties" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/application.properties" afterDir="false" />
+    </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
@@ -264,10 +269,10 @@
       <screen x="0" y="23" width="1920" height="1057" />
     </state>
     <state x="664" y="361" key="#com.intellij.fileTypes.FileTypeChooser/0.23.1920.1057/1920.222.1920.1057/-1920.246.1920.1057@0.23.1920.1057" timestamp="1578585003421" />
-    <state x="773" y="264" key="#com.intellij.ide.util.MemberChooser" timestamp="1579530349969">
+    <state x="773" y="264" key="#com.intellij.ide.util.MemberChooser" timestamp="1580225294662">
       <screen x="0" y="23" width="1920" height="1057" />
     </state>
-    <state x="773" y="264" key="#com.intellij.ide.util.MemberChooser/0.23.1920.1057/1920.222.1920.1057/-1920.246.1920.1057@0.23.1920.1057" timestamp="1579530349969" />
+    <state x="773" y="264" key="#com.intellij.ide.util.MemberChooser/0.23.1920.1057/1920.222.1920.1057/-1920.246.1920.1057@0.23.1920.1057" timestamp="1580225294662" />
     <state x="698" y="345" key="#com.intellij.ide.util.TreeClassChooserDialog" timestamp="1575989359628">
       <screen x="0" y="23" width="1920" height="1057" />
     </state>

@@ -31,6 +31,8 @@ public class RabbitMQ{
     @Autowired
     private  MongoCollection<Document> collection;
 
+
+
     @RabbitListener(queues = "${rabbitmq.queue.send.notification}")
     public void notificationService(Message message) throws IOException {
 
