@@ -1,4 +1,4 @@
-package OCARIoT;
+package notification_service;
 
 import com.google.firebase.messaging.FirebaseMessagingException;
 import com.mongodb.client.MongoCollection;

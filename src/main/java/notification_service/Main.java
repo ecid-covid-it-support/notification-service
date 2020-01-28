@@ -1,4 +1,4 @@
-package OCARIoT;
+package notification_service;
 
 import com.google.auth.oauth2.GoogleCredentials;
 import com.google.firebase.FirebaseApp;

@@ -8,11 +8,6 @@
   <component name="ChangeListManager">
     <list default="true" id="8cd855f9-d8e2-46cb-a5a1-fa8d4102f752" name="Default Changelist" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/OCARIoT/FirebaseMessage.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/OCARIoT/FirebaseMessage.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/OCARIoT/Main.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/OCARIoT/Main.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/OCARIoT/MongoDBConfiguration.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/OCARIoT/MongoDBConfiguration.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/OCARIoT/RabbitMQ.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/OCARIoT/RabbitMQ.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/OCARIoT/RabbitMQConfig.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/OCARIoT/RabbitMQConfig.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -101,11 +96,11 @@
         <env name="KEYSTORE_PATH" value="$PROJECT_DIR$/src/main/resources/tmp_keystore.p12" />
         <env name="GOOGLE_APPLICATION_CREDENTIALS" value="$PROJECT_DIR$/src/main/resources/ocariot-3ecd2-firebase-adminsdk-78rs8-aef075a1ea.json" />
       </envs>
-      <option name="MAIN_CLASS_NAME" value="OCARIoT.Main" />
-      <module name="OCARIoT.main" />
+      <option name="MAIN_CLASS_NAME" value="notification_service.Main" />
+      <module name="notification_service.main" />
       <extension name="coverage">
         <pattern>
-          <option name="PATTERN" value="OCARIoT.*" />
+          <option name="PATTERN" value="notification_service.*" />
           <option name="ENABLED" value="true" />
         </pattern>
       </extension>

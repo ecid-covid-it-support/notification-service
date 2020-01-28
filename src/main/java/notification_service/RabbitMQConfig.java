@@ -1,4 +1,4 @@
-package OCARIoT;
+package notification_service;
 
 import org.springframework.amqp.core.*;
 import org.springframework.beans.factory.annotation.Value;

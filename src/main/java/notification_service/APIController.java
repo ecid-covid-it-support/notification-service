@@ -1,4 +1,4 @@
-package OCARIoT;
+package notification_service;
 
 
 import com.mongodb.client.MongoCollection;
