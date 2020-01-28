@@ -8,7 +8,6 @@ import org.bson.Document;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 import java.util.Map;
-import java.util.Objects;
 
 
 
@@ -29,13 +28,6 @@ public class APIController {
         String token = body.get("token");
         collection.updateOne(eq("id", id), new Document("$addToSet", new Document("Tokens",token)),new UpdateOptions().upsert(true));
         return "User saved";
-    }
-
-    @GetMapping("/user/{id}")
-    public String show(@PathVariable String id){
-
-        Document myDoc = collection.find(eq("id",id)).first();
-        return Objects.requireNonNull(myDoc).toJson();
     }
 
 }
