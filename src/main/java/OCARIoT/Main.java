@@ -11,12 +11,9 @@ import org.springframework.boot.autoconfigure.mongo.MongoAutoConfiguration;
 import java.io.*;
 
 
-
-
 @SpringBootApplication
 @EnableAutoConfiguration(exclude={MongoAutoConfiguration.class})
 public class Main {
-
 
     public static void main(String[] args) throws IOException {
 
@@ -28,8 +25,5 @@ public class Main {
 
 
         SpringApplication.run(Main.class,args);
-
-
-
     }
 }

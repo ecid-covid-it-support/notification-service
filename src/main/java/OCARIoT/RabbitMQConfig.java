@@ -9,7 +9,6 @@ import org.springframework.context.annotation.Configuration;
 public class RabbitMQConfig {
 
 
-
     @Value("${rabbitmq.exchange.send.notification}")
     private String exchangeNotification;
 

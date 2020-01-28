@@ -22,7 +22,6 @@ import java.util.logging.Logger;
 import static com.mongodb.client.model.Filters.eq;
 
 
-
 @Service
 public class RabbitMQ{
 
@@ -79,7 +78,7 @@ public class RabbitMQ{
 
                                 } else {
 
-                                    List<String> tokens = (List) (Objects.requireNonNull(collection.find(eq("id", userID)).first())).get("Tokens");
+                                    List<String> tokens = (List<String>) (Objects.requireNonNull(collection.find(eq("id", userID)).first())).get("Tokens");
 
                                     for (String token : tokens) {
 
@@ -88,7 +87,7 @@ public class RabbitMQ{
                                             FirebaseMessage.sendToToken(token, title, content);
 
                                         } catch (FirebaseMessagingException e) {
-                                            //LOGGER.log(Level.WARNING, (Supplier<String>) e);
+
                                             Bson filter = Filters.eq("id", userID);
                                             Bson delete = Updates.pull("Tokens", token);
                                             collection.updateOne(filter, delete);

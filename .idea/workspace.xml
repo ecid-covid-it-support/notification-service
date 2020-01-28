@@ -7,10 +7,12 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="8cd855f9-d8e2-46cb-a5a1-fa8d4102f752" name="Default Changelist" comment="">
-      <change beforePath="$PROJECT_DIR$/.gradle/5.2.1/executionHistory/executionHistory.lock" beforeDir="false" afterPath="$PROJECT_DIR$/.gradle/5.2.1/executionHistory/executionHistory.lock" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/OCARIoT/FirebaseMessage.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/OCARIoT/FirebaseMessage.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/OCARIoT/Main.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/OCARIoT/Main.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/OCARIoT/MongoDBConfiguration.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/OCARIoT/MongoDBConfiguration.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/OCARIoT/RabbitMQ.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/OCARIoT/RabbitMQ.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/OCARIoT/RabbitMQConfig.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/OCARIoT/RabbitMQConfig.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -275,10 +277,10 @@
       <screen x="0" y="23" width="1920" height="1057" />
     </state>
     <state x="648" y="287" key="#com.intellij.openapi.updateSettings.impl.PluginUpdateInfoDialog/0.23.1920.1057/1920.222.1920.1057/-1920.246.1920.1057@0.23.1920.1057" timestamp="1577972336206" />
-    <state x="709" y="394" key="ANALYSIS_DLG_com.intellij.analysis.BaseAnalysisAction$1" timestamp="1579893612339">
+    <state x="709" y="394" key="ANALYSIS_DLG_com.intellij.analysis.BaseAnalysisAction$1" timestamp="1580208975503">
       <screen x="0" y="23" width="1920" height="1057" />
     </state>
-    <state x="709" y="394" key="ANALYSIS_DLG_com.intellij.analysis.BaseAnalysisAction$1/0.23.1920.1057/1920.222.1920.1057/-1920.246.1920.1057@0.23.1920.1057" timestamp="1579893612339" />
+    <state x="709" y="394" key="ANALYSIS_DLG_com.intellij.analysis.BaseAnalysisAction$1/0.23.1920.1057/1920.222.1920.1057/-1920.246.1920.1057@0.23.1920.1057" timestamp="1580208975503" />
     <state x="922" y="212" width="490" height="754" key="EnvironmentVariablesDialog" timestamp="1579870422931">
       <screen x="0" y="23" width="1920" height="1057" />
     </state>

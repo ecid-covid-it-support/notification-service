@@ -1,8 +1,5 @@
 package OCARIoT;
 
-
-
-
 import com.mongodb.client.MongoClient;
 import com.mongodb.client.MongoClients;
 import com.mongodb.client.MongoCollection;
@@ -38,7 +35,7 @@ public class MongoDBConfiguration{
         System.setProperty ("javax.net.ssl.keyStorePassword",keystorePass);
         System.setProperty ("javax.net.ssl.trustStore",truststorePath);
         System.setProperty ("javax.net.ssl.trustStorePassword","changeit");
-        MongoClient mongoClient = MongoClients.create(mongoURI);
+        MongoClient mongoClient = MongoClients.create(mongoURI+"&sslInvalidHostNameAllowed=true");
         MongoDatabase database = mongoClient.getDatabase(mongoDatabase);
         return database.getCollection(mongoCollection);
     }
