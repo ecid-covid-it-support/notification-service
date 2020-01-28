@@ -1,0 +1,11 @@
+<component name="libraryTable">
+  <library name="Gradle: com.google.cloud:google-cloud-firestore:1.31.0">
+    <CLASSES>
+      <root url="jar://$USER_HOME$/.gradle/caches/modules-2/files-2.1/com.google.cloud/google-cloud-firestore/1.31.0/9c6bc832e21e7d7a93c0786cb4dd48cdac1675d6/google-cloud-firestore-1.31.0.jar!/" />
+    </CLASSES>
+    <JAVADOC />
+    <SOURCES>
+      <root url="jar://$USER_HOME$/.gradle/caches/modules-2/files-2.1/com.google.cloud/google-cloud-firestore/1.31.0/40033019efde68d0bd5f87a33152f475161f2676/google-cloud-firestore-1.31.0-sources.jar!/" />
+    </SOURCES>
+  </library>
+</component>
