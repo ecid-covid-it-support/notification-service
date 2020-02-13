@@ -22,7 +22,7 @@ public class APIController {
         return "OCARIoT Notification Microservice";
     }
 
-    @PostMapping("user/{id}")
+    @PostMapping("/v1/notifications/user/{id}")
     public String create(@PathVariable String id, @RequestBody Map <String,String> body) {
 
         String token = body.get("token");
