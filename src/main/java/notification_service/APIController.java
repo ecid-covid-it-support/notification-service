@@ -4,21 +4,16 @@ package notification_service;
 import com.mongodb.BasicDBObject;
 import com.mongodb.client.MongoCollection;
 import static com.mongodb.client.model.Filters.eq;
-
-import com.mongodb.client.model.Filters;
 import com.mongodb.client.model.UpdateOptions;
-import com.mongodb.client.model.Updates;
 import org.bson.BsonDocument;
 import org.bson.BsonString;
 import org.bson.Document;
-import org.bson.conversions.Bson;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
-
 import java.util.Date;
 import java.util.Map;
-import java.util.logging.Level;
+
 
 
 @RestController
@@ -51,7 +46,7 @@ public class APIController {
                 }
                 collection.updateOne(eq("id", id), new Document("$addToSet", new Document("Tokens", token)), new UpdateOptions().upsert(true));
                 BasicDBObject updateFields = new BasicDBObject();
-                updateFields.append("lang", lang).append("ts", new Date());
+                updateFields.append("lang", lang).append("lastLogin", new Date());
                 BasicDBObject setQuery = new BasicDBObject();
                 setQuery.append("$set", updateFields);
                 collection.updateOne(eq("id", id), setQuery);
@@ -79,7 +74,7 @@ public class APIController {
                 Document update = new Document("$pull", new Document("Tokens", token));
                 collection.updateOne(filter, update);
                 return ResponseEntity.status(200).body("Token deleted");
-            } catch (Exception e) {
+                } catch (Exception e) {
                 return ResponseEntity.status(400).body("Error");
             }
         }
