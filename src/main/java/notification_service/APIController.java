@@ -30,27 +30,30 @@ public class APIController {
     @PostMapping("/v1/notifications/user/{id}")
     public ResponseEntity<String> create(@PathVariable String id, @RequestBody Map <String,String> body) {
 
-                String token = body.get("token");
-                String lang = body.get("lang");
-                if (token==null || token.isEmpty()){
+        String token=null;
+        String lang = null;
 
-                   return ResponseEntity.status(400).body("No token found in the message body");
-                }
-                if (lang==null || lang.isEmpty()){
+        token = body.get("token");
+        lang = body.get("lang");
 
-                    return ResponseEntity.status(400).body("No lang found in the message body");
-                }
-                if (!lang.equals("en")&&!lang.equals("es")&&!lang.equals("pt")&&!lang.equals("el")){
+        if (lang==null || lang.isEmpty()){
 
-                    return ResponseEntity.status(400).body("Only English(en), Spanish(es), Portuguese(pt), Greek(el) languages supported");
-                }
-                collection.updateOne(eq("id", id), new Document("$addToSet", new Document("Tokens", token)), new UpdateOptions().upsert(true));
-                BasicDBObject updateFields = new BasicDBObject();
-                updateFields.append("lang", lang).append("lastLogin", new Date());
-                BasicDBObject setQuery = new BasicDBObject();
-                setQuery.append("$set", updateFields);
-                collection.updateOne(eq("id", id), setQuery);
-                return ResponseEntity.status(200).body("User saved or updated");
+            return ResponseEntity.status(400).body("No lang found in the message body");
+        }
+        if (!lang.equals("en")&&!lang.equals("es")&&!lang.equals("pt")&&!lang.equals("el")){
+
+            return ResponseEntity.status(400).body("Only English(en), Spanish(es), Portuguese(pt), Greek(el) languages supported");
+        }
+        if (token!=null && !token.isEmpty()){
+
+            collection.updateOne(eq("id", id), new Document("$addToSet", new Document("tokens", token)), new UpdateOptions().upsert(true));
+
+        }
+
+        collection.updateOne(eq("id", id), new Document("$set", new Document("lang", lang)),new UpdateOptions().upsert(true));
+        collection.updateOne(eq("id", id), new Document("$set", new Document("lastLogin", new Date())),new UpdateOptions().upsert(true));
+        collection.updateOne(eq("id", id), new Document("$set", new Document("lastNotification", new Date())),new UpdateOptions().upsert(true));
+        return ResponseEntity.status(200).body("User saved or updated");
 
     }
 
