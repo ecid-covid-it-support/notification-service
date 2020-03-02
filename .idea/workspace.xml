@@ -1,18 +1,8 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="33f011e0-e252-4d72-a6bd-fe6aef9ea0ce" name="Default Changelist" comment="">
+    <list default="true" id="5f23f1e1-0507-4fab-8793-3ad5b4b978de" name="Default Changelist" comment="">
       <change afterPath="$PROJECT_DIR$/src/main/java/notification_service/EngagementTaks.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.gradle/5.2.1/executionHistory/executionHistory.bin" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/.gradle/5.2.1/executionHistory/executionHistory.lock" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/.gradle/5.2.1/fileHashes/fileHashes.bin" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/.gradle/5.2.1/fileHashes/fileHashes.lock" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/.gradle/5.2.1/javaCompile/classAnalysis.bin" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/.gradle/5.2.1/javaCompile/javaCompile.lock" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/.gradle/5.2.1/javaCompile/taskHistory.bin" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/.gradle/buildOutputCleanup/buildOutputCleanup.lock" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/.gradle/buildOutputCleanup/cache.properties" beforeDir="false" afterPath="$PROJECT_DIR$/.gradle/buildOutputCleanup/cache.properties" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.gradle/buildOutputCleanup/outputFiles.bin" beforeDir="false" afterPath="$PROJECT_DIR$/.gradle/buildOutputCleanup/outputFiles.bin" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/notification_service/Main.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/notification_service/Main.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/notification_service/RabbitMQ.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/notification_service/RabbitMQ.java" afterDir="false" />
@@ -26,9 +16,6 @@
   <component name="ExternalProjectsManager">
     <system id="GRADLE">
       <state>
-        <task path="$PROJECT_DIR$">
-          <activation />
-        </task>
         <projects_view>
           <tree_state>
             <expand>
@@ -59,113 +46,16 @@
       </state>
     </system>
   </component>
+  <component name="FavoritesManager">
+    <favorites_list name="OCARIoT" />
+  </component>
   <component name="Git.Settings">
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
-  </component>
-  <component name="ProjectId" id="1YZgkGcS08a4BPiplCKE1V1PS4p" />
-  <component name="ProjectViewState">
-    <option name="hideEmptyMiddlePackages" value="true" />
-    <option name="showExcludedFiles" value="true" />
-    <option name="showLibraryContents" value="true" />
-  </component>
-  <component name="PropertiesComponent">
-    <property name="RunOnceActivity.ShowReadmeOnStart" value="true" />
-    <property name="last_opened_file_path" value="$PROJECT_DIR$" />
-  </component>
-  <component name="RunManager" selected="Gradle.OCARIoT [clean]">
-    <configuration name="Main" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
-      <option name="MAIN_CLASS_NAME" value="notification_service.Main" />
-      <module name="IdeaProjects.OCARIoT.main" />
-      <extension name="coverage">
-        <pattern>
-          <option name="PATTERN" value="notification_service.*" />
-          <option name="ENABLED" value="true" />
-        </pattern>
-      </extension>
-      <method v="2">
-        <option name="Make" enabled="true" />
-      </method>
-    </configuration>
-    <configuration name="OCARIoT [clean]" type="GradleRunConfiguration" factoryName="Gradle" temporary="true">
-      <ExternalSystemSettings>
-        <option name="executionName" />
-        <option name="externalProjectPath" value="$PROJECT_DIR$" />
-        <option name="externalSystemIdString" value="GRADLE" />
-        <option name="scriptParameters" />
-        <option name="taskDescriptions">
-          <list />
-        </option>
-        <option name="taskNames">
-          <list>
-            <option value="clean" />
-          </list>
-        </option>
-        <option name="vmOptions" />
-      </ExternalSystemSettings>
-      <GradleScriptDebugEnabled>true</GradleScriptDebugEnabled>
-      <method v="2" />
-    </configuration>
-    <recent_temporary>
-      <list>
-        <item itemvalue="Gradle.OCARIoT [clean]" />
-        <item itemvalue="Application.Main" />
-      </list>
-    </recent_temporary>
   </component>
   <component name="SvnConfiguration">
     <configuration />
   </component>
   <component name="TaskManager">
-    <task active="true" id="Default" summary="Default task">
-      <changelist id="33f011e0-e252-4d72-a6bd-fe6aef9ea0ce" name="Default Changelist" comment="" />
-      <created>1583155671093</created>
-      <option name="number" value="Default" />
-      <option name="presentableId" value="Default" />
-      <updated>1583155671093</updated>
-    </task>
     <servers />
-  </component>
-  <component name="Vcs.Log.Tabs.Properties">
-    <option name="TAB_STATES">
-      <map>
-        <entry key="MAIN">
-          <value>
-            <State>
-              <option name="COLUMN_ORDER" />
-            </State>
-          </value>
-        </entry>
-      </map>
-    </option>
-  </component>
-  <component name="WindowStateProjectService">
-    <state x="425" y="215" key="#com.intellij.execution.impl.EditConfigurationsDialog" timestamp="1583156871684">
-      <screen x="0" y="23" width="1920" height="1057" />
-    </state>
-    <state x="425" y="215" key="#com.intellij.execution.impl.EditConfigurationsDialog/0.23.1920.1057/1920.222.1920.1057/-1920.246.1920.1057@0.23.1920.1057" timestamp="1583156871684" />
-    <state x="715" y="323" key="EnvironmentVariablesDialog" timestamp="1583156618474">
-      <screen x="0" y="23" width="1920" height="1057" />
-    </state>
-    <state x="715" y="323" key="EnvironmentVariablesDialog/0.23.1920.1057/1920.222.1920.1057/-1920.246.1920.1057@0.23.1920.1057" timestamp="1583156618474" />
-    <state width="1878" height="290" key="GridCell.Tab.0.bottom" timestamp="1583156693497">
-      <screen x="0" y="23" width="1920" height="1057" />
-    </state>
-    <state width="1878" height="290" key="GridCell.Tab.0.bottom/0.23.1920.1057/1920.222.1920.1057/-1920.246.1920.1057@0.23.1920.1057" timestamp="1583156693497" />
-    <state width="1878" height="290" key="GridCell.Tab.0.center" timestamp="1583156693495">
-      <screen x="0" y="23" width="1920" height="1057" />
-    </state>
-    <state width="1878" height="290" key="GridCell.Tab.0.center/0.23.1920.1057/1920.222.1920.1057/-1920.246.1920.1057@0.23.1920.1057" timestamp="1583156693495" />
-    <state width="1878" height="290" key="GridCell.Tab.0.left" timestamp="1583156693495">
-      <screen x="0" y="23" width="1920" height="1057" />
-    </state>
-    <state width="1878" height="290" key="GridCell.Tab.0.left/0.23.1920.1057/1920.222.1920.1057/-1920.246.1920.1057@0.23.1920.1057" timestamp="1583156693495" />
-    <state width="1878" height="290" key="GridCell.Tab.0.right" timestamp="1583156693496">
-      <screen x="0" y="23" width="1920" height="1057" />
-    </state>
-    <state width="1878" height="290" key="GridCell.Tab.0.right/0.23.1920.1057/1920.222.1920.1057/-1920.246.1920.1057@0.23.1920.1057" timestamp="1583156693496" />
-    <state x="689" y="280" key="RollbackChangesDialog" timestamp="1583156691271">
-      <screen x="0" y="23" width="1920" height="1057" />
-    </state>
-    <state x="689" y="280" key="RollbackChangesDialog/0.23.1920.1057/1920.222.1920.1057/-1920.246.1920.1057@0.23.1920.1057" timestamp="1583156691271" />
   </component>
 </project>
