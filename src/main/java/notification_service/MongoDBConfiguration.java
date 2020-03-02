@@ -27,7 +27,6 @@ public class MongoDBConfiguration{
     public String truststorePath;
 
 
-
     @Bean
     public MongoCollection<Document> collection() {
 
@@ -38,5 +37,25 @@ public class MongoDBConfiguration{
         MongoClient mongoClient = MongoClients.create(mongoURI+"&sslInvalidHostNameAllowed=true");
         MongoDatabase database = mongoClient.getDatabase(mongoDatabase);
         return database.getCollection(mongoCollection);
+    }
+
+    @Bean
+    public MongoCollection<Document> messagesCollection() {
+
+        MongoClient mongoClient = MongoClients.create(mongoURI+"&sslInvalidHostNameAllowed=true");
+        MongoDatabase database = mongoClient.getDatabase(mongoDatabase);
+
+        return database.getCollection("messages");
+
+    }
+
+    @Bean
+    public MongoCollection<Document> pendingNotifications() {
+
+        MongoClient mongoClient = MongoClients.create(mongoURI+"&sslInvalidHostNameAllowed=true");
+        MongoDatabase database = mongoClient.getDatabase(mongoDatabase);
+
+        return database.getCollection("pendingNotifications");
+
     }
 }
