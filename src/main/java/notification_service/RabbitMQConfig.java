@@ -9,6 +9,19 @@ import org.springframework.context.annotation.Configuration;
 public class RabbitMQConfig {
 
 
+    @Value("${rabbitmq.exchange.delete.users}")
+    private String exchangeDeleteUsers;
+
+    @Bean
+    public DirectExchange directDeleteUsers() {
+
+        return new DirectExchange(exchangeDeleteUsers);
+    }
+
+    @Value("${rabbitmq.routingkey.delete.users}")
+    private String routingkeyDeleteUsers;
+
+
     @Value("${rabbitmq.exchange.send.notification}")
     private String exchangeNotification;
 
@@ -33,6 +46,11 @@ public class RabbitMQConfig {
     @Bean
     public Binding binding1a(DirectExchange directNotification, Queue queueNotification) {
         return BindingBuilder.bind(queueNotification).to(directNotification).with(routingkeyNotification);
+    }
+
+    @Bean
+    public Binding binding1b(DirectExchange directDeleteUsers, Queue queueNotification) {
+        return BindingBuilder.bind(queueNotification).to(directDeleteUsers).with(routingkeyDeleteUsers);
     }
 
 }
