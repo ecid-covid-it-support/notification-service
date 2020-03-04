@@ -38,10 +38,11 @@ public class APIController {
 
         String token=null;
         String lang = null;
-
+        String type = null;
 
         token = body.get("token");
         lang = body.get("lang");
+        type = body.get("type");
 
         if (lang==null || lang.isEmpty()){
 
@@ -51,6 +52,15 @@ public class APIController {
 
             return ResponseEntity.status(400).body("Only English(en), Spanish(es), Portuguese(pt), Greek(el) languages supported");
         }
+        if (type==null||type.isEmpty()){
+
+            return ResponseEntity.status(400).body("Type of user not defined");
+        }
+        if (!type.equals("children")&&!type.equals("family")&&!type.equals("teacher")){
+
+            return ResponseEntity.status(400).body("Type of user can only be one of children, family or teacher");
+        }
+
         if (token!=null && !token.isEmpty()){
 
             collection.updateOne(eq("id", id), new Document("$addToSet", new Document("tokens", token)), new UpdateOptions().upsert(true));
@@ -58,6 +68,7 @@ public class APIController {
         }
 
         collection.updateOne(eq("id", id), new Document("$set", new Document("lang", lang)),new UpdateOptions().upsert(true));
+        collection.updateOne(eq("id", id), new Document("$set", new Document("type", type)),new UpdateOptions().upsert(true));
         collection.updateOne(eq("id", id), new Document("$set", new Document("lastLogin", new Date())),new UpdateOptions().upsert(true));
         collection.updateOne(eq("id", id), new Document("$set", new Document("lastNotification", new Date())),new UpdateOptions().upsert(true));
         return ResponseEntity.status(200).body("User saved or updated");

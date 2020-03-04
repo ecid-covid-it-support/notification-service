@@ -3,8 +3,17 @@
   <component name="ChangeListManager">
     <list default="true" id="5f23f1e1-0507-4fab-8793-3ad5b4b978de" name="Default Changelist" comment="">
       <change afterPath="$PROJECT_DIR$/src/main/java/notification_service/EngagementTaks.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.gradle/5.2.1/executionHistory/executionHistory.bin" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.gradle/5.2.1/executionHistory/executionHistory.lock" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.gradle/5.2.1/fileContent/fileContent.lock" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.gradle/5.2.1/fileHashes/fileHashes.bin" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.gradle/5.2.1/fileHashes/fileHashes.lock" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.gradle/5.2.1/javaCompile/javaCompile.lock" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.gradle/buildOutputCleanup/buildOutputCleanup.lock" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/notification_service/Main.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/notification_service/Main.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/notification_service/APIController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/notification_service/APIController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/notification_service/FirebaseMessage.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/notification_service/FirebaseMessage.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/notification_service/MongoDBConfiguration.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/notification_service/MongoDBConfiguration.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/notification_service/RabbitMQ.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/notification_service/RabbitMQ.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/resources/application.properties" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/application.properties" afterDir="false" />
     </list>
@@ -52,10 +61,98 @@
   <component name="Git.Settings">
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
   </component>
+  <component name="ProjectId" id="1Ya6MUUlLVULV5MMnWRZqMywYbo" />
+  <component name="ProjectViewState">
+    <option name="hideEmptyMiddlePackages" value="true" />
+    <option name="showExcludedFiles" value="true" />
+    <option name="showLibraryContents" value="true" />
+  </component>
+  <component name="PropertiesComponent">
+    <property name="RunOnceActivity.ShowReadmeOnStart" value="true" />
+  </component>
+  <component name="RunManager">
+    <configuration name="Main" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
+      <envs>
+        <env name="PORT_HTTPS" value="10001" />
+        <env name="MONGODB_URI" value="mongodb://myDbOwner:abc123@localhost:27017/NotificationMicroservice" />
+        <env name="MONGO_NOTIFICATION_DATABASE" value="NotificationMicroservice" />
+        <env name="RABBITMQ_HOST" value="localhost" />
+        <env name="RABBITMQ_PORT" value="5672" />
+        <env name="RABBITMQ_USERNAME" value="notification.app" />
+        <env name="RABBITMQ_PASSWORD" value="OCARIoT" />
+        <env name="RABBITMQ_VHOST" value="ocariot" />
+        <env name="RABBITMQ_SSL" value="false" />
+        <env name="KEYSTORE_PASS" value="s3cr3tp4ss" />
+        <env name="GOOGLE_APPLICATION_CREDENTIALS" value="$USER_HOME$/ocariot-docker-compose/firebase_keyfile.json" />
+      </envs>
+      <option name="MAIN_CLASS_NAME" value="notification_service.Main" />
+      <module name="IdeaProjects.OCARIoT.main" />
+      <extension name="coverage">
+        <pattern>
+          <option name="PATTERN" value="notification_service.*" />
+          <option name="ENABLED" value="true" />
+        </pattern>
+      </extension>
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <recent_temporary>
+      <list>
+        <item itemvalue="Application.Main" />
+      </list>
+    </recent_temporary>
+  </component>
   <component name="SvnConfiguration">
     <configuration />
   </component>
   <component name="TaskManager">
+    <task active="true" id="Default" summary="Default task">
+      <changelist id="5f23f1e1-0507-4fab-8793-3ad5b4b978de" name="Default Changelist" comment="" />
+      <created>1583168309628</created>
+      <option name="number" value="Default" />
+      <option name="presentableId" value="Default" />
+      <updated>1583168309628</updated>
+    </task>
     <servers />
+  </component>
+  <component name="Vcs.Log.Tabs.Properties">
+    <option name="TAB_STATES">
+      <map>
+        <entry key="MAIN">
+          <value>
+            <State>
+              <option name="COLUMN_ORDER" />
+            </State>
+          </value>
+        </entry>
+      </map>
+    </option>
+  </component>
+  <component name="WindowStateProjectService">
+    <state x="424" y="215" key="#com.intellij.execution.impl.EditConfigurationsDialog" timestamp="1583236164359">
+      <screen x="0" y="23" width="1920" height="1057" />
+    </state>
+    <state x="424" y="215" key="#com.intellij.execution.impl.EditConfigurationsDialog/0.23.1920.1057/1920.222.1920.1057/-1920.246.1920.1057@0.23.1920.1057" timestamp="1583236164359" />
+    <state x="714" y="323" key="EnvironmentVariablesDialog" timestamp="1583236163409">
+      <screen x="0" y="23" width="1920" height="1057" />
+    </state>
+    <state x="714" y="323" key="EnvironmentVariablesDialog/0.23.1920.1057/1920.222.1920.1057/-1920.246.1920.1057@0.23.1920.1057" timestamp="1583236163409" />
+    <state width="1878" height="183" key="GridCell.Tab.0.bottom" timestamp="1583331873222">
+      <screen x="0" y="23" width="1920" height="1057" />
+    </state>
+    <state width="1878" height="183" key="GridCell.Tab.0.bottom/0.23.1920.1057/1920.222.1920.1057/-1920.246.1920.1057@0.23.1920.1057" timestamp="1583331873222" />
+    <state width="1878" height="183" key="GridCell.Tab.0.center" timestamp="1583331873220">
+      <screen x="0" y="23" width="1920" height="1057" />
+    </state>
+    <state width="1878" height="183" key="GridCell.Tab.0.center/0.23.1920.1057/1920.222.1920.1057/-1920.246.1920.1057@0.23.1920.1057" timestamp="1583331873220" />
+    <state width="1878" height="183" key="GridCell.Tab.0.left" timestamp="1583331873219">
+      <screen x="0" y="23" width="1920" height="1057" />
+    </state>
+    <state width="1878" height="183" key="GridCell.Tab.0.left/0.23.1920.1057/1920.222.1920.1057/-1920.246.1920.1057@0.23.1920.1057" timestamp="1583331873219" />
+    <state width="1878" height="183" key="GridCell.Tab.0.right" timestamp="1583331873221">
+      <screen x="0" y="23" width="1920" height="1057" />
+    </state>
+    <state width="1878" height="183" key="GridCell.Tab.0.right/0.23.1920.1057/1920.222.1920.1057/-1920.246.1920.1057@0.23.1920.1057" timestamp="1583331873221" />
   </component>
 </project>
