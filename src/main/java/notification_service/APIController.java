@@ -5,6 +5,7 @@ import com.mongodb.client.FindIterable;
 import com.mongodb.client.MongoCollection;
 import static com.mongodb.client.model.Filters.eq;
 import com.mongodb.client.model.UpdateOptions;
+import com.sun.tools.javac.code.Attribute;
 import org.bson.BsonDocument;
 import org.bson.BsonString;
 import org.bson.Document;
@@ -56,9 +57,9 @@ public class APIController {
 
             return ResponseEntity.status(400).body("Type of user not defined");
         }
-        if (!type.equals("children")&&!type.equals("family")&&!type.equals("teacher")){
+        if (!type.equals("child")&&!type.equals("family")&&!type.equals("educator")){
 
-            return ResponseEntity.status(400).body("Type of user can only be one of children, family or teacher");
+            return ResponseEntity.status(400).body("Type of user can only be one of child, family or educator");
         }
 
         if (token!=null && !token.isEmpty()){
@@ -92,7 +93,7 @@ public class APIController {
         } else {
 
                 Document filter = new Document("id",id);
-                Document update = new Document("$pull", new Document("Tokens", token));
+                Document update = new Document("$pull", new Document("tokens", token));
                 collection.updateOne(filter, update);
                 return ResponseEntity.status(200).body("Token deleted");
         }
@@ -100,7 +101,7 @@ public class APIController {
     }
 
     @GetMapping("/v1/notifications/pendingnotification/{id}")
-    public ResponseEntity<JSONObject> pendingNotification(@PathVariable String id) {
+    public ResponseEntity<String> pendingNotification(@PathVariable String id) {
 
         FindIterable<Document> iterable = pendingNotifications.find();
         JSONObject jo = new JSONObject();
@@ -111,7 +112,11 @@ public class APIController {
         long found = pendingNotifications.countDocuments(new BsonDocument("id", new BsonString(id)));
         if (found == 0) {
 
-            return ResponseEntity.status(200).body(response);
+            ArrayList<JSONObject> emptyArray = null;
+            response.put("id", id);
+            response.put("notifications", (Collection<?>) null);
+            System.out.println(response);
+            return ResponseEntity.status(200).body(response.toString());
 
         } else{
 
@@ -119,7 +124,6 @@ public class APIController {
 
             for (Document doc : docs){
 
-                item=null;
                 item.put("title", doc.get("title"));
                 item.put("body", doc.get("body"));
                 item.put("timestamp", doc.get("timestamp"));
@@ -129,9 +133,9 @@ public class APIController {
             }
             jo.put("id", id);
             jo.put("notifications", items);
-            System.out.println(jo);
 
-            return ResponseEntity.status(200).body(jo);
+
+            return ResponseEntity.status(200).body(jo.toString());
         }
     }
 
