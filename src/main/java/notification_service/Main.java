@@ -25,7 +25,10 @@ public class Main {
 
         FirebaseApp.initializeApp(options);
 
-
         SpringApplication.run(Main.class,args);
+
+
+
     }
+
 }
