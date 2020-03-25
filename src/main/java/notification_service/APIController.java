@@ -5,7 +5,6 @@ import com.mongodb.client.FindIterable;
 import com.mongodb.client.MongoCollection;
 import static com.mongodb.client.model.Filters.eq;
 import com.mongodb.client.model.UpdateOptions;
-import com.sun.tools.javac.code.Attribute;
 import org.bson.BsonDocument;
 import org.bson.BsonString;
 import org.bson.Document;
@@ -37,13 +36,15 @@ public class APIController {
     @PostMapping("/v1/notifications/user/{id}")
     public ResponseEntity<String> create(@PathVariable String id, @RequestBody Map <String,String> body) {
 
-        String token=null;
-        String lang = null;
-        String type = null;
+        String token;
+        String lang;
+        String type;
 
         token = body.get("token");
         lang = body.get("lang");
         type = body.get("type");
+        ArrayList<String> emptyArrayTokens = new ArrayList<>();
+
 
         if (lang==null || lang.isEmpty()){
 
@@ -57,15 +58,18 @@ public class APIController {
 
             return ResponseEntity.status(400).body("Type of user not defined");
         }
-        if (!type.equals("child")&&!type.equals("family")&&!type.equals("educator")){
+        if (!type.equals("children")&&!type.equals("family")&&!type.equals("educator")){
 
-            return ResponseEntity.status(400).body("Type of user can only be one of child, family or educator");
+            return ResponseEntity.status(400).body("Type of user can only be one of children, family or educator");
         }
 
         if (token!=null && !token.isEmpty()){
 
             collection.updateOne(eq("id", id), new Document("$addToSet", new Document("tokens", token)), new UpdateOptions().upsert(true));
 
+        }else{
+
+            //collection.updateOne(eq("id", id), new Document("$addToSet", new Document("tokens", )), new UpdateOptions().upsert(true));
         }
 
         collection.updateOne(eq("id", id), new Document("$set", new Document("lang", lang)),new UpdateOptions().upsert(true));
@@ -103,16 +107,16 @@ public class APIController {
     @GetMapping("/v1/notifications/pendingnotification/{id}")
     public ResponseEntity<String> pendingNotification(@PathVariable String id) {
 
-        FindIterable<Document> iterable = pendingNotifications.find();
+        //FindIterable<Document> iterable = pendingNotifications.find();
         JSONObject jo = new JSONObject();
-        Collection<JSONObject> items = new ArrayList<JSONObject>();
+        Collection<JSONObject> items = new ArrayList<>();
         JSONObject response = new JSONObject();
         JSONObject item = new JSONObject();
 
         long found = pendingNotifications.countDocuments(new BsonDocument("id", new BsonString(id)));
         if (found == 0) {
 
-            ArrayList<JSONObject> emptyArray = null;
+            //ArrayList<JSONObject> emptyArray = null;
             response.put("id", id);
             response.put("notifications", (Collection<?>) null);
             System.out.println(response);

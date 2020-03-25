@@ -11,7 +11,8 @@ import org.springframework.amqp.rabbit.annotation.RabbitListener;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.ApplicationContext;
 import org.springframework.stereotype.Service;
-import java.io.IOException;
+
+import java.util.ArrayList;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import static com.mongodb.client.model.Filters.eq;
@@ -33,25 +34,23 @@ public class RabbitMQ{
 
     final ApplicationContext appCtx = ApplicationContextUtils.getApplicationContext();
     final FirebaseMessage firebaseMessage =  appCtx.getBean(FirebaseMessage.class);
-    RabbitMQRequester rabbitMQRequester = appCtx.getBean(RabbitMQRequester.class);
+    final RabbitMQRequester rabbitMQRequester = appCtx.getBean(RabbitMQRequester.class);
 
 
 
 
 
     @RabbitListener(queues = "${rabbitmq.queue.send.notification}")
-    public void notificationService(Message message) throws IOException {
-
+    public void notificationService(Message message) {
 
         try{
+
             byte[] body = message.getBody();
             JSONObject jsonmsg = new JSONObject(new String(body));
 
             if (jsonmsg.has("event_name")) {
 
                 String eventName = (String) jsonmsg.get("event_name");
-
-
 
                 switch (eventName){
 
@@ -60,7 +59,6 @@ public class RabbitMQ{
                         if (jsonmsg.has("notification_type")) {
 
                             String messageType = jsonmsg.getString("notification_type");
-                            System.out.println(jsonmsg);
 
                             switch (messageType){
 
@@ -88,11 +86,8 @@ public class RabbitMQ{
                                         String uID = jsonmsg.getString("id");
                                         firebaseMessage.sendToToken(uID,messageType,null, 0);
 
-
                                     } catch (JSONException e) {
                                         LOGGER.log(Level.WARNING, "Could not read id from json message");
-                                    } catch (FirebaseMessagingException e) {
-                                        LOGGER.log(Level.WARNING, "Could not send notification "+messageType);
                                     }
                                     break;
 
@@ -101,48 +96,77 @@ public class RabbitMQ{
                                     try {
 
                                         String username = null;
-                                        String familyID = null;
+                                        String familyID;
+                                        ArrayList<String> arrayEducators = new ArrayList<>();
+                                        ArrayList<String> arrayFamilies = new ArrayList<>();
+                                        int i;
 
                                         String uID = jsonmsg.getString("id");
                                         int days_since = jsonmsg.getInt("days_since");
 
                                         String info = rabbitMQRequester.send("_id="+uID,"children.find");
+
                                         JSONArray jsonarray = new JSONArray(info);
+
                                         try {
                                             username = (String) jsonarray.getJSONObject(0).get("username");
-
                                         } catch (JSONException e) {
-
+                                            LOGGER.log(Level.WARNING, "Could not fetch children username from account microservice");
                                         }
 
                                         String family = rabbitMQRequester.send("?children="+uID,"families.find");
                                         jsonarray = new JSONArray(family);
                                         try {
-                                            familyID = (String) jsonarray.getJSONObject(0).get("id");
-                                            if (familyID!=null && !familyID.isEmpty()) {
-                                                firebaseMessage.sendToToken(familyID, messageType, username, days_since);
+                                            for (i = 0; i < jsonarray.length(); i++) {
+
+                                                familyID = (String) jsonarray.getJSONObject(i).get("id");
+                                                arrayFamilies.add(familyID);
+
+                                            }
+
+                                            for (i = 0; i < arrayFamilies.size(); i++) {
+
+                                                familyID = arrayFamilies.get(i);
+                                                if (familyID!=null && !familyID.isEmpty() && username!=null) {
+                                                    firebaseMessage.sendToToken(familyID, messageType, username, days_since);
+
+                                                }
                                             }
 
                                         } catch (JSONException e) {
-
+                                            LOGGER.log(Level.WARNING, "Error processing family information for monitoring:miss_child_data notification");
                                         }
 
+
+                                        ///missing notification for teacher
 
 
                                     } catch (JSONException e) {
                                         LOGGER.log(Level.WARNING, "Could not get id or days_since from json message.");
-                                    } catch (FirebaseMessagingException e) {
-                                        LOGGER.log(Level.WARNING, "Error sending notification.");
                                     }
-
-
                                     break;
 
+                                case "iot:miss_data":
+
+                                    try{
+
+                                        String institutionID;
+
+                                        institutionID = jsonmsg.getString("institution_id");
+                                        int days_since = jsonmsg.getInt("days_since");
+                                        JSONObject location = jsonmsg.getJSONObject("location");
+                                        String sensorType = jsonmsg.getString("sensor_type");
 
 
+                                        firebaseMessage.sendToToken(institutionID,messageType,sensorType,location,days_since);
+
+
+                                    } catch (JSONException e) {
+                                        LOGGER.log(Level.WARNING, "Could not get institution_id, sensor_type, location or days_since from json message.");
+                                    }
+                                    break;
 
                             }
-
 
                         }
                         break;

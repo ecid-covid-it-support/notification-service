@@ -8,8 +8,6 @@ import org.springframework.amqp.rabbit.core.RabbitTemplate;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
-import java.lang.reflect.Array;
-
 @Component
 public class RabbitMQRequester {
 
@@ -21,7 +19,6 @@ public class RabbitMQRequester {
     public String send(String handle, String method) {
 
         Message response = null;
-        JSONObject jsonObject= null;
 
         try {
 
@@ -41,6 +38,8 @@ public class RabbitMQRequester {
         } catch (AmqpException e) {
             e.printStackTrace();
         }
+
+
 
         return new String(response.getBody());
 

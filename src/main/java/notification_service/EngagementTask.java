@@ -12,6 +12,8 @@ import org.springframework.context.ApplicationContext;
 import org.springframework.scheduling.annotation.Scheduled;
 import org.springframework.stereotype.Service;
 import java.util.Date;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 
 @Service
@@ -20,10 +22,11 @@ public class EngagementTask {
     @Autowired
     MongoCollection<Document> collection;
 
-    ApplicationContext appCtx = ApplicationContextUtils.getApplicationContext();
-    FirebaseMessage firebaseMessage =  appCtx.getBean(FirebaseMessage.class);
-    RabbitMQRequester rabbitMQRequester = appCtx.getBean(RabbitMQRequester.class);
+    final ApplicationContext appCtx = ApplicationContextUtils.getApplicationContext();
+    final FirebaseMessage firebaseMessage =  appCtx.getBean(FirebaseMessage.class);
+    final RabbitMQRequester rabbitMQRequester = appCtx.getBean(RabbitMQRequester.class);
 
+    private static final Logger LOGGER = Logger.getLogger( RabbitMQ.class.getName() );
 
     @Scheduled(fixedRate = 3600000) //1 hour 3600000
     public void sendEngagementNotification() {
@@ -55,6 +58,7 @@ public class EngagementTask {
                 long diffNotificationDays = diffNotification / (24 * 60 * 60 * 1000);
 
                 int daysSinceLastLogin = 7;
+                int i;
 
 
                 if (diffLoginDays >= daysSinceLastLogin && diffNotificationDays >= 2) {
@@ -62,12 +66,11 @@ public class EngagementTask {
 
                     switch (userType){
 
-                        case "child":
+                        case "children":
 
-                            String institutionID;
-                            String familyID = null;
-                            String user = null;
-                            String teacherID = null;
+                            String familyID;
+                            String user;
+
 
                             firebaseMessage.sendToToken(userID,"notification:child", null, daysSinceLastLogin);
 
@@ -76,25 +79,28 @@ public class EngagementTask {
                             String info = rabbitMQRequester.send("_id="+userID,"children.find");
 
                             JSONArray jsonarray = new JSONArray(info);
-                            try {
-                                user = (String) jsonarray.getJSONObject(0).get("username");
-
-                            } catch (JSONException e) {
 
 
-                            }
+                            user = (String) jsonarray.getJSONObject(0).get("username");
+
 
 
                             String family = rabbitMQRequester.send("?children="+userID,"families.find");
                             jsonarray = new JSONArray(family);
                             try {
-                                familyID = (String) jsonarray.getJSONObject(0).get("id");
-                                if (familyID!=null && !familyID.isEmpty()) {
-                                    firebaseMessage.sendToToken(familyID, "notification:child_family", user, daysSinceLastLogin);
+
+                                for (i=0;i<jsonarray.length();i++) {
+
+                                    familyID = (String) jsonarray.getJSONObject(i).get("id");
+
+                                    if (familyID != null && !familyID.isEmpty()) {
+                                        firebaseMessage.sendToToken(familyID, "notification:child_family", user, daysSinceLastLogin);
+                                    }
                                 }
 
                             } catch (JSONException e) {
 
+                                LOGGER.log(Level.WARNING, "Could not retrieve id of family when sending engagement notification");
                             }
                             //get teachers of children
 
@@ -119,9 +125,10 @@ public class EngagementTask {
 
                             break;
 
-                        case "teacher":
+                        case "educator":
 
-                            firebaseMessage.sendToToken(userID,"notification:teacher", null,daysSinceLastLogin);
+                            System.out.println("Estou a enviar para o educator");
+                            firebaseMessage.sendToToken(userID,"notification:educator", null,daysSinceLastLogin);
 
                             break;
                     }
