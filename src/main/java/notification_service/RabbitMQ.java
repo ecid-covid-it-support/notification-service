@@ -110,7 +110,8 @@ public class RabbitMQ{
                                         String uID = jsonmsg.getString("id");
                                         int days_since = jsonmsg.getInt("days_since");
 
-                                        String info = rabbitMQRequester.send("_id="+uID,"children.find");
+                                        String info = rabbitMQRequester.send("?_id="+uID,"children.find");
+                                        
 
                                         JSONArray jsonarray = new JSONArray(info);
 
