@@ -20,7 +20,7 @@ public class Main {
 
     public static void main(String[] args) throws IOException {
 
-        ApplicationContext appCtx = ApplicationContextUtils.getApplicationContext();
+
 
         FirebaseOptions options = new FirebaseOptions.Builder()
                 .setCredentials(GoogleCredentials.getApplicationDefault())

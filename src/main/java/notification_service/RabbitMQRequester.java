@@ -40,7 +40,6 @@ public class RabbitMQRequester {
         }
 
 
-
         return new String(response.getBody());
 
 

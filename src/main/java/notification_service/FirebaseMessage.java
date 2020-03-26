@@ -44,9 +44,8 @@ public class FirebaseMessage {
     Document messageDoc;
     String lang;
 
-
-    final ApplicationContext appCtx = ApplicationContextUtils.getApplicationContext();
-    final RabbitMQRequester rabbitMQRequester = appCtx.getBean(RabbitMQRequester.class);
+    @Autowired
+    RabbitMQRequester rabbitMQRequester;
 
     private List<String> getTokens(String userID){
 
