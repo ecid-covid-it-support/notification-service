@@ -22,6 +22,7 @@ dependencies {
     compile group: 'org.springframework.boot', name: 'spring-boot-starter-web', version: '2.2.5.RELEASE'
     compile group: 'org.json', name: 'json', version: '20190722'
     compile group: 'org.springframework.boot', name: 'spring-boot-starter-amqp', version: '2.2.5.RELEASE'
+    compile group: 'org.springframework.boot', name: 'spring-boot-starter', version: '2.2.5.RELEASE'
 
 
 }
