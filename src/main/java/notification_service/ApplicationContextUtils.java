@@ -17,6 +17,6 @@ public class ApplicationContextUtils implements ApplicationContextAware {
     }
 
     public static ApplicationContext getApplicationContext() {
-        return ctx;
+             return ctx;
     }
 }

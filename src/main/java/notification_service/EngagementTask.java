@@ -22,9 +22,9 @@ public class EngagementTask {
     @Autowired
     MongoCollection<Document> collection;
 
-    final ApplicationContext appCtx = ApplicationContextUtils.getApplicationContext();
-    final FirebaseMessage firebaseMessage =  appCtx.getBean(FirebaseMessage.class);
-    final RabbitMQRequester rabbitMQRequester = appCtx.getBean(RabbitMQRequester.class);
+    ApplicationContext appCtx = ApplicationContextUtils.getApplicationContext();
+    FirebaseMessage firebaseMessage =  appCtx.getBean(FirebaseMessage.class);
+    RabbitMQRequester rabbitMQRequester = appCtx.getBean(RabbitMQRequester.class);
 
     private static final Logger LOGGER = Logger.getLogger( RabbitMQ.class.getName() );
 

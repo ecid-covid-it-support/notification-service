@@ -10,6 +10,7 @@ import org.springframework.amqp.core.Message;
 import org.springframework.amqp.rabbit.annotation.RabbitListener;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.ApplicationContext;
+import org.springframework.stereotype.Component;
 import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
@@ -18,7 +19,7 @@ import java.util.logging.Logger;
 import static com.mongodb.client.model.Filters.eq;
 
 
-@Service
+@Component
 public class RabbitMQ{
 
     private static final Logger LOGGER = Logger.getLogger( RabbitMQ.class.getName() );
@@ -32,9 +33,9 @@ public class RabbitMQ{
     @Autowired
     private MongoCollection<Document> pendingNotifications;
 
-    final ApplicationContext appCtx = ApplicationContextUtils.getApplicationContext();
-    final FirebaseMessage firebaseMessage =  appCtx.getBean(FirebaseMessage.class);
-    final RabbitMQRequester rabbitMQRequester = appCtx.getBean(RabbitMQRequester.class);
+    ApplicationContext appCtx = ApplicationContextUtils.getApplicationContext();
+    FirebaseMessage firebaseMessage =  appCtx.getBean(FirebaseMessage.class);
+    RabbitMQRequester rabbitMQRequester = appCtx.getBean(RabbitMQRequester.class);
 
 
 
