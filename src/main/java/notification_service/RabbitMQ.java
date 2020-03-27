@@ -34,16 +34,9 @@ public class RabbitMQ{
     private MongoCollection<Document> pendingNotifications;
 
     @Autowired
-    private  ApplicationContext appContext;
-
-    @Autowired
     FirebaseMessage firebaseMessage;
     @Autowired
     RabbitMQRequester rabbitMQRequester;
-
-
-
-
 
 
     @RabbitListener(queues = "${rabbitmq.queue.send.notification}")

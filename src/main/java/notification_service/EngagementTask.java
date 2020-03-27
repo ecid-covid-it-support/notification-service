@@ -23,10 +23,8 @@ public class EngagementTask {
     MongoCollection<Document> collection;
 
     @Autowired
-    private  ApplicationContext appContext;
-
-    @Autowired
     FirebaseMessage firebaseMessage;
+
     @Autowired
     RabbitMQRequester rabbitMQRequester;
 

@@ -38,6 +38,7 @@ public class FirebaseMessage {
     @Autowired
     private MongoCollection<Document> pendingNotifications;
 
+
     private String title;
     private String body;
     Document userDoc;

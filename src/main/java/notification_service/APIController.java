@@ -28,6 +28,8 @@ public class APIController {
     @Autowired
     private  MongoCollection<Document> pendingNotifications;
 
+
+
     @RequestMapping("/")
     public String index() {
         return "OCARIoT Notification Microservice";
