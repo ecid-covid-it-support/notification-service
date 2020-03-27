@@ -20,13 +20,13 @@ import java.util.logging.Logger;
 public class EngagementTask {
 
     @Autowired
-    MongoCollection<Document> collection;
+    private MongoCollection<Document> collection;
 
     @Autowired
-    FirebaseMessage firebaseMessage;
+    private FirebaseMessage firebaseMessage;
 
     @Autowired
-    RabbitMQRequester rabbitMQRequester;
+    private RabbitMQRequester rabbitMQRequester;
 
     private static final Logger LOGGER = Logger.getLogger( RabbitMQ.class.getName() );
 

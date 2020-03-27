@@ -28,7 +28,7 @@ public class MongoDBConfiguration{
 
 
     @Bean
-    public MongoCollection<Document> collection() {
+    public MongoDatabase database() {
 
         System.setProperty ("javax.net.ssl.keyStore",keystorePath);
         System.setProperty ("javax.net.ssl.keyStorePassword",keystorePass);
@@ -36,26 +36,38 @@ public class MongoDBConfiguration{
         System.setProperty ("javax.net.ssl.trustStorePassword","changeit");
         MongoClient mongoClient = MongoClients.create(mongoURI+"&sslInvalidHostNameAllowed=true");
         MongoDatabase database = mongoClient.getDatabase(mongoDatabase);
-        return database.getCollection(mongoCollection);
+        return database;
     }
 
-    /*@Bean
-    public MongoCollection<Document> messagesCollection() {
 
-        MongoClient mongoClient = MongoClients.create(mongoURI);
-        MongoDatabase database = mongoClient.getDatabase(mongoDatabase);
+    @Bean
+    public MongoCollection<Document> collection(MongoDatabase database) {
+
+        //MongoClient mongoClient = MongoClients.create(mongoURI);
+        //MongoDatabase database = mongoClient.getDatabase(mongoDatabase);
+
+        return database.getCollection("users");
+
+    }
+
+
+    @Bean
+    public MongoCollection<Document> messagesCollection(MongoDatabase database) {
+
+        //MongoClient mongoClient = MongoClients.create(mongoURI);
+        //MongoDatabase database = mongoClient.getDatabase(mongoDatabase);
 
         return database.getCollection("messages");
 
     }
 
     @Bean
-    public MongoCollection<Document> pendingNotifications() {
+    public MongoCollection<Document> pendingNotifications(MongoDatabase database) {
 
-        MongoClient mongoClient = MongoClients.create(mongoURI);
-        MongoDatabase database = mongoClient.getDatabase(mongoDatabase);
+        //MongoClient mongoClient = MongoClients.create(mongoURI);
+        //MongoDatabase database = mongoClient.getDatabase(mongoDatabase);
 
         return database.getCollection("pendingNotifications");
 
-    }*/
+    }
 }

@@ -33,11 +33,11 @@ public class FirebaseMessage {
     @Autowired
     private MongoCollection<Document> collection;
 
-    //@Autowired
-    private MongoCollection<Document> messagesCollection = collection;
+    @Autowired
+    private MongoCollection<Document> messagesCollection;
 
-    //@Autowired
-    private MongoCollection<Document> pendingNotifications= collection;
+    @Autowired
+    private MongoCollection<Document> pendingNotifications;
 
 
     private String title;
