@@ -29,39 +29,40 @@ public class MongoDBConfiguration{
 
 
     @Bean
-    public MongoClient mongoClient(){
+    public MongoDatabase database(){
 
         System.setProperty ("javax.net.ssl.keyStore",keystorePath);
         System.setProperty ("javax.net.ssl.keyStorePassword",keystorePass);
         System.setProperty ("javax.net.ssl.trustStore",truststorePath);
         System.setProperty ("javax.net.ssl.trustStorePassword","changeit");
         MongoClient mongoClient = MongoClients.create(mongoURI+"&sslInvalidHostNameAllowed=true");
-        return  mongoClient;
+        MongoDatabase database = mongoClient.getDatabase(mongoDatabase);
+        return  database;
     }
 
     @Bean
-    public MongoCollection<Document> collection(MongoClient mongoClient) {
+    public MongoCollection<Document> collection(MongoDatabase database) {
 
         //MongoClient mongoClient = MongoClients.create(mongoURI+"&sslInvalidHostNameAllowed=true");
-        MongoDatabase database = mongoClient.getDatabase(mongoDatabase);
-        return database.getCollection(mongoCollection);
+        //MongoDatabase database = mongoClient.getDatabase(mongoDatabase);
+        return database.getCollection("users");
     }
 
     @Bean
-    public MongoCollection<Document> messagesCollection(MongoClient mongoClient) {
+    public MongoCollection<Document> messagesCollection(MongoDatabase database) {
 
         //MongoClient mongoClient = MongoClients.create(mongoURI+"&sslInvalidHostNameAllowed=true");
-        MongoDatabase database = mongoClient.getDatabase(mongoDatabase);
+        //MongoDatabase database = mongoClient.getDatabase(mongoDatabase);
 
         return database.getCollection("messages");
 
     }
 
     @Bean
-    public MongoCollection<Document> pendingNotifications(MongoClient mongoClient) {
+    public MongoCollection<Document> pendingNotifications(MongoDatabase database) {
 
         //MongoClient mongoClient = MongoClients.create(mongoURI+"&sslInvalidHostNameAllowed=true");
-        MongoDatabase database = mongoClient.getDatabase(mongoDatabase);
+        //MongoDatabase database = mongoClient.getDatabase(mongoDatabase);
 
         return database.getCollection("pendingNotifications");
 
