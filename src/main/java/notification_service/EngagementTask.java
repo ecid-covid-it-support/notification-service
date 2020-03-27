@@ -8,7 +8,6 @@ import org.bson.Document;
 import org.json.JSONArray;
 import org.json.JSONException;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.context.ApplicationContext;
 import org.springframework.scheduling.annotation.Scheduled;
 import org.springframework.stereotype.Service;
 import java.util.Date;
@@ -17,7 +16,7 @@ import java.util.logging.Logger;
 
 
 @Service
-public class EngagementTask {
+public class EngagementTask{
 
     @Autowired
     private MongoCollection<Document> collection;
@@ -30,7 +29,7 @@ public class EngagementTask {
 
     private static final Logger LOGGER = Logger.getLogger( RabbitMQ.class.getName() );
 
-    @Scheduled(fixedRate = 3600000) //1 hour 3600000
+    @Scheduled(fixedDelay = 3600000,fixedRate = 3600000) //1 hour 3600000
     public void sendEngagementNotification() {
 
         Date timeNow = new Date();
