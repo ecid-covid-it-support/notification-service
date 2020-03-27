@@ -25,8 +25,10 @@ public class APIController {
     @Autowired
     private  MongoCollection<Document> collection;
 
-    @Autowired
-    private  MongoCollection<Document> pendingNotifications;
+    /*@Autowired
+    private  MongoCollection<Document> pendingNotifications;*/
+    MongoCollection<Document> pendingNotifications = collection;
+
 
 
 

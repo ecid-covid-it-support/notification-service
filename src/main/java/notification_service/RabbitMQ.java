@@ -27,11 +27,11 @@ public class RabbitMQ{
     @Autowired
     private MongoCollection<Document> collection;
 
-    @Autowired
-    private MongoCollection<Document> messagesCollection;
+    //@Autowired
+    private MongoCollection<Document> messagesCollection = collection;
 
-    @Autowired
-    private MongoCollection<Document> pendingNotifications;
+    //@Autowired
+    private MongoCollection<Document> pendingNotifications = collection;
 
     @Autowired
     FirebaseMessage firebaseMessage;
