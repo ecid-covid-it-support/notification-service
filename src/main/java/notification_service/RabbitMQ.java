@@ -19,7 +19,7 @@ import java.util.logging.Logger;
 import static com.mongodb.client.model.Filters.eq;
 
 
-@Component
+@Service
 public class RabbitMQ{
 
     private static final Logger LOGGER = Logger.getLogger( RabbitMQ.class.getName() );

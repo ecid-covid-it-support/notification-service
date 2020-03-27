@@ -35,17 +35,13 @@ public class MongoDBConfiguration{
         System.setProperty ("javax.net.ssl.keyStorePassword",keystorePass);
         System.setProperty ("javax.net.ssl.trustStore",truststorePath);
         System.setProperty ("javax.net.ssl.trustStorePassword","changeit");
-        MongoClient mongoClient = MongoClients.create(mongoURI+"&sslInvalidHostNameAllowed=true");
+        MongoClient mongoClient = MongoClients.create(mongoURI);
         return  mongoClient;
     }
 
     @Bean
     public MongoCollection<Document> collection(MongoClient mongoClient) {
 
-        System.setProperty ("javax.net.ssl.keyStore",keystorePath);
-        System.setProperty ("javax.net.ssl.keyStorePassword",keystorePass);
-        System.setProperty ("javax.net.ssl.trustStore",truststorePath);
-        System.setProperty ("javax.net.ssl.trustStorePassword","changeit");
         //MongoClient mongoClient = MongoClients.create(mongoURI+"&sslInvalidHostNameAllowed=true");
         MongoDatabase database = mongoClient.getDatabase(mongoDatabase);
         return database.getCollection(mongoCollection);
