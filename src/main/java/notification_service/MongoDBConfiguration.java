@@ -5,9 +5,18 @@ import com.mongodb.client.MongoClients;
 import com.mongodb.client.MongoCollection;
 import com.mongodb.client.MongoDatabase;
 import org.bson.Document;
+import org.json.simple.parser.JSONParser;
+import org.json.simple.parser.ParseException;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
+
+import java.io.FileNotFoundException;
+import java.io.FileReader;
+import java.io.IOException;
+import java.util.ArrayList;
+import java.util.List;
+
 
 
 @Configuration
@@ -43,8 +52,6 @@ public class MongoDBConfiguration{
     @Bean
     public MongoCollection<Document> collection(MongoDatabase database) {
 
-        //MongoClient mongoClient = MongoClients.create(mongoURI);
-        //MongoDatabase database = mongoClient.getDatabase(mongoDatabase);
 
         return database.getCollection("users");
 
@@ -54,8 +61,26 @@ public class MongoDBConfiguration{
     @Bean
     public MongoCollection<Document> messagesCollection(MongoDatabase database) {
 
-        //MongoClient mongoClient = MongoClients.create(mongoURI);
-        //MongoDatabase database = mongoClient.getDatabase(mongoDatabase);
+        List<Document> documents = new ArrayList<Document>();
+        try{
+
+
+            JSONParser jsonParser = new JSONParser();
+            FileReader reader = new FileReader("/Users/jpdoliveira/ocariot/docker-compose-master/messages.json");
+            documents= (List<Document>) jsonParser.parse(reader);
+
+
+        } catch (FileNotFoundException e) {
+            e.printStackTrace();
+        } catch (ParseException e) {
+            e.printStackTrace();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+
+
+        database.getCollection("messages").deleteMany(new Document());
+        database.getCollection("messages").insertMany(documents);
 
         return database.getCollection("messages");
 
@@ -64,8 +89,6 @@ public class MongoDBConfiguration{
     @Bean
     public MongoCollection<Document> pendingNotifications(MongoDatabase database) {
 
-        //MongoClient mongoClient = MongoClients.create(mongoURI);
-        //MongoDatabase database = mongoClient.getDatabase(mongoDatabase);
 
         return database.getCollection("pendingNotifications");
 
