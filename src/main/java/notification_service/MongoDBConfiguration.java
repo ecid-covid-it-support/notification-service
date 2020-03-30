@@ -56,7 +56,7 @@ public class MongoDBConfiguration{
 
     @Bean
     public MongoCollection<Document> messagesCollection(MongoDatabase database) {
-        
+
 
         return database.getCollection("messages");
 
