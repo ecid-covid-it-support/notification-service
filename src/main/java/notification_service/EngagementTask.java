@@ -33,20 +33,23 @@ public class EngagementTask{
     public void sendEngagementNotification() {
 
         Date timeNow = new Date();
-        System.out.println("test 1");
+
         FindIterable<Document> iterable;
-        System.out.println("test 2");
+
         MongoCursor<Document> cursor = null;
-        System.out.println("test 3");
+
 
         try {
 
-            System.out.println("test 4");
+
 
             iterable = collection.find();
+            System.out.println("test 1");
             cursor = iterable.iterator();
+            System.out.println("test 2");
 
             while (cursor.hasNext()) {
+                System.out.println("test 3");
 
                 Document document = cursor.next();
 
@@ -145,7 +148,9 @@ public class EngagementTask{
 
 
             }
+            System.out.println("test 5");
         } catch (Exception e) {
+            System.out.println("test 6");
             cursor.close();
         }
     }
