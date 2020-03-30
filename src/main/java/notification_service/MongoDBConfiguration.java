@@ -36,7 +36,7 @@ public class MongoDBConfiguration{
     public String keystorePass;
     @Value("${server.ssl.key-truststore}")
     public String truststorePath;
-    @Value("${MESSAGES_PATH}")
+    @Value("${preset.messages}")
     public String messagesPath;
 
     @Bean
