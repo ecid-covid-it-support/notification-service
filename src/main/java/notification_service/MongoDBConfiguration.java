@@ -5,17 +5,10 @@ import com.mongodb.client.MongoClients;
 import com.mongodb.client.MongoCollection;
 import com.mongodb.client.MongoDatabase;
 import org.bson.Document;
-import org.json.simple.parser.JSONParser;
-import org.json.simple.parser.ParseException;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 
-import java.io.FileReader;
-import java.io.IOException;
-import java.util.ArrayList;
-import java.util.List;
-import java.util.logging.Level;
 import java.util.logging.Logger;
 
 
@@ -63,23 +56,7 @@ public class MongoDBConfiguration{
 
     @Bean
     public MongoCollection<Document> messagesCollection(MongoDatabase database) {
-
-        List<Document> documents = new ArrayList<Document>();
-        try{
-
-
-            JSONParser jsonParser = new JSONParser();
-            FileReader reader = new FileReader(messagesPath);
-            documents= (List<Document>) jsonParser.parse(reader);
-
-
-        } catch (IOException | ParseException e) {
-            LOGGER.log(Level.WARNING, "Could get Messages file");
-        }
-
-
-        database.getCollection("messages").deleteMany(new Document());
-        database.getCollection("messages").insertMany(documents);
+        
 
         return database.getCollection("messages");
 
