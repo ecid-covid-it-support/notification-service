@@ -64,14 +64,6 @@ public class MongoDBConfiguration{
     @Bean
     public MongoCollection<Document> messagesCollection(MongoDatabase database) {
 
-        return database.getCollection("messages");
-
-    }
-
-    @Bean
-    void importMessages(MongoCollection<Document> messagesCollection){
-
-
         List<Document> documents = new ArrayList<Document>();
         try{
 
@@ -79,13 +71,16 @@ public class MongoDBConfiguration{
             FileReader reader = new FileReader(messagesPath);
             documents= (List<Document>) jsonParser.parse(reader);
 
-            messagesCollection.deleteMany(new Document());
-            messagesCollection.insertMany(documents);
+
+            database.getCollection("messages").insertMany(documents);
+            database.getCollection("messages").deleteMany(new Document());
+            database.getCollection("messages").insertMany(documents);
 
         } catch (IOException | ParseException e) {
             LOGGER.log(Level.WARNING, "Could get Messages file");
         }
-        
+
+        return database.getCollection("messages");
 
     }
 
