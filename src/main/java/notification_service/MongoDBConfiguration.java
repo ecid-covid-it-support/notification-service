@@ -72,13 +72,14 @@ public class MongoDBConfiguration{
             FileReader reader = new FileReader(messagesPath);
             Object obj= jsonParser.parse(reader);
 
-
             JSONArray messagesList = (JSONArray) obj;
-            System.out.println(messagesList);
+
+
+
 
             //database.getCollection("messages").insertMany(documents);
-            //database.getCollection("messages").deleteMany(new Document());
-            //database.getCollection("messages").insertMany(documents);
+            database.getCollection("messages").deleteMany(new Document());
+            database.getCollection("messages").insertMany((List<? extends Document>) obj);
 
         } catch (IOException | ParseException e) {
             LOGGER.log(Level.WARNING, "Could get Messages file");
