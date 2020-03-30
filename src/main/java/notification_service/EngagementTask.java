@@ -44,12 +44,9 @@ public class EngagementTask{
 
 
             iterable = collection.find();
-            System.out.println("test 1");
-            cursor = iterable.iterator();
-            System.out.println("test 2");
-
+            cursor = iterable.cursor();
             while (cursor.hasNext()) {
-                System.out.println("test 3");
+
 
                 Document document = cursor.next();
 
