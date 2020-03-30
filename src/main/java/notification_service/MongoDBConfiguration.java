@@ -5,6 +5,7 @@ import com.mongodb.client.MongoClients;
 import com.mongodb.client.MongoCollection;
 import com.mongodb.client.MongoDatabase;
 import org.bson.Document;
+import org.json.simple.JSONArray;
 import org.json.simple.parser.JSONParser;
 import org.json.simple.parser.ParseException;
 import org.springframework.beans.factory.annotation.Value;
@@ -69,12 +70,15 @@ public class MongoDBConfiguration{
 
             JSONParser jsonParser = new JSONParser();
             FileReader reader = new FileReader(messagesPath);
-            documents= (List<Document>) jsonParser.parse(reader);
+            Object obj= jsonParser.parse(reader);
 
 
-            database.getCollection("messages").insertMany(documents);
-            database.getCollection("messages").deleteMany(new Document());
-            database.getCollection("messages").insertMany(documents);
+            JSONArray messagesList = (JSONArray) obj;
+            System.out.println(messagesList);
+
+            //database.getCollection("messages").insertMany(documents);
+            //database.getCollection("messages").deleteMany(new Document());
+            //database.getCollection("messages").insertMany(documents);
 
         } catch (IOException | ParseException e) {
             LOGGER.log(Level.WARNING, "Could get Messages file");
