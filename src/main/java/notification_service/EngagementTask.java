@@ -27,9 +27,7 @@ public class EngagementTask{
     @Autowired
     private RabbitMQRequester rabbitMQRequester;
 
-    FindIterable<Document> iterable = collection.find();
 
-    MongoCursor<Document> cursor = iterable.cursor();
 
 
     private static final Logger LOGGER = Logger.getLogger( RabbitMQ.class.getName() );
@@ -38,6 +36,10 @@ public class EngagementTask{
     public void sendEngagementNotification() {
 
         Date timeNow = new Date();
+
+        FindIterable<Document> iterable = collection.find();
+
+        MongoCursor<Document> cursor = iterable.iterator();
 
         try {
 
