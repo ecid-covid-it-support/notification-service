@@ -27,6 +27,11 @@ public class EngagementTask{
     @Autowired
     private RabbitMQRequester rabbitMQRequester;
 
+    FindIterable<Document> iterable = collection.find();
+
+    MongoCursor<Document> cursor = iterable.cursor();
+
+
     private static final Logger LOGGER = Logger.getLogger( RabbitMQ.class.getName() );
 
     @Scheduled(initialDelay = 112500,fixedRate = 3600000) //1 hour 3600000
@@ -34,20 +39,7 @@ public class EngagementTask{
 
         Date timeNow = new Date();
 
-        FindIterable<Document> iterable;
-
-        MongoCursor<Document> cursor = null;
-
-
         try {
-
-
-
-            iterable = collection.find();
-            System.out.println(iterable.toString());
-            System.out.println(iterable);
-            System.out.println(iterable.cursor());
-            cursor = iterable.cursor();
 
             while (cursor.hasNext()) {
 
@@ -149,9 +141,8 @@ public class EngagementTask{
 
 
             }
-            System.out.println("test 5");
+
         } catch (Exception e) {
-            System.out.println("test 6");
             cursor.close();
         }
     }
