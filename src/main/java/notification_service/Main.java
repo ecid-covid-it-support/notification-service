@@ -7,15 +7,14 @@ import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.EnableAutoConfiguration;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.boot.autoconfigure.mongo.MongoAutoConfiguration;
-import org.springframework.context.ApplicationContext;
 import org.springframework.scheduling.annotation.EnableScheduling;
 
-import java.io.*;
+import java.io.IOException;
 
 
 @SpringBootApplication
 @EnableScheduling
-@EnableAutoConfiguration(exclude={MongoAutoConfiguration.class})
+@EnableAutoConfiguration(exclude=MongoAutoConfiguration.class)
 public class Main {
 
     public static void main(String[] args) throws IOException {
