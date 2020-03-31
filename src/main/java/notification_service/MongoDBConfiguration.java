@@ -39,7 +39,7 @@ public class MongoDBConfiguration{
         System.setProperty ("javax.net.ssl.keyStorePassword",keystorePass);
         System.setProperty ("javax.net.ssl.trustStore",truststorePath);
         System.setProperty ("javax.net.ssl.trustStorePassword","changeit");
-        MongoClient mongoClient = MongoClients.create(mongoURI+"&sslInvalidHostNameAllowed=true&authSource="+mongoDatabase+"&authMechanism=SCRAM-SHA-256\"");
+        MongoClient mongoClient = MongoClients.create(mongoURI+"&sslInvalidHostNameAllowed=true&authSource="+mongoDatabase);
         MongoDatabase database = mongoClient.getDatabase(mongoDatabase);
         return database;
     }
