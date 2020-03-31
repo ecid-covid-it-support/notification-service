@@ -46,26 +46,29 @@ public class MongoDBConfiguration{
 
 
     @Bean
-    public MongoCollection<Document> collection(MongoDatabase database) {
+    public MongoCollection<Document> collection() {
 
-
+        MongoClient mongoClient = MongoClients.create(mongoURI+"&sslInvalidHostNameAllowed=true");
+        MongoDatabase database = mongoClient.getDatabase(mongoDatabase);
         return database.getCollection("users");
 
     }
 
 
     @Bean
-    public MongoCollection<Document> messagesCollection(MongoDatabase database) {
+    public MongoCollection<Document> messagesCollection() {
 
-
+        MongoClient mongoClient = MongoClients.create(mongoURI+"&sslInvalidHostNameAllowed=true");
+        MongoDatabase database = mongoClient.getDatabase(mongoDatabase);
         return database.getCollection("messages");
 
     }
 
     @Bean
-    public MongoCollection<Document> pendingNotifications(MongoDatabase database) {
+    public MongoCollection<Document> pendingNotifications() {
 
-
+        MongoClient mongoClient = MongoClients.create(mongoURI+"&sslInvalidHostNameAllowed=true");
+        MongoDatabase database = mongoClient.getDatabase(mongoDatabase);
         return database.getCollection("pendingNotifications");
 
     }
