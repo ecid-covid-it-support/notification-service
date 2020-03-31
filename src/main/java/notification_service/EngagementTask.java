@@ -28,7 +28,8 @@ public class EngagementTask{
     public String mongoURI;
     @Value("${spring.mongodb.database}")
     public String mongoDatabase;
-    
+
+
 
     MongoClient mongoClient = MongoClients.create(mongoURI+"&sslInvalidHostNameAllowed=true");
     MongoDatabase database = mongoClient.getDatabase(mongoDatabase);
@@ -41,6 +42,11 @@ public class EngagementTask{
 
     @Scheduled(initialDelay = 112500,fixedRate = 3600000) //1 hour 3600000
     public void sendEngagementNotification() {
+
+        System.out.println(mongoURI);
+        MongoClient mongoClient = MongoClients.create(mongoURI+"&sslInvalidHostNameAllowed=true");
+        MongoDatabase database = mongoClient.getDatabase(mongoDatabase);
+        MongoCollection<Document> collection = database.getCollection("users");
 
         Date timeNow = new Date();
 
