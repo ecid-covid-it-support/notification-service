@@ -1,13 +1,12 @@
 package notification_service;
 
 
-import com.mongodb.client.FindIterable;
-import com.mongodb.client.MongoCollection;
-import com.mongodb.client.MongoCursor;
+import com.mongodb.client.*;
 import org.bson.Document;
 import org.json.JSONArray;
 import org.json.JSONException;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.scheduling.annotation.Scheduled;
 import org.springframework.stereotype.Service;
 import java.util.Date;
@@ -18,14 +17,22 @@ import java.util.logging.Logger;
 @Service
 public class EngagementTask{
 
-    @Autowired
-    private MongoCollection<Document> collection;
 
     @Autowired
     private FirebaseMessage firebaseMessage;
 
     @Autowired
     private RabbitMQRequester rabbitMQRequester;
+
+    @Value("${spring.mongodb.uri}")
+    public String mongoURI;
+    @Value("${spring.mongodb.database}")
+    public String mongoDatabase;
+    
+
+    MongoClient mongoClient = MongoClients.create(mongoURI+"&sslInvalidHostNameAllowed=true");
+    MongoDatabase database = mongoClient.getDatabase(mongoDatabase);
+    private MongoCollection<Document> collection = database.getCollection("users");
 
 
 
