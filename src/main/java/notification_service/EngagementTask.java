@@ -31,11 +31,6 @@ public class EngagementTask{
 
 
 
-    MongoClient mongoClient = MongoClients.create(mongoURI+"&sslInvalidHostNameAllowed=true");
-    MongoDatabase database = mongoClient.getDatabase(mongoDatabase);
-    private MongoCollection<Document> collection = database.getCollection("users");
-
-
 
 
     private static final Logger LOGGER = Logger.getLogger( RabbitMQ.class.getName() );
