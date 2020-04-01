@@ -5,13 +5,19 @@ import com.mongodb.client.MongoClients;
 import com.mongodb.client.MongoCollection;
 import com.mongodb.client.MongoDatabase;
 import org.bson.Document;
+import org.json.JSONArray;
 import org.json.JSONObject;
+import org.json.simple.parser.JSONParser;
+import org.json.simple.parser.ParseException;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 
+import java.io.FileReader;
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.logging.Level;
 import java.util.logging.Logger;
 
 
@@ -64,7 +70,7 @@ public class MongoDBConfiguration{
         int i;
 
 
-        /*MongoCollection<Document> messages = database.getCollection("messages");
+        MongoCollection<Document> messages = database.getCollection("messages");
 
         try{
             messages.deleteMany(new Document());
@@ -81,7 +87,7 @@ public class MongoDBConfiguration{
 
         } catch (IOException | ParseException e) {
             LOGGER.log(Level.WARNING, "Could get Messages file");
-        }*/
+        }
 
         return database.getCollection("messages");
 
