@@ -49,8 +49,7 @@ public class MongoDBConfiguration{
         System.setProperty ("javax.net.ssl.trustStore",truststorePath);
         System.setProperty ("javax.net.ssl.trustStorePassword","changeit");
         MongoClient mongoClient = MongoClients.create(mongoURI+"&sslInvalidHostNameAllowed=true");
-        MongoDatabase database = mongoClient.getDatabase(mongoDatabase);
-        return database;
+        return mongoClient.getDatabase(mongoDatabase);
     }
 
 
@@ -67,13 +66,14 @@ public class MongoDBConfiguration{
     public MongoCollection<Document> messagesCollection(MongoDatabase database) {
 
 
-        List<JSONObject> documents = new ArrayList<JSONObject>();
+        List<JSONObject> documents = new ArrayList<>();
         int i;
 
 
         MongoCollection<Document> messages = database.getCollection("messages");
-        messages.deleteMany(new Document());
+
         try{
+            messages.deleteMany(new Document());
             JSONParser jsonParser = new JSONParser();
             FileReader reader = new FileReader(messagesPath);
             Object obj = jsonParser.parse(reader);

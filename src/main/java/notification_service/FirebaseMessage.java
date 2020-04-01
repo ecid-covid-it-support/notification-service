@@ -11,21 +11,17 @@ import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.context.ApplicationContext;
 import org.springframework.stereotype.Component;
-import org.springframework.stereotype.Service;
-
 
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
-
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
 import static com.mongodb.client.model.Filters.eq;
 
-@Service
+@Component
 public class FirebaseMessage {
 
     private static final Logger LOGGER = Logger.getLogger( RabbitMQ.class.getName());
