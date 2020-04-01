@@ -7,18 +7,10 @@ import com.mongodb.client.MongoCursor;
 import org.bson.Document;
 import org.json.JSONArray;
 import org.json.JSONException;
-import org.json.JSONObject;
-import org.json.simple.parser.JSONParser;
-import org.json.simple.parser.ParseException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.scheduling.annotation.Scheduled;
 import org.springframework.stereotype.Service;
-
-import java.io.FileReader;
-import java.io.IOException;
-import java.util.ArrayList;
 import java.util.Date;
-import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
@@ -28,9 +20,6 @@ public class EngagementTask{
 
     @Autowired
     private MongoCollection<Document> collection;
-
-    @Autowired
-    private MongoCollection<Document> messagesCollection;
 
     @Autowired
     private FirebaseMessage firebaseMessage;
@@ -45,30 +34,6 @@ public class EngagementTask{
 
     @Scheduled(initialDelay = 112500,fixedRate = 3600000) //1 hour 3600000
     public void sendEngagementNotification() {
-
-
-
-
-
-
-        try{
-            List<JSONObject> documents = new ArrayList<>();
-            int i;
-            messagesCollection.deleteMany(new Document());
-            JSONParser jsonParser = new JSONParser();
-            FileReader reader = new FileReader("/etc/keys/messages.json");
-            Object obj = jsonParser.parse(reader);
-            String stringJson = obj.toString();
-            JSONArray jsonArray = new JSONArray(stringJson);
-            for(i=0;i<jsonArray.length();i++){
-
-                Document doc = Document.parse(jsonArray.get(i).toString());
-                messagesCollection.insertOne(doc);
-            }
-
-        } catch (IOException | ParseException e) {
-            LOGGER.log(Level.WARNING, "Could get Messages file");
-        }
 
         Date timeNow = new Date();
 
