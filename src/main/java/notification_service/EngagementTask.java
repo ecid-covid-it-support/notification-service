@@ -76,7 +76,8 @@ public class EngagementTask{
                         case "children":
 
                             String familyID;
-                            String user;
+                            String username;
+                            String educatorID;
 
 
                             firebaseMessage.sendToToken(userID,"notification:child", null, daysSinceLastLogin);
@@ -88,20 +89,21 @@ public class EngagementTask{
                             JSONArray jsonarray = new JSONArray(info);
 
 
-                            user = (String) jsonarray.getJSONObject(0).get("username");
+                            username = (String) jsonarray.getJSONObject(0).get("username");
 
 
 
-                            String family = rabbitMQRequester.send("?children="+userID,"families.find");
-                            jsonarray = new JSONArray(family);
+
                             try {
+                                String family = rabbitMQRequester.send("?children="+userID,"families.find");
+                                jsonarray = new JSONArray(family);
 
                                 for (i=0;i<jsonarray.length();i++) {
 
                                     familyID = (String) jsonarray.getJSONObject(i).get("id");
 
                                     if (familyID != null && !familyID.isEmpty()) {
-                                        firebaseMessage.sendToToken(familyID, "notification:child_family", user, daysSinceLastLogin);
+                                        firebaseMessage.sendToToken(familyID, "notification:child_family", username, daysSinceLastLogin);
                                     }
                                 }
 
@@ -109,20 +111,24 @@ public class EngagementTask{
 
                                 LOGGER.log(Level.WARNING, "Could not retrieve id of family when sending engagement notification");
                             }
-                            //get teachers of children
 
-                            /*String teacher  = rabbitMQRequester.send("?children="+userID,"educators.find");
-                            jsonarray = new JSONArray(family);
+
                             try {
-                                teacherID = (String) jsonarray.getJSONObject(0).get("id");
-                                if (teacherID!=null && !teacherID.isEmpty()) {
-                                    firebaseMessage.sendToToken(teacherID, "notification:child_teacher", user);
+                                String educators = rabbitMQRequester.send(userID,"child.educators.find");
+                                jsonarray = new JSONArray(educators);
+                                for (i = 0; i < jsonarray.length(); i++) {
+
+                                    educatorID = (String) jsonarray.getJSONObject(i).get("id");
+                                    if (educatorID!=null && !educatorID.isEmpty() && username!=null) {
+                                        firebaseMessage.sendToToken(educatorID, "notification:child_teacher", username, daysSinceLastLogin);
+
+                                    }
 
                                 }
 
                             } catch (JSONException e) {
-
-                            }*/
+                                LOGGER.log(Level.WARNING, "Could not retrieve id of educator when sending engagement notification");
+                            }
 
                             break;
 

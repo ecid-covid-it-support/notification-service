@@ -95,6 +95,7 @@ public class RabbitMQ{
 
                                         String username = null;
                                         String familyID;
+                                        String educatorID;
                                         ArrayList<String> arrayEducators = new ArrayList<>();
                                         ArrayList<String> arrayFamilies = new ArrayList<>();
                                         int i;
@@ -113,23 +114,18 @@ public class RabbitMQ{
                                             LOGGER.log(Level.WARNING, "Could not fetch children username from account microservice");
                                         }
 
+                                        ///notification for families
                                         String family = rabbitMQRequester.send("?children="+uID,"families.find");
                                         jsonarray = new JSONArray(family);
                                         try {
                                             for (i = 0; i < jsonarray.length(); i++) {
 
                                                 familyID = (String) jsonarray.getJSONObject(i).get("id");
-                                                arrayFamilies.add(familyID);
-
-                                            }
-
-                                            for (i = 0; i < arrayFamilies.size(); i++) {
-
-                                                familyID = arrayFamilies.get(i);
                                                 if (familyID!=null && !familyID.isEmpty() && username!=null) {
                                                     firebaseMessage.sendToToken(familyID, messageType, username, days_since);
 
                                                 }
+
                                             }
 
                                         } catch (JSONException e) {
@@ -137,7 +133,23 @@ public class RabbitMQ{
                                         }
 
 
-                                        ///missing notification for teacher
+                                        ///notification for teacher
+                                        String educators = rabbitMQRequester.send(uID,"child.educators.find");
+                                        jsonarray = new JSONArray(educators);
+                                        try {
+                                            for (i = 0; i < jsonarray.length(); i++) {
+
+                                                educatorID = (String) jsonarray.getJSONObject(i).get("id");
+                                                if (educatorID!=null && !educatorID.isEmpty() && username!=null) {
+                                                    firebaseMessage.sendToToken(educatorID, messageType, username, days_since);
+
+                                                }
+
+                                            }
+
+                                        } catch (JSONException e) {
+                                            LOGGER.log(Level.WARNING, "Error processing educator information for monitoring:miss_child_data notification");
+                                        }
 
 
                                     } catch (JSONException e) {

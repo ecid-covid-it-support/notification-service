@@ -3,7 +3,6 @@ package notification_service;
 
 import com.mongodb.client.FindIterable;
 import com.mongodb.client.MongoCollection;
-import static com.mongodb.client.model.Filters.eq;
 import com.mongodb.client.model.UpdateOptions;
 import org.bson.BsonDocument;
 import org.bson.BsonString;
@@ -12,10 +11,13 @@ import org.json.JSONObject;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
+
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.Date;
 import java.util.Map;
+
+import static com.mongodb.client.model.Filters.eq;
 
 
 
@@ -69,9 +71,6 @@ public class APIController {
 
             collection.updateOne(eq("id", id), new Document("$addToSet", new Document("tokens", token)), new UpdateOptions().upsert(true));
 
-        }else{
-
-            //collection.updateOne(eq("id", id), new Document("$addToSet", new Document("tokens", )), new UpdateOptions().upsert(true));
         }
 
         collection.updateOne(eq("id", id), new Document("$set", new Document("lang", lang)),new UpdateOptions().upsert(true));
