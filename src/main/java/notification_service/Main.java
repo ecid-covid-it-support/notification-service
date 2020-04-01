@@ -17,6 +17,8 @@ import java.io.IOException;
 @EnableAutoConfiguration(exclude=MongoAutoConfiguration.class)
 public class Main {
 
+
+
     public static void main(String[] args) throws IOException {
 
 
