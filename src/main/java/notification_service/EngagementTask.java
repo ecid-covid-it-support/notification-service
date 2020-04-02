@@ -1,7 +1,6 @@
 package notification_service;
 
 
-import com.mongodb.client.FindIterable;
 import com.mongodb.client.MongoCollection;
 import com.mongodb.client.MongoCursor;
 import org.bson.Document;
@@ -10,6 +9,7 @@ import org.json.JSONException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.scheduling.annotation.Scheduled;
 import org.springframework.stereotype.Service;
+
 import java.util.Date;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -37,16 +37,13 @@ public class EngagementTask{
 
         Date timeNow = new Date();
 
-        FindIterable<Document> iterable = collection.find();
-
-        MongoCursor<Document> cursor = iterable.iterator();
-
-        try {
+        try (MongoCursor<Document> cursor = collection.find().iterator()) {
 
             while (cursor.hasNext()) {
 
 
                 Document document = cursor.next();
+                System.out.println(document);
 
                 String userID = document.getString("id");
                 Date lastLogin = (Date) document.get("lastLogin");
@@ -150,8 +147,6 @@ public class EngagementTask{
 
             }
 
-        } catch (Exception e) {
-            cursor.close();
         }
     }
 }
