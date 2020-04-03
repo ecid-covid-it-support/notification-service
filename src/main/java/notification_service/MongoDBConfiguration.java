@@ -1,23 +1,16 @@
 package notification_service;
 
-import com.mongodb.client.MongoClient;
-import com.mongodb.client.MongoClients;
+
+import com.mongodb.MongoClientOptions;
 import com.mongodb.client.MongoCollection;
-import com.mongodb.client.MongoDatabase;
 import org.bson.Document;
-import org.json.JSONArray;
-import org.json.JSONObject;
-import org.json.simple.parser.JSONParser;
-import org.json.simple.parser.ParseException;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.data.mongodb.MongoDbFactory;
+import org.springframework.data.mongodb.core.MongoTemplate;
+import org.springframework.data.mongodb.core.SimpleMongoClientDbFactory;
 
-import java.io.FileReader;
-import java.io.IOException;
-import java.util.ArrayList;
-import java.util.List;
-import java.util.logging.Level;
 import java.util.logging.Logger;
 
 
@@ -41,7 +34,55 @@ public class MongoDBConfiguration{
     @Value("${preset.messages}")
     public String messagesPath;
 
+
+
+
     @Bean
+    public MongoClientOptions mongoClientOptions(){
+        System.setProperty ("javax.net.ssl.keyStore",keystorePath);
+        System.setProperty ("javax.net.ssl.keyStorePassword",keystorePass);
+        System.setProperty ("javax.net.ssl.trustStore",truststorePath);
+        System.setProperty ("javax.net.ssl.trustStorePassword","changeit");
+        MongoClientOptions.Builder builder = MongoClientOptions.builder();
+        MongoClientOptions options=builder.sslEnabled(true).build();
+        return options;
+    }
+
+    /*@Bean
+    public MongoClient mongoClient() throws Exception {
+        return new MongoClient(new MongoClientURI(mongoURI+"&sslInvalidHostNameAllowed=true"));
+    }*/
+
+
+    @Bean
+    public MongoDbFactory mongoDbFactory() {
+
+        return new SimpleMongoClientDbFactory(mongoURI+"&sslInvalidHostNameAllowed=true");
+    }
+
+    @Bean
+    public MongoCollection<Document> collection() {
+        MongoTemplate mongoTemplate = new MongoTemplate(mongoDbFactory());
+
+        return mongoTemplate.getCollection("users");
+
+    }
+    @Bean
+    public MongoCollection<Document> messagesCollection() {
+        MongoTemplate mongoTemplate = new MongoTemplate(mongoDbFactory());
+
+        return mongoTemplate.getCollection("messages");
+
+    }
+
+    @Bean
+    public MongoCollection<Document> pendingNotifications() {
+        MongoTemplate mongoTemplate = new MongoTemplate(mongoDbFactory());
+
+        return mongoTemplate.getCollection("pendingNotifications");
+
+    }
+    /*@Bean
     public MongoDatabase database() {
 
         System.setProperty ("javax.net.ssl.keyStore",keystorePath);
@@ -96,5 +137,5 @@ public class MongoDBConfiguration{
 
         return database.getCollection("pendingNotifications");
 
-    }
+    }*/
 }
