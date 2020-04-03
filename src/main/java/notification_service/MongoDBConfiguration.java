@@ -4,7 +4,6 @@ package notification_service;
 import com.mongodb.client.MongoClient;
 import com.mongodb.client.MongoClients;
 import com.mongodb.client.MongoCollection;
-import com.mongodb.client.MongoDatabase;
 import org.bson.Document;
 import org.json.JSONArray;
 import org.json.JSONObject;
@@ -13,6 +12,7 @@ import org.json.simple.parser.ParseException;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.data.mongodb.config.AbstractMongoClientConfiguration;
 
 import java.io.FileReader;
 import java.io.IOException;
@@ -23,7 +23,7 @@ import java.util.logging.Logger;
 
 
 @Configuration
-public class MongoDBConfiguration{
+public class MongoDBConfiguration extends AbstractMongoClientConfiguration {
 
     private static final Logger LOGGER = Logger.getLogger( MongoDBConfiguration.class.getName());
 
@@ -42,8 +42,69 @@ public class MongoDBConfiguration{
     @Value("${preset.messages}")
     public String messagesPath;
 
+    @Bean
+    @Override
+    public MongoClient mongoClient() {
+        System.setProperty ("javax.net.ssl.keyStore",keystorePath);
+        System.setProperty ("javax.net.ssl.keyStorePassword",keystorePass);
+        System.setProperty ("javax.net.ssl.trustStore",truststorePath);
+        System.setProperty ("javax.net.ssl.trustStorePassword","changeit");
+        return MongoClients.create(mongoURI+"&sslInvalidHostNameAllowed=true");
+    }
+
+    @Override
+    protected String getDatabaseName() {
+        return mongoDatabase;
+    }
 
     @Bean
+    public MongoCollection<Document> collection(MongoClient mongoClient) {
+
+
+
+        return mongoClient.getDatabase(mongoDatabase).getCollection("users");
+    }
+
+    @Bean
+    public MongoCollection<Document> messagesCollection(MongoClient mongoClient) {
+
+
+        MongoCollection<Document> messages = mongoClient.getDatabase(mongoDatabase).getCollection("messages");
+
+        try{
+            List<JSONObject> documents = new ArrayList<>();
+            int i;
+            messages.deleteMany(new Document());
+            JSONParser jsonParser = new JSONParser();
+            FileReader reader = new FileReader(messagesPath);
+            Object obj = jsonParser.parse(reader);
+            String stringJson = obj.toString();
+            JSONArray jsonArray = new JSONArray(stringJson);
+            for(i=0;i<jsonArray.length();i++){
+
+                Document doc = Document.parse(jsonArray.get(i).toString());
+                messages.insertOne(doc);
+            }
+
+        } catch (IOException | ParseException e) {
+            LOGGER.log(Level.WARNING, "Could get Messages file");
+        }
+
+        return mongoClient.getDatabase(mongoDatabase).getCollection("messages");
+    }
+
+    @Bean
+    public MongoCollection<Document> pendingNotifications(MongoClient mongoClient) {
+
+
+
+        return mongoClient.getDatabase(mongoDatabase).getCollection("pendingNotifications");
+    }
+
+
+
+
+    /*@Bean
     public MongoDatabase database() {
 
         System.setProperty ("javax.net.ssl.keyStore",keystorePath);
@@ -98,5 +159,5 @@ public class MongoDBConfiguration{
 
         return database.getCollection("pendingNotifications");
 
-    }
+    }*/
 }
