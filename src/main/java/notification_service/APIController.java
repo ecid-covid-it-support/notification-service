@@ -21,6 +21,8 @@ import static com.mongodb.client.model.Filters.eq;
 
 
 
+
+
 @RestController
 public class APIController {
 
@@ -35,6 +37,7 @@ public class APIController {
     @RequestMapping("/")
     public String index() {
         return "OCARIoT Notification Microservice";
+
     }
 
     @PostMapping("/v1/notifications/user/{id}")
