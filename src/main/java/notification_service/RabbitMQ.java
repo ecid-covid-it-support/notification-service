@@ -14,6 +14,7 @@ import org.springframework.stereotype.Service;
 import java.util.ArrayList;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+
 import static com.mongodb.client.model.Filters.eq;
 
 
@@ -54,18 +55,20 @@ public class RabbitMQ{
 
                     case "SendNotificationEvent":
 
-                        if (jsonmsg.has("notification_type")) {
+                        if (jsonmsg.has("notification")) {
 
-                            String messageType = jsonmsg.getString("notification_type");
+                            JSONObject notificationJson = (JSONObject) jsonmsg.get("notification");
+
+                            String messageType = notificationJson.getString("notification_type");
 
                             switch (messageType){
 
                                 case "topic":
 
                                     try {
-                                        String topic = jsonmsg.getString("topic");
-                                        String title = jsonmsg.getString("title");
-                                        String bod = jsonmsg.getString("body");
+                                        String topic = notificationJson.getString("topic");
+                                        String title = notificationJson.getString("title");
+                                        String bod = notificationJson.getString("body");
                                         firebaseMessage.sendToTopic(topic, title, bod);
                                     } catch (JSONException e) {
                                         LOGGER.log(Level.WARNING, "Could not read topic,title or body from json message");
@@ -81,7 +84,7 @@ public class RabbitMQ{
 
 
                                     try{
-                                        String uID = jsonmsg.getString("id");
+                                        String uID = notificationJson.getString("id");
                                         firebaseMessage.sendToToken(uID,messageType,null, 0);
 
                                     } catch (JSONException e) {
@@ -100,8 +103,8 @@ public class RabbitMQ{
                                         ArrayList<String> arrayFamilies = new ArrayList<>();
                                         int i;
 
-                                        String uID = jsonmsg.getString("id");
-                                        int days_since = jsonmsg.getInt("days_since");
+                                        String uID = notificationJson.getString("id");
+                                        int days_since = notificationJson.getInt("days_since");
 
                                         String info = rabbitMQRequester.send("?_id="+uID,"children.find");
 
@@ -163,10 +166,10 @@ public class RabbitMQ{
 
                                         String institutionID;
 
-                                        institutionID = jsonmsg.getString("institution_id");
-                                        int days_since = jsonmsg.getInt("days_since");
-                                        JSONObject location = jsonmsg.getJSONObject("location");
-                                        String sensorType = jsonmsg.getString("sensor_type");
+                                        institutionID = notificationJson.getString("institution_id");
+                                        int days_since = notificationJson.getInt("days_since");
+                                        JSONObject location = notificationJson.getJSONObject("location");
+                                        String sensorType = notificationJson.getString("sensor_type");
 
 
                                         firebaseMessage.sendToToken(institutionID,messageType,sensorType,location,days_since);
