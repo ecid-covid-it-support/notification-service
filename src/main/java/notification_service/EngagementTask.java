@@ -43,7 +43,7 @@ public class EngagementTask{
 
 
                 Document document = cursor.next();
-                System.out.println(document);
+
 
                 String userID = document.getString("id");
                 Date lastLogin = (Date) document.get("lastLogin");
@@ -137,7 +137,7 @@ public class EngagementTask{
 
                         case "educator":
 
-                            System.out.println("Estou a enviar para o educator");
+
                             firebaseMessage.sendToToken(userID,"notification:educator", null,daysSinceLastLogin);
 
                             break;

@@ -104,7 +104,7 @@ public class FirebaseMessage {
             }
 
             String allteachers = rabbitMQRequester.send("?institution=" + institutionID, "educators.find");
-            System.out.println(allteachers);
+            
 
             JSONArray jsonarray = new JSONArray(allteachers);
 
