@@ -62,7 +62,6 @@ public class MongoDBConfiguration {
     @Bean
     public MongoCollection<Document> collection(MongoDatabase database) {
 
-
         return database.getCollection("users");
 
     }
