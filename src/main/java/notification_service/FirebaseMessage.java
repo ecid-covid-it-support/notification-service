@@ -13,6 +13,7 @@ import org.json.JSONObject;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
+import java.io.UnsupportedEncodingException;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
@@ -67,7 +68,16 @@ public class FirebaseMessage {
 
     }
 
-    public void sendToToken(List<String> tokens, String title, String body) {
+    public void sendToToken(List<String> tokens, String title, String body){
+
+        try {
+            byte[] utfString = title.getBytes("UTF-8");
+            title = new String(utfString, "UTF-8");
+            utfString = body.getBytes("UTF-8");
+            body = new String(utfString, "UTF-8");
+        } catch (UnsupportedEncodingException e) {
+            e.printStackTrace();
+        }
 
         for (String token : tokens) {
 
