@@ -70,16 +70,7 @@ public class FirebaseMessage {
 
     public void sendToToken(List<String> tokens, String title, String body){
 
-        try {
-            byte[] utfString = title.getBytes("UTF-8");
-            title = new String(utfString, "UTF-8");
-            utfString = body.getBytes("UTF-8");
-            body = new String(utfString, "UTF-8");
-        } catch (UnsupportedEncodingException e) {
-            e.printStackTrace();
-        }
-
-        for (String token : tokens) {
+            for (String token : tokens) {
 
                 try {
 
