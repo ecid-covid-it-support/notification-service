@@ -6,6 +6,8 @@ import com.google.firebase.messaging.FirebaseMessagingException;
 import com.google.firebase.messaging.Message;
 import com.google.firebase.messaging.Notification;
 import com.mongodb.client.MongoCollection;
+import com.vdurmont.emoji.Emoji;
+import com.vdurmont.emoji.EmojiParser;
 import org.bson.Document;
 import org.json.JSONArray;
 import org.json.JSONException;
@@ -70,22 +72,28 @@ public class FirebaseMessage {
 
     public void sendToToken(List<String> tokens, String title, String body){
 
-            for (String token : tokens) {
+        title = EmojiParser.parseToUnicode(title);
+        body = EmojiParser.parseToUnicode(body);
 
-                try {
 
-                    Message message = Message.builder()
-                            .setNotification(Notification.builder().setTitle(title).setBody(body).build())
-                            .setToken(token)
-                            .build();
 
-                    FirebaseMessaging.getInstance().send(message);
-                    // Send a message to the device corresponding to the provided registration token.
+        for (String token : tokens) {
 
-                } catch (FirebaseMessagingException e) {
-                    LOGGER.log(Level.WARNING, "Error sending notification to token");
-                }
+            try {
+
+                Message message = Message.builder()
+                        .setNotification(Notification.builder().setTitle(title).setBody(body).build())
+                        .setToken(token)
+                        .build();
+
+                FirebaseMessaging.getInstance().send(message);
+                // Send a message to the device corresponding to the provided registration token.
+
+            } catch (FirebaseMessagingException e) {
+
+                LOGGER.log(Level.WARNING, "Error sending notification to token");
             }
+        }
     }
 
     public void sendToToken(String institutionID,String messageType, String sensorType, JSONObject location, int days_since) {
