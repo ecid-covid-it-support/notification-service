@@ -74,7 +74,7 @@ Copy and paste with the file `.env.example` and name it `.env` to make the Docke
 | `SSL_KEY_PATH` |Private key for SSL certificate. | `./certs/server.key` |
 | `SSL_CERT_PATH`| Certificate SSL. | `./certs/server.crt`|
 |`KEYSTORE_PASS` | PKCS12 file pass required in the Notification service. | `s3cr3tp4ss`|
-|`FIREBASE_KEYFILE_PATH` |File that must be obtained in the Firebase project settings. |`./firebase_keyfile.json` |
+|`FIREBASE_KEYFILE_PATH` |File that must be obtained in the [Firebase project settings](https://firebase.google.com/docs/admin/setup?gclid=CjwKCAjw-YT1BRAFEiwAd2WRtkXLw8yNy11nuoWcGTH1mvwYSucmcuzJ9SXDSvBO-jDqX-8kA3efjxoCxdUQAvD_BwE#java). |`./firebase_keyfile.json` |
 | `MESSAGES_FILE_PATH`|File that contains pre-set notification type messages. | `./config/notification/messages.json`|
 | `NOTIFICATION_RABBITMQ_USER`| Username for Notification Service to connect RabbitMQ.|`notification.app` |
 | `NOTIFICATION_RABBITMQ_PASS`| Password for Notification Service to connect to the RabbitMQ.|`RABBITMQ_PASSWORD` |
