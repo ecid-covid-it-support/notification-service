@@ -8,7 +8,7 @@ Microservice responsible for sending notifications to user's client apps of OCAR
 -   Save user's Firebase tokens;
 -   Save and return pending notifications;
 
-See the  [documentation] for more information.
+See the  [documentation](https://github.com/ocariot/notification-service/wiki) for more information.
 
 ## Prerequisites
 
