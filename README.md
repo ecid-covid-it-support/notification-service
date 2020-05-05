@@ -79,4 +79,4 @@ Copy and paste with the file `.env.example` and name it `.env` to make the Docke
 | `NOTIFICATION_RABBITMQ_USER`| Username for Notification Service to connect RabbitMQ.|`notification.app` |
 | `NOTIFICATION_RABBITMQ_PASS`| Password for Notification Service to connect to the RabbitMQ.|`RABBITMQ_PASSWORD` |
 
- If you are not running this repository using the docker image make sure you set the enviromental variables of the first table to the desired ones. 
+ If you are not running this repository using the docker image make sure you set the enviromental variables of the first table to the desired ones.
