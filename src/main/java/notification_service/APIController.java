@@ -84,7 +84,7 @@ public class APIController {
 
     }
 
-    @PostMapping("/v1/notifications/deletetoken/{id}")
+    @PatchMapping("/v1/notifications/deletetoken/{id}")
     public ResponseEntity<String> deleteToken(@PathVariable String id, @RequestBody Map <String,String> body){
 
         String token = body.get("token");
