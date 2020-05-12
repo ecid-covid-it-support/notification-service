@@ -52,7 +52,7 @@ public class APIController {
         type = body.get("type");
         ArrayList<String> emptyArrayTokens = new ArrayList<>();
 
-        JSONObject jo = new JSONObject();
+        Document jo = new Document();
 
 
         if (lang==null || lang.isEmpty()){
@@ -98,7 +98,7 @@ public class APIController {
         collection.updateOne(eq("id", id), new Document("$set", new Document("lastLogin", new Date())),new UpdateOptions().upsert(true));
         collection.updateOne(eq("id", id), new Document("$set", new Document("lastNotification", new Date())),new UpdateOptions().upsert(true));
 
-        JSONObject doc = (JSONObject) collection.find(eq("id",id)).first().remove("_id");
+        Document doc = (Document) collection.find(eq("id",id)).first().remove("_id");
         return ResponseEntity.status(200).body(doc.toString());
 
     }
