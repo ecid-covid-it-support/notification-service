@@ -102,8 +102,8 @@ public class APIController {
         collection.updateOne(eq("id", id), new Document("$set", new Document("lastLogin", new Date())),new UpdateOptions().upsert(true));
         collection.updateOne(eq("id", id), new Document("$set", new Document("lastNotification", new Date())),new UpdateOptions().upsert(true));
 
-        String cursor = collection.find(eq("id",id)).projection(Projections.excludeId()).toString();
-        return new ResponseEntity<Object>(cursor, HttpStatus.OK);
+        Document myDoc = collection.find(eq("id", id)).first();
+        return new ResponseEntity<Object>(myDoc, HttpStatus.OK);
 
     }
 
@@ -140,10 +140,9 @@ public class APIController {
             Document filter = new Document("id",id);
             Document update = new Document("$pull", new Document("tokens", token));
             collection.updateOne(filter, update);
-            Document mydoc = (Document) collection.find(eq("id",id)).projection(Projections.excludeId());
-            System.out.println(mydoc);
-            String doc = mydoc.toString();
-            jo = new JSONObject(doc);
+            Document myDoc = collection.find(filter).first();
+            jo = new JSONObject(myDoc);
+
             return new ResponseEntity<Object>(jo.toMap(), HttpStatus.OK);
 
         }
