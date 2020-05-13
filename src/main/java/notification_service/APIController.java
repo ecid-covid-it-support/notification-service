@@ -9,6 +9,8 @@ import org.bson.BsonString;
 import org.bson.Document;
 import org.json.JSONObject;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpHeaders;
+import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
@@ -98,7 +100,7 @@ public class APIController {
         collection.updateOne(eq("id", id), new Document("$set", new Document("lastLogin", new Date())),new UpdateOptions().upsert(true));
         collection.updateOne(eq("id", id), new Document("$set", new Document("lastNotification", new Date())),new UpdateOptions().upsert(true));
 
-        Document doc = (Document) collection.find(eq("id",id)).first().remove("_id");
+        JSONObject doc = (JSONObject) collection.find(eq("id",id)).first().remove("_id");
         return ResponseEntity.status(200).body(doc.toString());
 
     }
@@ -159,8 +161,10 @@ public class APIController {
             jo.put("id", id);
             jo.put("notifications", items);
 
+            final HttpHeaders httpHeaders= new HttpHeaders();
+            httpHeaders.setContentType(MediaType.APPLICATION_JSON);
 
-            return ResponseEntity.status(200).body(jo.toString());
+            return ResponseEntity.status(200).headers(httpHeaders).body(jo.toString());
         }
     }
 
