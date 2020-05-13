@@ -10,6 +10,7 @@ import org.bson.Document;
 import org.json.JSONObject;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpHeaders;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -164,7 +165,8 @@ public class APIController {
             final HttpHeaders httpHeaders= new HttpHeaders();
             httpHeaders.setContentType(MediaType.APPLICATION_JSON);
 
-            return ResponseEntity.status(200).headers(httpHeaders).body(jo.toString());
+            //return ResponseEntity.status(200).headers(httpHeaders).body(jo.toString());
+            return new ResponseEntity<String>(jo.toString(), httpHeaders, HttpStatus.OK);
         }
     }
 
