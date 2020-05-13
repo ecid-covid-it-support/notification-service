@@ -1,8 +1,10 @@
 package notification_service;
 
 
+import com.mongodb.DBCursor;
 import com.mongodb.client.FindIterable;
 import com.mongodb.client.MongoCollection;
+import com.mongodb.client.model.Projections;
 import com.mongodb.client.model.UpdateOptions;
 import org.bson.BsonDocument;
 import org.bson.BsonString;
@@ -41,7 +43,7 @@ public class APIController {
     }
 
     @PostMapping("/v1/notifications/user/{id}")
-    public ResponseEntity<String> create(@PathVariable String id, @RequestBody Map <String,String> body) {
+    public ResponseEntity<Object> create(@PathVariable String id, @RequestBody Map <String,String> body) {
 
         String token;
         String lang;
@@ -52,7 +54,7 @@ public class APIController {
         type = body.get("type");
         ArrayList<String> emptyArrayTokens = new ArrayList<>();
 
-        Document jo = new Document();
+        JSONObject jo = new JSONObject();
 
 
         if (lang==null || lang.isEmpty()){
@@ -61,7 +63,7 @@ public class APIController {
             jo.put("message", "MISSING PARAMETERS");
             jo.put("description", "No lang found in the message body");
             jo.put("redirect_link", "/user/{id}");
-            return ResponseEntity.status(400).body(jo.toString());
+            return new ResponseEntity<Object>(jo.toMap(), HttpStatus.BAD_REQUEST);
         }
         if (!lang.equals("en")&&!lang.equals("es")&&!lang.equals("pt")&&!lang.equals("el")){
 
@@ -69,7 +71,7 @@ public class APIController {
             jo.put("message", "WRONG PARAMETERS");
             jo.put("description", "Only English(en), Spanish(es), Portuguese(pt), Greek(el) languages supported");
             jo.put("redirect_link", "/user/{id}");
-            return ResponseEntity.status(400).body(jo.toString());
+            return new ResponseEntity<Object>(jo.toMap(), HttpStatus.BAD_REQUEST);
         }
         if (type==null||type.isEmpty()){
 
@@ -77,7 +79,7 @@ public class APIController {
             jo.put("message", "MISSING PARAMETERS");
             jo.put("description", "Type of user not defined");
             jo.put("redirect_link", "/user/{id}");
-            return ResponseEntity.status(400).body(jo.toString());
+            return new ResponseEntity<Object>(jo.toMap(), HttpStatus.BAD_REQUEST);
         }
         if (!type.equals("children")&&!type.equals("family")&&!type.equals("educator")){
 
@@ -85,7 +87,7 @@ public class APIController {
             jo.put("message", "WRONG PARAMETERS");
             jo.put("description", "Type of user can only be one of children, family or educator");
             jo.put("redirect_link", "/user/{id}");
-            return ResponseEntity.status(400).body(jo.toString());
+            return new ResponseEntity<Object>(jo.toMap(), HttpStatus.BAD_REQUEST);
         }
         if (token!=null && !token.isEmpty()){
 
@@ -98,31 +100,48 @@ public class APIController {
         collection.updateOne(eq("id", id), new Document("$set", new Document("lastLogin", new Date())),new UpdateOptions().upsert(true));
         collection.updateOne(eq("id", id), new Document("$set", new Document("lastNotification", new Date())),new UpdateOptions().upsert(true));
 
-        JSONObject doc = (JSONObject) collection.find(eq("id",id)).first().remove("_id");
-        return ResponseEntity.status(200).body(doc.toString());
+        FindIterable<Document> cursor = collection.find(eq("id",id)).projection(Projections.excludeId());
+        return new ResponseEntity<Object>(cursor, HttpStatus.OK);
 
     }
 
     @PatchMapping("/v1/notifications/deletetoken/{id}")
-    public ResponseEntity<String> deleteToken(@PathVariable String id, @RequestBody Map <String,String> body){
+    public ResponseEntity<Object> deleteToken(@PathVariable String id, @RequestBody Map <String,String> body){
+
+        JSONObject jo = new JSONObject();
 
         String token = body.get("token");
+
+
         if (token==null || token.isEmpty()){
 
-            return ResponseEntity.status(400).body("No token found in the message body");
+
+            jo.put("code", 400);
+            jo.put("message", "MISSING PARAMETERS");
+            jo.put("description", "No token found in the message body");
+            jo.put("redirect_link", "/deletetoken/{id}");
+            return new ResponseEntity<Object>(jo.toMap(), HttpStatus.BAD_REQUEST);
         }
 
         long found = collection.countDocuments(new BsonDocument("id", new BsonString(id)));
         if (found == 0) {
 
-            return ResponseEntity.status(200).body("User not found");
+
+            jo.put("code", 200);
+            jo.put("message", "OK");
+            jo.put("description", "User not found");
+            jo.put("redirect_link", "/deletetoken/{id}");
+            return new ResponseEntity<Object>(jo.toMap(), HttpStatus.OK);
 
         } else {
 
-                Document filter = new Document("id",id);
-                Document update = new Document("$pull", new Document("tokens", token));
-                collection.updateOne(filter, update);
-                return ResponseEntity.status(200).body("Token deleted");
+            Document filter = new Document("id",id);
+            Document update = new Document("$pull", new Document("tokens", token));
+            collection.updateOne(filter, update);
+            FindIterable<Document> cursor = collection.find(eq("id",id)).projection(Projections.excludeId());
+
+            return new ResponseEntity<Object>(cursor, HttpStatus.OK);
+
         }
 
     }
@@ -141,7 +160,6 @@ public class APIController {
             response.put("id", id);
             response.put("notifications", (Collection<?>) null);
 
-            //return ResponseEntity.status(200).body(response.toString());
             return new ResponseEntity<Object>(response.toMap(), HttpStatus.OK);
 
         } else{
@@ -160,10 +178,7 @@ public class APIController {
             jo.put("id", id);
             jo.put("notifications", items);
 
-            final HttpHeaders httpHeaders= new HttpHeaders();
-            httpHeaders.setContentType(MediaType.APPLICATION_JSON);
 
-            //return ResponseEntity.status(200).headers(httpHeaders).body(jo.toString());
             return new ResponseEntity<Object>(jo.toMap(), HttpStatus.OK);
         }
     }
