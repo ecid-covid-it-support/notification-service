@@ -140,9 +140,9 @@ public class APIController {
 
             response.put("id", id);
             response.put("notifications", (Collection<?>) null);
-            System.out.println(response);
+
             //return ResponseEntity.status(200).body(response.toString());
-            return new ResponseEntity<Object>(response, HttpStatus.OK);
+            return new ResponseEntity<Object>(response.toMap(), HttpStatus.OK);
 
         } else{
 
