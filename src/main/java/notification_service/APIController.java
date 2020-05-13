@@ -9,10 +9,7 @@ import org.bson.BsonString;
 import org.bson.Document;
 import org.json.JSONObject;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.HttpHeaders;
-import org.springframework.http.HttpStatus;
-import org.springframework.http.MediaType;
-import org.springframework.http.ResponseEntity;
+import org.springframework.http.*;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.ArrayList;
@@ -130,8 +127,8 @@ public class APIController {
 
     }
 
-    @GetMapping("/v1/notifications/pendingnotification/{id}")
-    public ResponseEntity<String> pendingNotification(@PathVariable String id) {
+    @GetMapping(value = "/v1/notifications/pendingnotification/{id}",produces = MediaType.APPLICATION_JSON_VALUE)
+    public HttpEntity<Object> pendingNotification(@PathVariable String id) {
 
         JSONObject jo = new JSONObject();
         Collection<JSONObject> items = new ArrayList<>();
@@ -144,7 +141,8 @@ public class APIController {
             response.put("id", id);
             response.put("notifications", (Collection<?>) null);
             System.out.println(response);
-            return ResponseEntity.status(200).body(response.toString());
+            //return ResponseEntity.status(200).body(response.toString());
+            return new ResponseEntity<Object>(response, HttpStatus.OK);
 
         } else{
 
@@ -166,7 +164,7 @@ public class APIController {
             httpHeaders.setContentType(MediaType.APPLICATION_JSON);
 
             //return ResponseEntity.status(200).headers(httpHeaders).body(jo.toString());
-            return new ResponseEntity<String>(jo.toString(), httpHeaders, HttpStatus.OK);
+            return new ResponseEntity<Object>(jo, HttpStatus.OK);
         }
     }
 
