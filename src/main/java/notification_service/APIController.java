@@ -104,6 +104,7 @@ public class APIController {
 
         Document myDoc = collection.find(eq("id", id)).first();
         myDoc.remove("_id");
+        myDoc.remove("lastNotification");
         return new ResponseEntity<Object>(myDoc, HttpStatus.OK);
 
     }
@@ -143,7 +144,7 @@ public class APIController {
             collection.updateOne(filter, update);
             Document myDoc = collection.find(filter).first();
             myDoc.remove("_id");
-            
+            myDoc.remove("lastNotification");
             return new ResponseEntity<Object>(myDoc, HttpStatus.OK);
 
         }
