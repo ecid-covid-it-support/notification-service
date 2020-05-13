@@ -1,7 +1,9 @@
 package notification_service;
 
 
+import com.google.api.client.json.Json;
 import com.mongodb.DBCursor;
+import com.mongodb.DBObject;
 import com.mongodb.client.FindIterable;
 import com.mongodb.client.MongoCollection;
 import com.mongodb.client.model.Projections;
@@ -138,9 +140,11 @@ public class APIController {
             Document filter = new Document("id",id);
             Document update = new Document("$pull", new Document("tokens", token));
             collection.updateOne(filter, update);
-            String cursor = collection.find(eq("id",id)).projection(Projections.excludeId()).toString();
-
-            return new ResponseEntity<Object>(cursor, HttpStatus.OK);
+            Document mydoc = (Document) collection.find(eq("id",id)).projection(Projections.excludeId());
+            System.out.println(mydoc);
+            String doc = mydoc.toString();
+            jo = new JSONObject(doc);
+            return new ResponseEntity<Object>(jo.toMap(), HttpStatus.OK);
 
         }
 
