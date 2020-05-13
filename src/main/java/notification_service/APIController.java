@@ -164,7 +164,7 @@ public class APIController {
             httpHeaders.setContentType(MediaType.APPLICATION_JSON);
 
             //return ResponseEntity.status(200).headers(httpHeaders).body(jo.toString());
-            return new ResponseEntity<Object>(jo, HttpStatus.OK);
+            return new ResponseEntity<Object>(jo.toMap(), HttpStatus.OK);
         }
     }
 
