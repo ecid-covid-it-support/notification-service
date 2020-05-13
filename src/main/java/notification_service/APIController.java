@@ -42,7 +42,7 @@ public class APIController {
 
     }
 
-    @PostMapping("/v1/notifications/user/{id}")
+    @PostMapping(value = "/v1/notifications/user/{id}",produces = MediaType.APPLICATION_JSON_VALUE )
     public ResponseEntity<Object> create(@PathVariable String id, @RequestBody Map <String,String> body) {
 
         String token;
@@ -100,12 +100,12 @@ public class APIController {
         collection.updateOne(eq("id", id), new Document("$set", new Document("lastLogin", new Date())),new UpdateOptions().upsert(true));
         collection.updateOne(eq("id", id), new Document("$set", new Document("lastNotification", new Date())),new UpdateOptions().upsert(true));
 
-        FindIterable<Document> cursor = collection.find(eq("id",id)).projection(Projections.excludeId());
+        String cursor = collection.find(eq("id",id)).projection(Projections.excludeId()).toString();
         return new ResponseEntity<Object>(cursor, HttpStatus.OK);
 
     }
 
-    @PatchMapping("/v1/notifications/deletetoken/{id}")
+    @PatchMapping(value = "/v1/notifications/deletetoken/{id}",produces = MediaType.APPLICATION_JSON_VALUE )
     public ResponseEntity<Object> deleteToken(@PathVariable String id, @RequestBody Map <String,String> body){
 
         JSONObject jo = new JSONObject();
@@ -138,7 +138,7 @@ public class APIController {
             Document filter = new Document("id",id);
             Document update = new Document("$pull", new Document("tokens", token));
             collection.updateOne(filter, update);
-            FindIterable<Document> cursor = collection.find(eq("id",id)).projection(Projections.excludeId());
+            String cursor = collection.find(eq("id",id)).projection(Projections.excludeId()).toString();
 
             return new ResponseEntity<Object>(cursor, HttpStatus.OK);
 
