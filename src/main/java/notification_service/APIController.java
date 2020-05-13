@@ -103,6 +103,7 @@ public class APIController {
         collection.updateOne(eq("id", id), new Document("$set", new Document("lastNotification", new Date())),new UpdateOptions().upsert(true));
 
         Document myDoc = collection.find(eq("id", id)).first();
+        myDoc.remove("_id");
         return new ResponseEntity<Object>(myDoc, HttpStatus.OK);
 
     }
@@ -141,9 +142,9 @@ public class APIController {
             Document update = new Document("$pull", new Document("tokens", token));
             collection.updateOne(filter, update);
             Document myDoc = collection.find(filter).first();
-            jo = new JSONObject(myDoc);
-
-            return new ResponseEntity<Object>(jo.toMap(), HttpStatus.OK);
+            myDoc.remove("_id");
+            
+            return new ResponseEntity<Object>(myDoc, HttpStatus.OK);
 
         }
 
