@@ -8,6 +8,7 @@ import com.mongodb.client.FindIterable;
 import com.mongodb.client.MongoCollection;
 import com.mongodb.client.model.Projections;
 import com.mongodb.client.model.UpdateOptions;
+import com.vdurmont.emoji.EmojiParser;
 import org.bson.BsonDocument;
 import org.bson.BsonString;
 import org.bson.Document;
@@ -173,8 +174,9 @@ public class APIController {
 
             for (Document doc : docs){
 
-                item.put("title", doc.get("title"));
-                item.put("body", doc.get("body"));
+
+                item.put("title", EmojiParser.parseToUnicode((String) doc.get("title")));
+                item.put("body", EmojiParser.parseToUnicode((String) doc.get("body")));
                 item.put("timestamp", doc.get("timestamp"));
                 items.add(item);
                 pendingNotifications.findOneAndDelete(doc);
