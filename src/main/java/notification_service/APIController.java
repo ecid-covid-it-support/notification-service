@@ -156,13 +156,14 @@ public class APIController {
     public HttpEntity<Object> pendingNotification(@PathVariable String id) {
 
         JSONObject jo = new JSONObject();
+
+
         Collection<JSONObject> items = new ArrayList<>();
-        JSONObject response = new JSONObject();
-        JSONObject item = new JSONObject();
+
 
         long found = pendingNotifications.countDocuments(new BsonDocument("id", new BsonString(id)));
         if (found == 0) {
-
+            JSONObject response = new JSONObject();
             response.put("id", id);
             response.put("notifications", (Collection<?>) null);
 
@@ -173,8 +174,7 @@ public class APIController {
             FindIterable<Document> docs = pendingNotifications.find(eq("id", id));
 
             for (Document doc : docs){
-
-
+                JSONObject item = new JSONObject();
                 item.put("title", EmojiParser.parseToUnicode((String) doc.get("title")));
                 item.put("body", EmojiParser.parseToUnicode((String) doc.get("body")));
                 item.put("timestamp", doc.get("timestamp"));
