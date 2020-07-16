@@ -90,6 +90,7 @@ public class FirebaseMessage {
                 // Send a message to the device corresponding to the provided registration token.
 
             } catch (FirebaseMessagingException e) {
+                System.out.println(e);
 
                 LOGGER.log(Level.WARNING, "Error sending notification to token");
             }
@@ -173,7 +174,7 @@ public class FirebaseMessage {
             case "notification:educator":
 
                 userDoc = collection.find(eq("id", userID)).first();
-                System.out.println(userDoc);
+
                 if (userDoc != null) {
                     lang = userDoc.getString("lang");
 
