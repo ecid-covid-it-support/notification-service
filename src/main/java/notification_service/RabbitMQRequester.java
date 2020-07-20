@@ -44,6 +44,7 @@ public class RabbitMQRequester {
        }
 
 
+        assert response != null;
         return new String(response.getBody());
 
 

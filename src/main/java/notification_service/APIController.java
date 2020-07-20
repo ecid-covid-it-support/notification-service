@@ -1,12 +1,8 @@
 package notification_service;
 
 
-import com.google.api.client.json.Json;
-import com.mongodb.DBCursor;
-import com.mongodb.DBObject;
 import com.mongodb.client.FindIterable;
 import com.mongodb.client.MongoCollection;
-import com.mongodb.client.model.Projections;
 import com.mongodb.client.model.UpdateOptions;
 import com.vdurmont.emoji.EmojiParser;
 import org.bson.BsonDocument;
@@ -66,7 +62,7 @@ public class APIController {
             jo.put("message", "MISSING PARAMETERS");
             jo.put("description", "No lang found in the message body");
             jo.put("redirect_link", "/user/{id}");
-            return new ResponseEntity<Object>(jo.toMap(), HttpStatus.BAD_REQUEST);
+            return new ResponseEntity<>(jo.toMap(), HttpStatus.BAD_REQUEST);
         }
         if (!lang.equals("en")&&!lang.equals("es")&&!lang.equals("pt")&&!lang.equals("el")){
 
@@ -74,7 +70,7 @@ public class APIController {
             jo.put("message", "WRONG PARAMETERS");
             jo.put("description", "Only English(en), Spanish(es), Portuguese(pt), Greek(el) languages supported");
             jo.put("redirect_link", "/user/{id}");
-            return new ResponseEntity<Object>(jo.toMap(), HttpStatus.BAD_REQUEST);
+            return new ResponseEntity<>(jo.toMap(), HttpStatus.BAD_REQUEST);
         }
         if (type==null||type.isEmpty()){
 
@@ -82,7 +78,7 @@ public class APIController {
             jo.put("message", "MISSING PARAMETERS");
             jo.put("description", "Type of user not defined");
             jo.put("redirect_link", "/user/{id}");
-            return new ResponseEntity<Object>(jo.toMap(), HttpStatus.BAD_REQUEST);
+            return new ResponseEntity<>(jo.toMap(), HttpStatus.BAD_REQUEST);
         }
         if (!type.equals("children")&&!type.equals("family")&&!type.equals("educator")){
 
@@ -90,7 +86,7 @@ public class APIController {
             jo.put("message", "WRONG PARAMETERS");
             jo.put("description", "Type of user can only be one of children, family or educator");
             jo.put("redirect_link", "/user/{id}");
-            return new ResponseEntity<Object>(jo.toMap(), HttpStatus.BAD_REQUEST);
+            return new ResponseEntity<>(jo.toMap(), HttpStatus.BAD_REQUEST);
         }
         if (token!=null && !token.isEmpty()){
 
@@ -104,9 +100,10 @@ public class APIController {
         collection.updateOne(eq("id", id), new Document("$set", new Document("lastNotification", new Date())),new UpdateOptions().upsert(true));
 
         Document myDoc = collection.find(eq("id", id)).first();
+        assert myDoc != null;
         myDoc.remove("_id");
         myDoc.remove("lastNotification");
-        return new ResponseEntity<Object>(myDoc, HttpStatus.OK);
+        return new ResponseEntity<>(myDoc, HttpStatus.OK);
 
     }
 
@@ -125,7 +122,7 @@ public class APIController {
             jo.put("message", "MISSING PARAMETERS");
             jo.put("description", "No token found in the message body");
             jo.put("redirect_link", "/deletetoken/{id}");
-            return new ResponseEntity<Object>(jo.toMap(), HttpStatus.BAD_REQUEST);
+            return new ResponseEntity<>(jo.toMap(), HttpStatus.BAD_REQUEST);
         }
 
         long found = collection.countDocuments(new BsonDocument("id", new BsonString(id)));
@@ -136,7 +133,7 @@ public class APIController {
             jo.put("message", "OK");
             jo.put("description", "User not found");
             jo.put("redirect_link", "/deletetoken/{id}");
-            return new ResponseEntity<Object>(jo.toMap(), HttpStatus.OK);
+            return new ResponseEntity<>(jo.toMap(), HttpStatus.OK);
 
         } else {
 
@@ -144,9 +141,10 @@ public class APIController {
             Document update = new Document("$pull", new Document("tokens", token));
             collection.updateOne(filter, update);
             Document myDoc = collection.find(filter).first();
+            assert myDoc != null;
             myDoc.remove("_id");
             myDoc.remove("lastNotification");
-            return new ResponseEntity<Object>(myDoc, HttpStatus.OK);
+            return new ResponseEntity<>(myDoc, HttpStatus.OK);
 
         }
 
@@ -167,7 +165,7 @@ public class APIController {
             response.put("id", id);
             response.put("notifications", (Collection<?>) null);
 
-            return new ResponseEntity<Object>(response.toMap(), HttpStatus.OK);
+            return new ResponseEntity<>(response.toMap(), HttpStatus.OK);
 
         } else{
 
@@ -175,9 +173,11 @@ public class APIController {
 
             for (Document doc : docs){
                 JSONObject item = new JSONObject();
+                item.put("message_type", doc.get("message_type"));
                 item.put("title", EmojiParser.parseToUnicode((String) doc.get("title")));
                 item.put("body", EmojiParser.parseToUnicode((String) doc.get("body")));
                 item.put("timestamp", doc.get("timestamp"));
+
                 items.add(item);
                 pendingNotifications.findOneAndDelete(doc);
 
@@ -186,7 +186,7 @@ public class APIController {
             jo.put("notifications", items);
 
 
-            return new ResponseEntity<Object>(jo.toMap(), HttpStatus.OK);
+            return new ResponseEntity<>(jo.toMap(), HttpStatus.OK);
         }
     }
 

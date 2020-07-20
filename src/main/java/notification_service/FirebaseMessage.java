@@ -6,7 +6,6 @@ import com.google.firebase.messaging.FirebaseMessagingException;
 import com.google.firebase.messaging.Message;
 import com.google.firebase.messaging.Notification;
 import com.mongodb.client.MongoCollection;
-import com.vdurmont.emoji.Emoji;
 import com.vdurmont.emoji.EmojiParser;
 import org.bson.Document;
 import org.json.JSONArray;
@@ -15,10 +14,10 @@ import org.json.JSONObject;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
-import java.io.UnsupportedEncodingException;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
+import java.util.Objects;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
@@ -51,7 +50,7 @@ public class FirebaseMessage {
     private List<String> getTokens(String userID){
 
 
-        return (List<String>) collection.find(eq("id", userID)).first().get("tokens");
+        return (List<String>) Objects.requireNonNull(collection.find(eq("id", userID)).first()).get("tokens");
 
     }
 
@@ -61,6 +60,7 @@ public class FirebaseMessage {
         Document message = null;
 
         try {
+            assert messageDoc != null;
             message = (Document) messageDoc.get(lang);
         } catch (Exception e) {
             LOGGER.log(Level.WARNING, "Could not get retrieve message format from database");
@@ -70,12 +70,14 @@ public class FirebaseMessage {
 
     }
 
-    public void sendToToken(List<String> tokens, String title, String body){
+    public Boolean sendToToken(String userID, String title, String body){
 
         title = EmojiParser.parseToUnicode(title);
         body = EmojiParser.parseToUnicode(body);
+        boolean createPendingNotification = true;
 
 
+        List<String> tokens = getTokens(userID);
 
         for (String token : tokens) {
 
@@ -89,12 +91,22 @@ public class FirebaseMessage {
                 FirebaseMessaging.getInstance().send(message);
                 // Send a message to the device corresponding to the provided registration token.
 
+                createPendingNotification = false;
+
             } catch (FirebaseMessagingException e) {
-                System.out.println(e);
+
+                if (e.getErrorCode().equals("invalid-argument") || e.getErrorCode().equals("invalid-registration-token")|| e.getErrorCode().equals("registration-token-not-registered")){
+                    Document filter = new Document("id",userID);
+                    Document update = new Document("$pull", new Document("tokens", token));
+                    collection.updateOne(filter, update);
+                }
+
 
                 LOGGER.log(Level.WARNING, "Error sending notification to token");
             }
         }
+
+        return createPendingNotification;
     }
 
     public void sendToToken(String institutionID,String messageType, String sensorType, JSONObject location, int days_since) {
@@ -118,11 +130,13 @@ public class FirebaseMessage {
 
             JSONArray jsonarray = new JSONArray(allteachers);
 
+
             for (i = 0; i < jsonarray.length(); i++) {
 
 
                 String educatorID = (String) jsonarray.getJSONObject(i).get("id");
                 arrayEducators.add(educatorID);
+                
 
             }
 
@@ -140,13 +154,10 @@ public class FirebaseMessage {
                     title = messageDoc.getString("title");
                     body = messageDoc.getString("body");
 
-                    List<String> tokens = getTokens(educatorID);
+                    Boolean createPendingNotification = sendToToken(educatorID, title, String.format(body, sensorType, local, room, days_since));
 
-                    if (tokens != null && !tokens.isEmpty()) {
 
-                        sendToToken(tokens, title, String.format(body, sensorType, local, room, days_since));
-
-                    } else {
+                    if (createPendingNotification){
                         Document doc = new Document();
                         doc.put("id", educatorID);
                         doc.put("title", title);
@@ -186,12 +197,11 @@ public class FirebaseMessage {
                         LOGGER.log(Level.WARNING, "Could not retrieve message format from database");
                     }
 
-                    List<String> tokens = getTokens(userID);
 
-                    if (tokens != null && !tokens.isEmpty() && title != null && body != null) {
-                        sendToToken(tokens, title, String.format(body, days_since));
-                        collection.updateOne(eq("id", userID), new Document("$set", new Document("lastNotification", new Date())));
-                    } else {
+                    Boolean createPendingNotification=sendToToken(userID, title, String.format(body, days_since));
+                    collection.updateOne(eq("id", userID), new Document("$set", new Document("lastNotification", new Date())));
+
+                    if (createPendingNotification){
                         if (title != null && body != null) {
                             Document doc = new Document();
                             doc.put("id", userDoc.get("id"));
@@ -226,15 +236,10 @@ public class FirebaseMessage {
                         LOGGER.log(Level.WARNING, "Could not retrieve message format from database");
                     }
 
-                    List<String> tokens = getTokens(userID);
+                    Boolean createPendingNotification=sendToToken(userID, title, body);
+                    //collection.updateOne(eq("id", userID), new Document("$set", new Document("lastNotification",new Date())));
 
-                    if (tokens != null && !tokens.isEmpty() && title!=null && body!=null) {
-
-                        sendToToken(tokens, title, body);
-                        //collection.updateOne(eq("id", userID), new Document("$set", new Document("lastNotification",new Date())));
-
-                    } else {
-
+                    if(createPendingNotification){
                         if(title!=null && body!=null) {
                             Document doc = new Document();
                             doc.put("id", userDoc.get("id"));
@@ -264,14 +269,10 @@ public class FirebaseMessage {
                         LOGGER.log(Level.WARNING, "Could not retrieve message format from database");
                     }
 
-                    List<String>tokens = getTokens(userID);
+                    Boolean createPendingNotification=sendToToken(userID, title, String.format(body, username, days_since));
+                    //collection.updateOne(eq("id", userID), new Document("$set", new Document("lastNotification",new Date())));
 
-                    if (tokens != null && !tokens.isEmpty() && title!=null && body!=null) {
-
-                        sendToToken(tokens, title, String.format(body, username, days_since));
-                        //collection.updateOne(eq("id", userID), new Document("$set", new Document("lastNotification",new Date())));
-
-                    } else {
+                    if(createPendingNotification){
                         if(title!=null && body!=null) {
 
                             Document doc = new Document();
@@ -301,14 +302,11 @@ public class FirebaseMessage {
                         LOGGER.log(Level.WARNING, "Could not retrieve message format from database");
                     }
 
-                    List<String> tokens = getTokens(userID);
 
-                    if (tokens != null && !tokens.isEmpty() && title!=null && body!=null) {
-
-                        sendToToken(tokens, title, String.format(body, username, days_since));
+                    Boolean createPendingNotification = sendToToken(userID, title, String.format(body, username, days_since));
                         //collection.updateOne(eq("id", userID), new Document("$set", new Document("lastNotification",new Date())));
 
-                    } else {
+                    if(createPendingNotification){
                         if(title!=null && body!=null) {
                             Document doc = new Document();
                             doc.put("id", userDoc.get("id"));
